@@ -9,6 +9,11 @@ function Login() {
   const [selectedRole, setSelectedRole] = useState("Mahasiswa");
   const navigate = useNavigate();
 
+  const handleLogin = (event) => {
+    event.preventDefault();
+    navigate("/beranda");
+  };
+
   return (
     <>
       <div className="flex h-screen bg-gray-100">
@@ -81,7 +86,7 @@ function Login() {
               <button
                 type="submit"
                 className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded-md"
-                onClick={navigate("/beranda")}
+                onClick={handleLogin}
               >
                 Login
               </button>
