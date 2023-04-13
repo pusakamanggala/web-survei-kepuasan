@@ -1,16 +1,45 @@
 import React from "react";
+import { useState } from "react";
+import StudentTable from "../components/StudentTable";
+import LecturerTable from "../components/LecturerTable";
+import AlumniTable from "../components/AlumniTable";
 
 const UserAccount = () => {
-  // const [usersData, setUsersData] = useState([]);
-
   //dummy data
-  const data = [
+  const dataDosen = [
+    {
+      nip: "123456789",
+      nama: "John Doe",
+      password: "123456",
+    },
+    {
+      nip: "987654321",
+      nama: "Jane Doe",
+      password: "qwerty",
+    },
+    {
+      nip: "456123789",
+      nama: "Alice Smith",
+      password: "password",
+    },
+    {
+      nip: "789456123",
+      nama: "Bob Johnson",
+      password: "secret",
+    },
+    {
+      nip: "321654987",
+      nama: "Charlie Brown",
+      password: "letmein",
+    },
+  ];
+
+  const dataMahasiswa = [
     {
       id: 1,
       NIM: "001",
       nama: "John Doe",
       password: "password123",
-      kelas: ["CSCI101", "CSCI102", "CSCI201"],
       angkatan: 2018,
       semester: 1,
     },
@@ -19,7 +48,6 @@ const UserAccount = () => {
       NIM: "002",
       nama: "Jane Smith",
       password: "pass1234",
-      kelas: ["MATH201", "MATH202"],
       angkatan: 2019,
       semester: 2,
     },
@@ -28,7 +56,6 @@ const UserAccount = () => {
       NIM: "003",
       nama: "Bob Johnson",
       password: "hello123",
-      kelas: ["PHYS101", "PHYS102", "PHYS201"],
       angkatan: 2016,
       semester: 1,
     },
@@ -37,7 +64,6 @@ const UserAccount = () => {
       NIM: "004",
       nama: "Alice Lee",
       password: "world123",
-      kelas: ["CHEM201", "CHEM202", "CHEM301", "CHEM302"],
       angkatan: 2023,
       semester: 2,
     },
@@ -46,61 +72,64 @@ const UserAccount = () => {
       NIM: "005",
       nama: "Evelyn Davis",
       password: "qwerty123",
-      kelas: ["ARTS101", "ARTS102", "ARTS201"],
       angkatan: 2020,
-      semester: 2,
-    },
-    {
-      id: 6,
-      NIM: "006",
-      nama: "Michael Green",
-      password: "letmein123",
-      kelas: ["BUS101"],
-      angkatan: 2017,
-      semester: 1,
-    },
-    {
-      id: 7,
-      NIM: "007",
-      nama: "Samantha Parker",
-      password: "football123",
-      kelas: ["ENG101", "ENG102"],
-      angkatan: 2022,
-      semester: 2,
-    },
-    {
-      id: 8,
-      NIM: "008",
-      nama: "Richard Kim",
-      password: "baseball123",
-      kelas: ["MATH101", "MATH102", "MATH201"],
-      angkatan: 2016,
-      semester: 2,
-    },
-    {
-      id: 9,
-      NIM: "009",
-      nama: "Grace Chen",
-      password: "guitar123",
-      kelas: ["MUSC101", "MUSC201"],
-      angkatan: 2021,
-      semester: 1,
-    },
-    {
-      id: 10,
-      NIM: "010",
-      nama: "David Wang",
-      password: "password123",
-      kelas: ["CSCI201", "CSCI202", "CSCI301"],
-      angkatan: 2018,
       semester: 2,
     },
   ];
 
-  // //fetch users data from API
-  // useEffect(() => {
-  //   setUsersData(data);
-  // }, []);
+  const dataAlumni = [
+    {
+      nim: "123456",
+      nama: "John Doe",
+      angkatan: 2020,
+      password: "password1",
+    },
+    {
+      nim: "234567",
+      nama: "Jane Smith",
+      angkatan: 2021,
+      password: "password2",
+    },
+    {
+      nim: "345678",
+      nama: "Bob Johnson",
+      angkatan: 2019,
+      password: "password3",
+    },
+    {
+      nim: "456789",
+      nama: "Sara Lee",
+      angkatan: 2018,
+      password: "password4",
+    },
+    {
+      nim: "567890",
+      nama: "Alex Wong",
+      angkatan: 2017,
+      password: "password5",
+    },
+  ];
+
+  const [data, setData] = useState(dataMahasiswa);
+  const [userType, setUserType] = useState("mahasiswa");
+  const handleChangeData = (event) => {
+    const selectedUserType = event.target.value;
+    setUserType(selectedUserType);
+    switch (selectedUserType) {
+      case "mahasiswa":
+        setData(dataMahasiswa);
+        break;
+      case "dosen":
+        setData(dataDosen);
+        break;
+      case "alumni":
+        setData(dataAlumni);
+        break;
+      default:
+        setData([]);
+    }
+  };
+  console.log(data);
 
   return (
     <>
@@ -134,12 +163,15 @@ const UserAccount = () => {
             </div>
             {/* end of Search bar */}
             {/* select dropdown */}
-            <select className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4">
+            <select
+              className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4"
+              onChange={handleChangeData}
+              value={userType}
+            >
               <option value="mahasiswa">Mahasiswa</option>
               <option value="dosen">Dosen</option>
               <option value="alumni">Alumni</option>
             </select>
-
             {/* end of select dropdown */}
             {/* add button */}
             <button className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color shadow-sm shadow-secondary-color ">
@@ -167,76 +199,13 @@ const UserAccount = () => {
           <div className="py-2 flex flex-col min-w-full">
             <div className="overflow-auto flex-grow">
               {/* Table */}
-              <table className="w-full relative border-2 z-10 ">
-                <thead>
-                  <tr>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium bg-secondary-color text-white px-6 py-4 text-left"
-                    >
-                      NIM
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-left"
-                    >
-                      Nama
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-left"
-                    >
-                      Password
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-left"
-                    >
-                      Kelas
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium text-white bg-secondary-color px-6 py-4"
-                    >
-                      Angkatan
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium text-white bg-secondary-color px-6 py-4 "
-                    >
-                      Semester
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* map data */}
-                  {data.map((res, index) => {
-                    return (
-                      // print data to table
-                      <tr className="bg-gray-100 border-b">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                          {res.NIM}
-                        </td>
-                        <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
-                          {res.nama}
-                        </td>
-                        <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
-                          {res.password}
-                        </td>
-                        <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
-                          {res.kelas.join(", ")}
-                        </td>
-                        <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center">
-                          {res.angkatan}
-                        </td>
-                        <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center">
-                          {res.semester}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+              {userType === "mahasiswa" ? (
+                <StudentTable data={data} />
+              ) : userType === "dosen" ? (
+                <LecturerTable data={data} />
+              ) : userType === "alumni" ? (
+                <AlumniTable data={data} />
+              ) : null}
             </div>
           </div>
         </div>
