@@ -1,9 +1,23 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const location = useLocation();
+
+  let pageTitle;
+  switch (location.pathname) {
+    case "/beranda":
+      pageTitle = "Beranda";
+      break;
+    case "/pengguna":
+      pageTitle = "Akun Pengguna";
+      break;
+    default:
+      pageTitle = "Halaman Tidak Ditemukan";
+  }
 
   const handleToggleSidebar = () => {
     setShowSidebar(!showSidebar);
@@ -13,7 +27,7 @@ const DashboardLayout = ({ children }) => {
     <div className="flex h-screen overflow-hidden">
       {/* Show toggle button on mobile */}
       <button
-        className="lg:hidden bg-gray-200 p-2 rounded-full fixed bottom-4 right-4 z-10"
+        className="lg:hidden bg-primary-color p-2 rounded-full fixed bottom-4 right-4 z-10 shadow-md shadow-secondary-color"
         onClick={handleToggleSidebar}
       >
         {showSidebar ? (
@@ -22,7 +36,7 @@ const DashboardLayout = ({ children }) => {
             className="h-6 w-6 text-gray-600"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="currentColor"
+            stroke="#ffffff"
           >
             <path
               strokeLinecap="round"
@@ -37,7 +51,7 @@ const DashboardLayout = ({ children }) => {
             className="h-6 w-6 text-gray-600"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="currentColor"
+            stroke="#ffffff"
           >
             <path
               strokeLinecap="round"
@@ -59,7 +73,7 @@ const DashboardLayout = ({ children }) => {
       <div className="flex flex-col flex-1 w-full">
         <header className="bg-secondary-color py-4">
           <div className="mx-auto px-4 sm:px-6 lg:px-8 flex justify-between">
-            <h1 className="text-white text-xl font-bold">Dashboard</h1>
+            <h1 className="text-white text-xl font-bold">{pageTitle}</h1>
             <div className="flex justify-center items-center">
               <h1 className="text-white text-lg font-semibold">John Doe</h1>
               <svg
