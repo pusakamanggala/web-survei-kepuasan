@@ -36,7 +36,7 @@ const LecturerTable = ({ data }) => {
         {data.map((res, index) => {
           return (
             // print data to table
-            <tr className="bg-gray-100 border-b">
+            <tr className="bg-gray-100 border-b" key={index}>
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                 {res.nip}
               </td>
