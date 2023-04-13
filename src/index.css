@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active {
+  @apply p-5 flex w-full bg-secondary-color cursor-default;
+}
+
+.inActive {
+  @apply p-5 flex w-full;
+}
