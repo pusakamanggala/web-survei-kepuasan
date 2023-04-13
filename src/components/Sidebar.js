@@ -1,20 +1,21 @@
 import React from "react";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [subMenu, setSubMenu] = useState(false);
 
   return (
-    <nav className="bg-primary-color w-64 px-2 pt-4 pb-8 text-white">
+    <nav className="bg-primary-color w-64 px-2 pt-4 pb-8 text-white z-50">
       <div className="flex justify-center">
         <span className="text-white text-3xl font-semibold py-6">Logo</span>
       </div>
       {/* sidebar menu */}
       <>
-        <button
-          className="p-5 flex w-full focus:bg-red-700"
-          // onClick={() => navigate("/")}
+        <NavLink
+          to="/beranda"
+          className={({ isActive }) => (isActive ? "active" : "inActive")}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -31,10 +32,10 @@ const Sidebar = () => {
             />
           </svg>
           <h1>Beranda</h1>
-        </button>
-        <button
-          className="p-5 flex w-full focus:bg-red-700"
-          // onClick={() => navigate("/users")}
+        </NavLink>
+        <NavLink
+          to="/pengguna"
+          className={({ isActive }) => (isActive ? "active" : "inActive")}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +52,7 @@ const Sidebar = () => {
             />
           </svg>
           <h1>Akun Pengguna</h1>
-        </button>
+        </NavLink>
         <button
           className="p-5 flex w-full focus:bg-red-700 items-center"
           onClick={() => setSubMenu(!subMenu)}
@@ -122,7 +123,6 @@ const Sidebar = () => {
                 d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25M9 16.5v.75m3-3v3M15 12v5.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
               />
             </svg>
-
             <h1>Survei Aktif</h1>
           </button>
           <button className="p-5 flex w-full focus:bg-red-700">
@@ -151,11 +151,11 @@ const Sidebar = () => {
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M8 19h-3a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v11a1 1 0 0 1 -1 1"></path>
