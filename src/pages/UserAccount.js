@@ -129,7 +129,6 @@ const UserAccount = () => {
         setData([]);
     }
   };
-  console.log(data);
 
   return (
     <>
@@ -137,7 +136,7 @@ const UserAccount = () => {
         <div className="w-full h-12 flex justify-end mb-2">
           {/* Search bar */}
           <div className="flex">
-            <div className=" flex h-12 md:w-72 items-center mx-2 rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color">
+            <div className=" flex h-12 md:w-72 items-center mx-2 rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color shadow-sm">
               <div className="grid place-items-center h-full w-12 text-gray-300">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +163,7 @@ const UserAccount = () => {
             {/* end of Search bar */}
             {/* select dropdown */}
             <select
-              className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4"
+              className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
               onChange={handleChangeData}
               value={userType}
             >
@@ -195,7 +194,7 @@ const UserAccount = () => {
             {/* end of add button */}
           </div>
         </div>
-        <div className="sm:mx-0.5 lg:mx-0.5 p-3 bg-white rounded-md">
+        <div className="sm:mx-0.5 lg:mx-0.5 p-3 bg-white rounded-md shadow-md">
           <div className="py-2 flex flex-col min-w-full">
             <div className="overflow-auto flex-grow">
               {/* Table */}
