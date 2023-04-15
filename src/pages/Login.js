@@ -30,17 +30,15 @@ function Login() {
         {/* right panel */}
         <div className="w-full md:w-1/2 bg-white px-10 py-10 flex flex-col justify-center">
           <form>
-            <div className="text-center mb-10">
-              <h1 className="text-3xl font-bold text-primary-color">
-                Login Sebagai {selectedRole}
-              </h1>
+            <div className="text-center mb-14">
+              <h1 className="text-3xl font-bold text-primary-color ">Logo</h1>
             </div>
             <div className="mb-5 ">
               <label
                 htmlFor="role"
                 className="block  font-bold mb-2 text-secondary-color"
               >
-                Siapa Kamu ?
+                Masuk sebagai
               </label>
               <select
                 id="role"
