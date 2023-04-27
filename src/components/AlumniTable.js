@@ -77,6 +77,13 @@ const AlumniTable = ({ keyword, angkatan }) => {
         Alumni <span className="font-bold">{keyword}</span> tidak ditemukan
       </div>
     );
+  // Show message if no record is found with the given angkatan
+  if (alumniData.message === "There is no record")
+    return (
+      <div className="text-primary-color">
+        Angkatan <span className="font-bold">{angkatan}</span> tidak ditemukan
+      </div>
+    );
 
   return (
     <table className="w-full border-2 ">
