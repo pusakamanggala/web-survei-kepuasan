@@ -1,19 +1,20 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
+  const { role } = useParams();
 
   let pageTitle;
   switch (location.pathname) {
     case "/beranda":
       pageTitle = "Beranda";
       break;
-    case "/pengguna":
-      pageTitle = "Akun Pengguna";
+    case `/pengguna/${role}`:
+      pageTitle = `${role}`;
       break;
     default:
       pageTitle = "Halaman Tidak Ditemukan";
@@ -66,14 +67,16 @@ const DashboardLayout = ({ children }) => {
       <div
         className={`${
           showSidebar ? "translate-x-0" : "-translate-x-full"
-        } fixed inset-y-0 left-0 transform lg:relative lg:translate-x-0 transition duration-200 ease-in-out bg-primary-color`}
+        } fixed inset-y-0 left-0 transform lg:relative lg:translate-x-0 transition duration-200 ease-in-out bg-primary-color z-50`}
       >
         <Sidebar />
       </div>
       <div className="flex flex-col flex-1 w-full">
         <header className="bg-secondary-color py-4">
           <div className="mx-auto px-4 sm:px-6 lg:px-8 flex justify-between">
-            <h1 className="text-white text-xl font-bold">{pageTitle}</h1>
+            <h1 className="text-white text-xl font-bold capitalize">
+              {pageTitle}
+            </h1>
             <div className="flex justify-center items-center">
               <h1 className="text-white text-lg font-semibold">John Doe</h1>
               <svg
