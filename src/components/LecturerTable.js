@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import useFetchLecturers from "../hooks/useFetchLecturers";
 import useFetchUserById from "../hooks/useFetchUserById";
 import useFetchUserByName from "../hooks/useFetchUserByName";
