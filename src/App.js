@@ -24,7 +24,7 @@ const App = () => {
             }
           />
           <Route
-            path="/pengguna"
+            path="/pengguna/:role"
             element={
               <DashboardLayout>
                 <UserAccount />
