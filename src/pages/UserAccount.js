@@ -17,8 +17,13 @@ const UserAccount = () => {
   //function to handle change of user type
   const handleChangeData = (event) => {
     const selectedUserType = event.target.value;
-    setKeyword(""); //reset the keyword state
-    setSearchValue(""); //reset the search value state
+    //reset the keyword state
+    setKeyword("");
+    setKeywordAngkatan("");
+    //reset the search value state
+    setSearchValue("");
+    setSearchValueAngkatan("");
+
     navigate(`/pengguna/${selectedUserType}`); //navigate to selected user type
   };
 
