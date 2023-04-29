@@ -1,8 +1,6 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 
 const useAddAlumni = () => {
-  const queryClient = useQueryClient();
-
   const addAlumniMutation = useMutation(async (formData) => {
     const response = await fetch("http://localhost:8000/alumni", {
       method: "POST",
