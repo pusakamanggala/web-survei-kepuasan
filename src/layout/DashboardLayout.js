@@ -16,6 +16,9 @@ const DashboardLayout = ({ children }) => {
     case `/pengguna/${role}`:
       pageTitle = `${role}`;
       break;
+    case `/pengguna/tambah/${role}`:
+      pageTitle = `Tambah ${role}`;
+      break;
     default:
       pageTitle = "Halaman Tidak Ditemukan";
   }
