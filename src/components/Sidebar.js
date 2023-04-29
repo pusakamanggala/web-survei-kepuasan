@@ -38,7 +38,10 @@ const Sidebar = () => {
           className={({ isActive }) =>
             isActive ||
             location.pathname === "/pengguna/dosen" ||
-            location.pathname === "/pengguna/alumni"
+            location.pathname === "/pengguna/alumni" ||
+            location.pathname === "/pengguna/tambah/mahasiswa" ||
+            location.pathname === "/pengguna/tambah/alumni" ||
+            location.pathname === "/pengguna/tambah/dosen"
               ? "active"
               : "inActive"
           }
