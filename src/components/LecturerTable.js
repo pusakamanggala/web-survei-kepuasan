@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useFetchLecturers from "../hooks/useFetchLecturers";
 import useFetchUserById from "../hooks/useFetchUserById";
 import useFetchUserByName from "../hooks/useFetchUserByName";
@@ -7,6 +7,30 @@ import { useParams } from "react-router-dom";
 const LecturerTable = ({ keyword }) => {
   // get role from url
   const { role } = useParams();
+
+  const [pageNumber, setPageNumber] = useState(1); // Set initial page number to 1
+  const [pageSize, setPageSize] = useState(5); // Set initial page size to 5
+
+  // Define functions to handle pagination
+  const handleNextPage = () => {
+    setPageNumber((prevPageNumber) => prevPageNumber + 1);
+  };
+  const handlePrevPage = () => {
+    setPageNumber((prevPageNumber) => prevPageNumber - 1);
+  };
+  const handleFirstPage = () => {
+    setPageNumber(1);
+  };
+  const handleLastPage = (totalPage) => {
+    setPageNumber(totalPage);
+  };
+
+  // Define function to handle page size change
+  const handlePageSizeChange = (event) => {
+    const newSize = parseInt(event.target.value);
+    setPageSize(newSize);
+    setPageNumber(1); // Reset page number to 1 when page size is changed
+  };
 
   // Declare variables for fetching data (will be assigned based on conditions)
   let fetchFunction;
@@ -25,8 +49,8 @@ const LecturerTable = ({ keyword }) => {
     // Use default fetch function and arguments if no keyword is provided
     fetchFunction = useFetchLecturers;
     fetchArgs = {
-      limit: 10, // Set the number of items per page
-      page: 1, // Set the initial page number
+      limit: pageSize, // Set the number of items per page
+      page: pageNumber, // Set the initial page number
     };
   }
 
@@ -61,49 +85,79 @@ const LecturerTable = ({ keyword }) => {
     );
 
   return (
-    <table className="w-full border-2 ">
-      <thead>
-        <tr>
-          <th
-            scope="col"
-            className="text-sm font-medium bg-secondary-color text-white px-6 py-4 text-left"
-          >
-            NIP
-          </th>
-          <th
-            scope="col"
-            className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-left"
-          >
-            Nama
-          </th>
-          <th
-            scope="col"
-            className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-left"
-          >
-            Telp
-          </th>
-          <th
-            scope="col"
-            className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-center"
-          >
-            Actions
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {/* map data */}
-        {Array.isArray(lecturerData.data) ? (
-          lecturerData.data.map((res, index) => (
-            // print data to table
-            <tr className="bg-gray-100 border-b" key={index}>
+    <div>
+      {/* To show total users when keyword is empty */}
+      {keyword === "" ? (
+        <div className="flex justify-between text-secondary-color font-medium mx-1">
+          <h1>Total Mahasiswa : {lecturerData.totalRecords}</h1>
+          <h1>
+            Halaman : {pageNumber} / {lecturerData.totalPage}
+          </h1>
+        </div>
+      ) : null}
+      {/* Table */}
+      <table className="w-full border-2 ">
+        <thead>
+          <tr>
+            <th
+              scope="col"
+              className="text-sm font-medium bg-secondary-color text-white px-6 py-4 text-left"
+            >
+              NIP
+            </th>
+            <th
+              scope="col"
+              className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-left"
+            >
+              Nama
+            </th>
+            <th
+              scope="col"
+              className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-left"
+            >
+              Telp
+            </th>
+            <th
+              scope="col"
+              className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-center"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* map data */}
+          {Array.isArray(lecturerData.data) ? (
+            lecturerData.data.map((res, index) => (
+              // print data to table
+              <tr className="bg-gray-100 border-b" key={index}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  {res.nip}
+                </td>
+                <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
+                  {res.nama}
+                </td>
+                <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
+                  {res.telepon}
+                </td>
+                {/* Actions Buttons */}
+                <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
+                  <button className="bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md">
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr className="bg-gray-100 border-b">
               <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                {res.nip}
+                {lecturerData.data.nip}
               </td>
               <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
-                {res.nama}
+                {lecturerData.data.nama}
               </td>
               <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
-                {res.telepon}
+                {lecturerData.data.telepon}
               </td>
               {/* Actions Buttons */}
               <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
@@ -112,28 +166,83 @@ const LecturerTable = ({ keyword }) => {
                 </button>
               </td>
             </tr>
-          ))
-        ) : (
-          <tr className="bg-gray-100 border-b">
-            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-              {lecturerData.data.nip}
-            </td>
-            <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
-              {lecturerData.data.nama}
-            </td>
-            <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
-              {lecturerData.data.telepon}
-            </td>
-            {/* Actions Buttons */}
-            <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
-              <button className="bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md">
-                Edit
+          )}
+        </tbody>
+      </table>
+      <div className="flex justify-between items-center pt-6 w-full">
+        {/* button to set how much data is displayed  */}
+        <div className="flex text-primary-color font-semibold ml-2">
+          {lecturerData && lecturerData.totalRecords > 5 ? (
+            <>
+              <h1>Tampilkan</h1>
+              <select
+                name=""
+                id=""
+                className="text-secondary-color"
+                value={pageSize}
+                onChange={handlePageSizeChange}
+              >
+                <option value="5">5</option>
+                <option value="10">10</option>
+              </select>
+            </>
+          ) : null}
+        </div>
+        {lecturerData &&
+        lecturerData.totalPage &&
+        lecturerData.totalPage !== 1 ? (
+          <div>
+            {pageNumber !== 1 ? (
+              <button
+                onClick={handleFirstPage}
+                disabled={pageNumber === 1}
+                className={`font-bold py-2 px-4 rounded mr-2 text-white ${
+                  pageNumber === 1
+                    ? "bg-red-400 "
+                    : "bg-red-600 hover:bg-red-700 "
+                } `}
+              >
+                First
               </button>
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </table>
+            ) : null}
+
+            <button
+              onClick={handlePrevPage}
+              disabled={pageNumber === 1}
+              className={`font-bold py-2 px-4 rounded mr-2 text-white ${
+                pageNumber === 1
+                  ? "bg-red-400 "
+                  : "bg-red-600 hover:bg-red-700 "
+              } `}
+            >
+              Prev
+            </button>
+            <button
+              onClick={handleNextPage}
+              disabled={pageNumber === lecturerData.totalPage}
+              className={`font-bold py-2 px-4 rounded mr-2 text-white ${
+                pageNumber === lecturerData.totalPage
+                  ? "bg-red-400 "
+                  : "bg-red-600 hover:bg-red-700 "
+              } `}
+            >
+              Next
+            </button>
+            <button
+              onClick={() => handleLastPage(lecturerData.totalPage)}
+              disabled={pageNumber === lecturerData.totalPage}
+              className={`font-bold py-2 px-4 rounded mr-2 text-white ${
+                pageNumber === lecturerData.totalPage
+                  ? "bg-red-400 "
+                  : "bg-red-600 hover:bg-red-700 "
+              } `}
+            >
+              Last
+            </button>
+          </div>
+        ) : null}
+      </div>
+    </div>
   );
 };
 
