@@ -27,6 +27,7 @@ const UserAccount = () => {
     navigate(`/pengguna/${selectedUserType}`); //navigate to selected user type
   };
 
+  // function to submit the search form
   const handleSubmit = (event) => {
     event.preventDefault();
     setKeyword(searchValue);
@@ -34,7 +35,6 @@ const UserAccount = () => {
     setKeywordAngkatan("");
     setSearchValueAngkatan("");
   };
-
   const handleSubmitAngkatan = (event) => {
     event.preventDefault();
     setKeywordAngkatan(searchValueAngkatan);
@@ -78,6 +78,7 @@ const UserAccount = () => {
                   className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
                   type="text"
                   id="search"
+                  minLength={3}
                   placeholder={`Cari ${
                     role === "dosen" ? "NIP" : "NIM"
                   } atau Nama`}
@@ -134,8 +135,9 @@ const UserAccount = () => {
                 <form onSubmit={handleSubmitAngkatan} className="w-full">
                   <input
                     className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
-                    type="text"
+                    type="number"
                     id="search"
+                    min={2000}
                     placeholder="Angkatan"
                     value={searchValueAngkatan}
                     onChange={(event) =>
@@ -184,7 +186,10 @@ const UserAccount = () => {
             </select>
             {/* end of select dropdown */}
             {/* add button */}
-            <button className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color shadow-sm shadow-secondary-color ">
+            <button
+              className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+              onClick={() => navigate(`/pengguna/tambah/${role}`)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -208,7 +213,7 @@ const UserAccount = () => {
           <div className="py-2 flex flex-col min-w-full">
             <div className="overflow-auto flex-grow">
               {/* Table */}
-              {/* conditional rendering based on the value of role*/}
+              {/* conditional user table rendering based on role*/}
               {role === "mahasiswa" ? (
                 <StudentTable keyword={keyword} angkatan={keywordAngkatan} />
               ) : role === "dosen" ? (
