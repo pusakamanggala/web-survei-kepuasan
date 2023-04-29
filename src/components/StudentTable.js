@@ -116,14 +116,15 @@ const StudentTable = ({ keyword, angkatan }) => {
 
   return (
     <div>
-      <div className="flex justify-between text-secondary-color font-medium mx-1">
-        {/* To show total users */}
-        <h1>Total Mahasiswa : {studentData.totalRecords}</h1>
-        <h1>
-          Halaman : {pageNumber} / {studentData.totalPage}
-        </h1>
-      </div>
-
+      {/* To show total users when keyword is empty */}
+      {keyword === "" ? (
+        <div className="flex justify-between text-secondary-color font-medium mx-1">
+          <h1>Total Mahasiswa : {studentData.totalRecords}</h1>
+          <h1>
+            Halaman : {pageNumber} / {studentData.totalPage}
+          </h1>
+        </div>
+      ) : null}
       {/* Table */}
       <table className="w-full border-2 ">
         <thead>
