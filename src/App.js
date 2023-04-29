@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import PageNotFound from "./pages/PageNotFound";
 import { QueryClient, QueryClientProvider } from "react-query";
+import AddUser from "./pages/AddUser";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,14 @@ const App = () => {
             element={
               <DashboardLayout>
                 <UserAccount />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/pengguna/tambah/:role"
+            element={
+              <DashboardLayout>
+                <AddUser />
               </DashboardLayout>
             }
           />
