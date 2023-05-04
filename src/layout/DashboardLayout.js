@@ -7,6 +7,7 @@ const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
   const { role } = useParams();
+  const { id } = useParams();
 
   let pageTitle;
   switch (location.pathname) {
@@ -19,6 +20,16 @@ const DashboardLayout = ({ children }) => {
     case `/pengguna/tambah/${role}`:
       pageTitle = `Tambah ${role}`;
       break;
+    case `/kelas`:
+      pageTitle = `Kelas`;
+      break;
+    case `/kelas/${id}`:
+      pageTitle = `Detail Kelas`;
+      break;
+    case "/kelas/tambah":
+      pageTitle = "Tambah Kelas";
+      break;
+
     default:
       pageTitle = "Halaman Tidak Ditemukan";
   }
