@@ -153,7 +153,10 @@ const Sidebar = () => {
           </button>
         </div>
         {/*end of survei sub menu */}
-        <button className="p-5 flex w-full focus:bg-red-700">
+        <NavLink
+          to="/kelas"
+          className={({ isActive }) => (isActive ? "active" : "inActive")}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-6 h-6 mr-4"
@@ -171,7 +174,7 @@ const Sidebar = () => {
             <path d="M11 16m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v1a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path>
           </svg>
           <h1>Daftar Kelas</h1>
-        </button>
+        </NavLink>
         <button className="p-5 flex w-full focus:bg-red-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
