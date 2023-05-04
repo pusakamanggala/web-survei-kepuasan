@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-const useFetchUserByName = ({ role, keyword }) => {
+const useFetchUserByName = ({ role, keyword, autoFetch = true }) => {
   const fetchUser = async () => {
     // Define async function to fetch user data
     const response = await fetch(
@@ -17,6 +17,7 @@ const useFetchUserByName = ({ role, keyword }) => {
     refetchOnWindowFocus: false,
     staleTime: 60000, // 1 minute
     cacheTime: 3600000, // 1 hour
+    enabled: autoFetch, // to disable or enable auto fetch
   });
 };
 
