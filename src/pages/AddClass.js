@@ -103,13 +103,16 @@ const AddClass = () => {
   }
 
   if (addClassMutation.isSuccess) {
-    const timeoutId = setTimeout(() => {
+    setTimeout(() => {
       window.location.reload(); // reload the page
     }, 5000); // set timeout to 5 seconds
 
     return (
       <div className="text-green-500 font-bold text-xl ml-2 capitalize">
-        Kelas Berhasil Ditambahkan
+        <h1>Kelas Berhasil Ditambahkan</h1>
+        <p className="text-black font-normal text-base">
+          Anda akan dialihkan dalam 5 detik
+        </p>
       </div>
     );
   }
