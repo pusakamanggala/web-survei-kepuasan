@@ -10,6 +10,9 @@ import AddUser from "./pages/AddUser";
 import Classes from "./pages/Classes";
 import ClassDetails from "./pages/ClassDetails";
 import AddClass from "./pages/AddClass";
+import Questions from "./pages/Questions";
+import AddSurveyTemplate from "./pages/AddSurveyTemplate";
+import SurveyTemplates from "./pages/SurveyTemplates";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +67,30 @@ const App = () => {
             element={
               <DashboardLayout>
                 <ClassDetails />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/survei-kepuasan/pertanyaan"
+            element={
+              <DashboardLayout>
+                <Questions />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/survei-kepuasan/template-survei/"
+            element={
+              <DashboardLayout>
+                <SurveyTemplates />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/survei-kepuasan/template-survei/tambah"
+            element={
+              <DashboardLayout>
+                <AddSurveyTemplate />
               </DashboardLayout>
             }
           />
