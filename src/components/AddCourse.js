@@ -24,7 +24,7 @@ const AddCourse = (props) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full text-primary-color bg-gray-900 bg-opacity-50 z-50">
+    <div className="fixed top-0 left-0 w-full h-full text-primary-color bg-gray-900 bg-opacity-50 z-40">
       <div className="flex justify-center items-center h-full">
         <div className="modal p-6 w-72 bg-white shadow-md rounded-md relative">
           <h1 className="text-center mb-4">Tambah Mata Kuliah</h1>
