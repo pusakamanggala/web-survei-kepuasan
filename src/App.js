@@ -13,6 +13,8 @@ import AddClass from "./pages/AddClass";
 import Questions from "./pages/Questions";
 import AddSurveyTemplate from "./pages/AddSurveyTemplate";
 import SurveyTemplates from "./pages/SurveyTemplates";
+import ActiveSurveys from "./pages/ActiveSurveys";
+import AddSurvey from "./pages/AddSurvey";
 
 const queryClient = new QueryClient();
 
@@ -91,6 +93,22 @@ const App = () => {
             element={
               <DashboardLayout>
                 <AddSurveyTemplate />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/survei-kepuasan/survei-aktif"
+            element={
+              <DashboardLayout>
+                <ActiveSurveys />
+              </DashboardLayout>
+            }
+          />
+          <Route
+            path="/survei-kepuasan/survei-aktif/tambah"
+            element={
+              <DashboardLayout>
+                <AddSurvey />
               </DashboardLayout>
             }
           />
