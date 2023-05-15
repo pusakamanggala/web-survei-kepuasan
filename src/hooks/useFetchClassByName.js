@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-const useFetchClassByName = ({ keyword }) => {
+const useFetchClassByName = ({ keyword, autoFetch = true }) => {
   const fetchClass = async () => {
     // Define async function to fetch class data
     const response = await fetch(
@@ -17,6 +17,7 @@ const useFetchClassByName = ({ keyword }) => {
     refetchOnWindowFocus: false,
     staleTime: 60000, // 1 minute
     cacheTime: 3600000, // 1 hour
+    enabled: autoFetch,
   });
 };
 
