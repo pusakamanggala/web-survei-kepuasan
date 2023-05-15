@@ -7,12 +7,12 @@ const Sidebar = () => {
   const location = useLocation();
 
   return (
-    <div className="bg-primary-color w-64 px-2 pt-4 pb-8 text-white">
+    <div className="bg-primary-color w-64 px-2 pt-4 pb-8 text-white h-full">
       <div className="flex justify-center">
         <span className="text-white text-3xl font-semibold py-6">Logo</span>
       </div>
       {/* sidebar menu */}
-      <>
+      <div className="h-full overflow-y-auto">
         <NavLink
           to="/beranda"
           className={({ isActive }) => (isActive ? "active" : "inActive")}
@@ -63,7 +63,7 @@ const Sidebar = () => {
           <h1>Pengguna</h1>
         </NavLink>
         <button
-          className="p-5 flex w-full focus:bg-red-700 items-center"
+          className="p-5 flex w-full focus:bg-red-700 items-center relative"
           onClick={() => setSubMenu(!subMenu)}
         >
           <svg
@@ -218,7 +218,7 @@ const Sidebar = () => {
 
           <h1>Sign Out</h1>
         </button>
-      </>
+      </div>
       {/* sidebar menu */}
     </div>
   );
