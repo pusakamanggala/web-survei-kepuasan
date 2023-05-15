@@ -167,7 +167,11 @@ const Classes = () => {
           {data && data.data && data.data.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {data.data.map((kelas) => (
-                <ClassCard key={kelas.id_kelas} kelas={kelas} />
+                <ClassCard
+                  key={kelas.id_kelas}
+                  kelas={kelas}
+                  onClick={() => navigate(`/kelas/${kelas.id_kelas}`)}
+                />
               ))}
             </div>
           ) : (
