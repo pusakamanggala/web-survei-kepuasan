@@ -2,16 +2,32 @@ import React from "react";
 import { useState } from "react";
 import "tailwindcss/tailwind.css";
 import { useNavigate } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  const [selectedRole, setSelectedRole] = useState("Mahasiswa");
+  const [selectedRole, setSelectedRole] = useState("mahasiswa");
   const navigate = useNavigate();
+
+  const loginMutation = useLogin(selectedRole);
+  console.log(selectedRole);
 
   const handleLogin = (event) => {
     event.preventDefault();
-    navigate("/beranda");
+
+    // Prepare the login data
+    const formData = {
+      id: userId,
+      password: password,
+    };
+
+    // Call the login mutation
+    loginMutation.mutate(formData); // Pass the role and form data
+
+    // Reset the form fields
+    setUserId("");
+    setPassword("");
   };
 
   return (
@@ -46,25 +62,25 @@ function Login() {
                 value={selectedRole}
                 onChange={(event) => setSelectedRole(event.target.value)}
               >
-                <option value="Admin">Admin</option>
-                <option value="Mahasiswa">Mahasiswa</option>
-                <option value="Dosen">Dosen</option>
-                <option value="Alumni">Alumni</option>
+                <option value="admin">Admin</option>
+                <option value="mahasiswa">Mahasiswa</option>
+                <option value="dosen">Dosen</option>
+                <option value="alumni">Alumni</option>
               </select>
             </div>
             <div className="mb-5 text-secondary-color">
-              <label htmlFor="username" className="block font-bold mb-2">
+              <label htmlFor="userId" className="block font-bold mb-2">
                 {selectedRole === "Admin" || selectedRole === "Dosen"
                   ? "NPM"
                   : "NIM"}
               </label>
               <input
                 type="text"
-                id="username"
+                id="userId"
+                required
                 className="border-2  p-2 w-full rounded-md"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-                autoComplete="username"
+                value={userId}
+                onChange={(event) => setUserId(event.target.value)}
               />
             </div>
             <div className="mb-5 text-secondary-color">
@@ -76,6 +92,7 @@ function Login() {
                 id="password"
                 className="border-2  p-2 w-full rounded-md"
                 value={password}
+                required
                 onChange={(event) => setPassword(event.target.value)}
                 autoComplete="current-password"
               />
@@ -90,6 +107,17 @@ function Login() {
               </button>
             </div>
           </form>
+          {/* login status */}
+          <div className="text-center font-semibold">
+            {loginMutation.isError && (
+              <h1 className="text-primary-color mt-2">
+                Terjadi kesalahan saat login
+              </h1>
+            )}
+            {loginMutation.isLoading && (
+              <h1 className="text-primary-color mt-2">Mencoba untuk login</h1>
+            )}
+          </div>
         </div>
         {/* end of right panel */}
       </div>
