@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useAddAlumni from "../hooks/useAddAlumni";
 
 function GraduateStudent(props) {
-  const { nama, nim, angkatan, status, setIsShow } = props; // props for student data
+  const { nama, nim, angkatan, setIsShow } = props; // props for student data
   const [tahun, setTahun] = useState(""); // state for tahun kelulusan
 
   const addAlumniMutation = useAddAlumni(); // useMutation to add alumni
@@ -61,21 +61,6 @@ function GraduateStudent(props) {
                       <h1 className="w-1/3">Angkatan</h1>
                       <h1 className="mr-2"> : </h1>
                       <h1 className="w-2/3 font-semibold">{angkatan}</h1>
-                    </div>
-                    <div className="flex">
-                      <h1 className="w-1/3">Status</h1>
-                      <h1 className="mr-2"> : </h1>
-                      <h1
-                        className={`"w-2/3 font-semibold" ${
-                          status === "Aktif"
-                            ? "text-red-500"
-                            : status === "Lulus"
-                            ? "text-blue-500"
-                            : "text-green-500"
-                        }`}
-                      >
-                        {status}
-                      </h1>
                     </div>
                   </div>
                   <form
