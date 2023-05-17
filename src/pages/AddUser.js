@@ -271,7 +271,6 @@ const AddUser = () => {
                   }
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
-                <h1>{nama}</h1>
               </div>
               <div className="mb-4">
                 <label
