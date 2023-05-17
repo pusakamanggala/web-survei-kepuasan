@@ -4,13 +4,16 @@ import useFetchUserById from "../hooks/useFetchUserById";
 import useFetchUserByName from "../hooks/useFetchUserByName";
 import { useParams } from "react-router-dom";
 import GraduateStudent from "./GraduateStudent";
+import EditUser from "./EditUser";
 
 const StudentTable = ({ keyword, angkatan }) => {
   // Set initial state values for sorting
   const [isAsc, setIsAsc] = useState(true);
   const [orderBy, setOrderBy] = useState("nim");
 
-  const [showModal, setShowModal] = useState(false); // state to open and close graduate student modal
+  const [showGraduateModal, setShowGraduateModal] = useState(false); // state to open and close graduate student modal
+
+  const [showEditModal, setShowEditModal] = useState(false); // state to open and close edit student modal
 
   const [pageNumber, setPageNumber] = useState(1); // Set initial page number to 1
   const [pageSize, setPageSize] = useState(5); // Set initial page size to 5
@@ -32,7 +35,7 @@ const StudentTable = ({ keyword, angkatan }) => {
     );
   };
 
-  // Define two functions to handle pagination
+  // Define functions to handle pagination
   const handleNextPage = () => {
     setPageNumber((prevPageNumber) => prevPageNumber + 1);
   };
@@ -94,6 +97,7 @@ const StudentTable = ({ keyword, angkatan }) => {
     );
 
   // Show message if no record is found with the given Name or NIM
+
   if (studentData.message === "There is no record with that id")
     return (
       <div className="text-primary-color">
@@ -208,12 +212,6 @@ const StudentTable = ({ keyword, angkatan }) => {
             </th>
             <th
               scope="col"
-              className="text-sm font-medium text-white bg-secondary-color px-6 py-4"
-            >
-              Status
-            </th>
-            <th
-              scope="col"
               className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-center"
             >
               Actions
@@ -237,36 +235,41 @@ const StudentTable = ({ keyword, angkatan }) => {
                 <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
                   {res.telepon}
                 </td>
-                <td
-                  className={`text-sm font-medium px-6 py-4 whitespace-nowrap text-center ${
-                    res.status === "Aktif"
-                      ? "text-red-500"
-                      : res.status === "Lulus"
-                      ? "text-blue-500"
-                      : "text-green-500"
-                  }`}
-                >
-                  {res.status}
-                </td>
                 {/* Actions Buttons */}
                 <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
                   <button
-                    className="bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
+                    className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
                     onClick={() => {
                       setSelectedStudent(res);
-                      setShowModal(true);
+                      setShowEditModal(true);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  {/* EditStudent component */}
+                  {showEditModal && (
+                    <EditUser
+                      setIsShow={setShowEditModal}
+                      userData={selectedStudent}
+                      role={role}
+                    />
+                  )}
+                  <button
+                    className="bg-green-500 text-white font-medium px-4 py-2 rounded-md shadow-md"
+                    onClick={() => {
+                      setSelectedStudent(res);
+                      setShowGraduateModal(true);
                     }}
                   >
                     Luluskan
                   </button>
                   {/* GraduateStudent component */}
-                  {showModal && (
+                  {showGraduateModal && (
                     <GraduateStudent
                       nama={selectedStudent.nama}
                       nim={selectedStudent.nim}
                       angkatan={selectedStudent.angkatan}
-                      status={selectedStudent.status}
-                      setIsShow={setShowModal}
+                      setIsShow={setShowGraduateModal}
                     />
                   )}
                 </td>
@@ -286,36 +289,41 @@ const StudentTable = ({ keyword, angkatan }) => {
               <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap">
                 {studentData.data.telepon}
               </td>
-              <td
-                className={`text-sm font-medium px-6 py-4 whitespace-nowrap text-center ${
-                  studentData.data.status === "Aktif"
-                    ? "text-red-500"
-                    : studentData.data.status === "Lulus"
-                    ? "text-blue-500"
-                    : "text-green-500"
-                }`}
-              >
-                {studentData.data.status}
-              </td>
               {/* Actions Buttons */}
               <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
                 <button
-                  className="bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
+                  className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
                   onClick={() => {
                     setSelectedStudent(studentData.data);
-                    setShowModal(true);
+                    setShowEditModal(true);
+                  }}
+                >
+                  Edit
+                </button>
+                {/* EditStudent component */}
+                {showEditModal && (
+                  <EditUser
+                    setIsShow={setShowEditModal}
+                    userData={selectedStudent}
+                    role={role}
+                  />
+                )}
+                <button
+                  className="bg-green-500 text-white font-medium px-4 py-2 rounded-md shadow-md"
+                  onClick={() => {
+                    setSelectedStudent(studentData.data);
+                    setShowGraduateModal(true);
                   }}
                 >
                   Luluskan
                 </button>
                 {/* GraduateStudent component */}
-                {showModal && (
+                {showGraduateModal && (
                   <GraduateStudent
                     nama={selectedStudent.nama}
                     nim={selectedStudent.nim}
                     angkatan={selectedStudent.angkatan}
-                    status={selectedStudent.status}
-                    setIsShow={setShowModal}
+                    setIsShow={setShowGraduateModal}
                   />
                 )}
               </td>
@@ -342,6 +350,7 @@ const StudentTable = ({ keyword, angkatan }) => {
             </>
           ) : null}
         </div>
+        {/* pagination buttons */}
         {studentData && studentData.totalPage !== 1 && keyword === "" ? (
           <div>
             {pageNumber !== 1 ? (

@@ -3,6 +3,7 @@ import useFetchAlumni from "../hooks/useFetchAlumni";
 import useFetchUserById from "../hooks/useFetchUserById";
 import useFetchUserByName from "../hooks/useFetchUserByName";
 import { useParams } from "react-router-dom";
+import EditUser from "./EditUser";
 
 const AlumniTable = ({ keyword, angkatan }) => {
   // Set initial state values for sorting
@@ -10,6 +11,9 @@ const AlumniTable = ({ keyword, angkatan }) => {
   const [orderBy, setOrderBy] = useState("nim");
   const [pageNumber, setPageNumber] = useState(1); // Set initial page number to 1
   const [pageSize, setPageSize] = useState(5); // Set initial page size to 5
+
+  const [showEditModal, setShowEditModal] = useState(false); // State to show/hide edit modal
+  const [selectedAlumni, setSelectedAlumni] = useState(null); // State to store selected alumni data
 
   // get role from url
   const { role } = useParams();
@@ -238,9 +242,23 @@ const AlumniTable = ({ keyword, angkatan }) => {
                 </td>
                 {/* Actions Buttons */}
                 <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
-                  <button className="bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md">
+                  <button
+                    className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
+                    onClick={() => {
+                      setSelectedAlumni(res);
+                      setShowEditModal(true);
+                    }}
+                  >
                     Edit
                   </button>
+                  {/* EditUser component */}
+                  {showEditModal && (
+                    <EditUser
+                      setIsShow={setShowEditModal}
+                      userData={selectedAlumni}
+                      role={role}
+                    />
+                  )}
                 </td>
               </tr>
             ))
@@ -263,9 +281,23 @@ const AlumniTable = ({ keyword, angkatan }) => {
               </td>
               {/* Actions Buttons */}
               <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
-                <button className="bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md">
+                <button
+                  className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
+                  onClick={() => {
+                    setSelectedAlumni(alumniData.data);
+                    setShowEditModal(true);
+                  }}
+                >
                   Edit
                 </button>
+                {/* EditUser component */}
+                {showEditModal && (
+                  <EditUser
+                    setIsShow={setShowEditModal}
+                    userData={selectedAlumni}
+                    role={role}
+                  />
+                )}
               </td>
             </tr>
           )}

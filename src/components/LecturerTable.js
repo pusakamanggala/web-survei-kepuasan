@@ -3,10 +3,15 @@ import useFetchLecturers from "../hooks/useFetchLecturers";
 import useFetchUserById from "../hooks/useFetchUserById";
 import useFetchUserByName from "../hooks/useFetchUserByName";
 import { useParams } from "react-router-dom";
+import EditUser from "./EditUser";
 
 const LecturerTable = ({ keyword }) => {
   // get role from url
   const { role } = useParams();
+
+  const [selectedLecturer, setSelectedLecturer] = useState({}); // State to hold lecturer data
+
+  const [showEditModal, setShowEditModal] = useState(false); // State to show/hide edit modal
 
   const [pageNumber, setPageNumber] = useState(1); // Set initial page number to 1
   const [pageSize, setPageSize] = useState(5); // Set initial page size to 5
@@ -142,9 +147,23 @@ const LecturerTable = ({ keyword }) => {
                 </td>
                 {/* Actions Buttons */}
                 <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
-                  <button className="bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md">
+                  <button
+                    className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
+                    onClick={() => {
+                      setSelectedLecturer(res);
+                      setShowEditModal(true);
+                    }}
+                  >
                     Edit
                   </button>
+                  {/* EditUser component */}
+                  {showEditModal && (
+                    <EditUser
+                      setIsShow={setShowEditModal}
+                      userData={selectedLecturer}
+                      role={role}
+                    />
+                  )}
                 </td>
               </tr>
             ))
@@ -161,9 +180,23 @@ const LecturerTable = ({ keyword }) => {
               </td>
               {/* Actions Buttons */}
               <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
-                <button className="bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md">
+                <button
+                  className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
+                  onClick={() => {
+                    setSelectedLecturer(lecturerData.data);
+                    setShowEditModal(true);
+                  }}
+                >
                   Edit
                 </button>
+                {/* EditUser component */}
+                {showEditModal && (
+                  <EditUser
+                    setIsShow={setShowEditModal}
+                    userData={selectedLecturer}
+                    role={role}
+                  />
+                )}
               </td>
             </tr>
           )}
