@@ -13,11 +13,6 @@ function useLogin(role) {
       if (!res.ok) {
         throw new Error("Failed to login");
       }
-      // Save cookies to browser
-      const cookies = res.headers.get("Set-Cookie");
-      document.cookie = cookies;
-
-      console.log(cookies);
 
       return res.json();
     })
