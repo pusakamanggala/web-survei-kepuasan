@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 
 function useLogin(role) {
   const LoginMutation = useMutation((data) =>
-    fetch(`http://localhost:8000/login/${role}`, {
+    fetch(`http://web-survei-api.up.railway.app/login/${role}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -13,9 +13,10 @@ function useLogin(role) {
         throw new Error("Failed to login");
       }
       // Save cookies to browser
-      const cookies = res.headers.get("set-cookie");
+      const cookies = res.headers.get("Set-Cookie");
       document.cookie = cookies;
-      console.log(document.cookie);
+
+      console.log(cookies);
 
       return res.json();
     })
