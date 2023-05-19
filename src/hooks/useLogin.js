@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 
 function useLogin(role) {
   const LoginMutation = useMutation((data) =>
-    fetch(`http://web-survei-api.up.railway.app/login/${role}`, {
+    fetch(`https://web-survei-api.up.railway.app/login/${role}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
