@@ -1,14 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import "tailwindcss/tailwind.css";
-import { useNavigate } from "react-router-dom";
 import useLogin from "../hooks/useLogin";
-import { UserContext } from "../context/UserContext";
 
 function Login() {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [selectedRole, setSelectedRole] = useState("mahasiswa");
-  const navigate = useNavigate();
   const loginMutation = useLogin(selectedRole);
 
   const handleLogin = (event) => {
