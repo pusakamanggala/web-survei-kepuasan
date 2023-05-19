@@ -10,7 +10,6 @@ function Login() {
   const [selectedRole, setSelectedRole] = useState("mahasiswa");
   const navigate = useNavigate();
   const loginMutation = useLogin(selectedRole);
-  const { setJwtUserRole } = useContext(UserContext);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -28,26 +27,6 @@ function Login() {
     setUserId("");
     setPassword("");
   };
-
-  // jwt dummy data
-  const jwtData =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJzdXBlcmFkbWluIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNjg0Mzk1NTkwLCJleHAiOjE2ODQ2NTQ3OTB9._I2NJ2rbGBGwaYgjmWrJI6JMSh3F42wMq3cm7205nUQ";
-
-  useEffect(() => {
-    if (loginMutation.isSuccess) {
-      // get the jwt data from cookie
-      const cookie = document.cookie;
-      console.log(cookie);
-      setJwtUserRole(jwtData);
-      navigate("/beranda");
-    }
-  }, [
-    loginMutation.isSuccess,
-    selectedRole,
-    loginMutation.data?.data,
-    setJwtUserRole,
-    navigate,
-  ]);
 
   return (
     <>
@@ -130,7 +109,9 @@ function Login() {
           <div className="text-center font-semibold">
             {loginMutation.isError && (
               <h1 className="text-primary-color mt-2">
-                Terjadi kesalahan saat login
+                {loginMutation.error.message === "wrong username or password"
+                  ? "NIM/NIP atau Password Salah"
+                  : "Terjadi kesalahan saat memproses permintaan"}
               </h1>
             )}
             {loginMutation.isLoading && (
