@@ -6,6 +6,11 @@ const Sidebar = () => {
   const [subMenu, setSubMenu] = useState(false);
   const location = useLocation();
 
+  const handleSignOut = () => {
+    document.cookie = "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    window.location.reload();
+  };
+
   return (
     <div className="bg-primary-color w-64 px-2 pt-4 pb-8 text-white h-full">
       <div className="flex justify-center">
@@ -200,7 +205,10 @@ const Sidebar = () => {
           </svg>
           <h1>Daftar Kelas</h1>
         </NavLink>
-        <button className="p-5 flex w-full focus:bg-red-700">
+        <button
+          className="p-5 flex w-full focus:bg-red-700"
+          onClick={handleSignOut}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
