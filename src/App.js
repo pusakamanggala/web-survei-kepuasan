@@ -15,21 +15,48 @@ import AddSurveyTemplate from "./pages/AddSurveyTemplate";
 import SurveyTemplates from "./pages/SurveyTemplates";
 import ActiveSurveys from "./pages/ActiveSurveys";
 import AddSurvey from "./pages/AddSurvey";
+import { Navigate } from "react-router-dom";
 
 const queryClient = new QueryClient();
+
+const cookies = document.cookie.split(";"); // Get cookies
+
+// Check if user is authorized by checking if there is a cookie named "Authorization"
+const isAuthorized = () => {
+  const cookieName = "Authorization";
+
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+
+    if (cookie.startsWith(`${cookieName}=`)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+const isAuthenticated = isAuthorized();
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route
+            path="/"
+            element={isAuthenticated ? <Navigate to="/beranda" /> : <Login />}
+          />
           <Route
             path="/beranda"
             element={
-              <DashboardLayout>
-                <Home />
-              </DashboardLayout>
+              isAuthenticated ? (
+                <DashboardLayout>
+                  <Home />
+                </DashboardLayout>
+              ) : (
+                <Navigate to="/" />
+              )
             }
           />
           <Route
@@ -112,7 +139,10 @@ const App = () => {
               </DashboardLayout>
             }
           />
-          <Route path="*" element={<PageNotFound />} />
+          <Route
+            path="*"
+            element={isAuthenticated ? <PageNotFound /> : <Navigate to="/" />}
+          />
         </Routes>
       </Router>
     </QueryClientProvider>
