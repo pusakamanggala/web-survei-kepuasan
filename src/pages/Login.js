@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "tailwindcss/tailwind.css";
 import useLogin from "../hooks/useLogin";
 
 function Login() {
@@ -24,6 +23,11 @@ function Login() {
     setUserId("");
     setPassword("");
   };
+
+  if (loginMutation.isSuccess) {
+    // reload the page
+    window.location.reload();
+  }
 
   return (
     <>
