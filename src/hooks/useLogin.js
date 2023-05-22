@@ -11,7 +11,9 @@ function useLogin(role) {
       body: JSON.stringify(data),
     }).then((res) => {
       if (!res.ok) {
-        throw new Error("Failed to login");
+        return res.json().then((errorData) => {
+          throw new Error(errorData.message); // Throw an Error with the error message
+        });
       }
 
       return res.json();
