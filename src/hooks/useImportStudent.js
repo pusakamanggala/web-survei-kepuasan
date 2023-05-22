@@ -5,7 +5,7 @@ function useImportStudent() {
     const formData = new FormData();
     formData.append("file", file);
 
-    return fetch("http://localhost:8000/mahasiswa/bulk", {
+    return fetch(`${process.env.REACT_APP_API_ENDPOINT}/mahasiswa/bulk`, {
       method: "POST",
       body: formData,
     }).then((res) => {

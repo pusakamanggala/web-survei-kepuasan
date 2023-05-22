@@ -4,7 +4,7 @@ const useFetchSurveyTemplate = ({ role, autoFetch = true }) => {
   const fetchSurveyTemplate = async () => {
     // Define async function to fetch templates data
     const response = await fetch(
-      `http://localhost:8000/survey-template?role=${role}`
+      `${process.env.REACT_APP_API_ENDPOINT}/survey-template?role=${role}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch templates data");

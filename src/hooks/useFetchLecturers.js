@@ -4,7 +4,7 @@ const useFetchLectures = ({ limit, page }) => {
   // Define async function to fetch lectures data
   const fetchLectures = async () => {
     const response = await fetch(
-      `http://localhost:8000/dosen?limit=${limit}&page=${page}`
+      `${process.env.REACT_APP_API_ENDPOINT}/dosen?limit=${limit}&page=${page}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch lecture data");

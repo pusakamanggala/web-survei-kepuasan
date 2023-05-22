@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 
 function useAddClass() {
   const addClassMutation = useMutation((kelas) =>
-    fetch("http://localhost:8000/kelas", {
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/kelas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

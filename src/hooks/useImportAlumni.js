@@ -5,7 +5,7 @@ function useImportAlumni() {
     const formData = new FormData();
     formData.append("file", file);
 
-    return fetch("http://localhost:8000/alumni/bulk", {
+    return fetch(`${process.env.REACT_APP_API_ENDPOINT}/alumni/bulk`, {
       method: "POST",
       body: formData,
     }).then((res) => {

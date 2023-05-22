@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 
 function useAddQuestion() {
   const addQuestionMutation = useMutation((question) =>
-    fetch("http://localhost:8000/questions", {
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/questions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

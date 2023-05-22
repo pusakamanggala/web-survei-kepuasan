@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 
 function useAddLecturer() {
   const addLecturerMutation = useMutation((lecturer) =>
-    fetch("http://localhost:8000/dosen", {
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/dosen`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

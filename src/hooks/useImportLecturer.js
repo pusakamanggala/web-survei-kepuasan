@@ -5,7 +5,7 @@ function useImportLecturer() {
     const formData = new FormData();
     formData.append("file", file);
 
-    return fetch("http://localhost:8000/dosen/bulk", {
+    return fetch(`${process.env.REACT_APP_API_ENDPOINT}/dosen/bulk`, {
       method: "POST",
       body: formData,
     }).then((res) => {

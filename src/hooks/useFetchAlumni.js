@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 const useFetchAlumni = ({ sortBy, orderBy, limit, page, angkatan }) => {
   // Define async function to fetch alumni data
   const fetchAlumni = async () => {
-    let url = `http://localhost:8000/alumni?sortBy=${sortBy}&orderBy=${orderBy}&limit=${limit}&page=${page}`;
+    let url = `${process.env.REACT_APP_API_ENDPOINT}/alumni?sortBy=${sortBy}&orderBy=${orderBy}&limit=${limit}&page=${page}`;
 
     if (angkatan !== "") {
       url += `&angkatan=${angkatan}`;

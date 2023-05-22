@@ -3,7 +3,9 @@ import { useQuery } from "react-query";
 const useFetchUserById = ({ role, id, autoFetch = true }) => {
   const fetchUser = async () => {
     // Define async function to fetch user data
-    const response = await fetch(`http://localhost:8000/${role}/${id}`);
+    const response = await fetch(
+      `${process.env.REACT_APP_API_ENDPOINT}/${role}/${id}`
+    );
     if (!response.ok) {
       throw new Error("Failed to fetch user data");
     }

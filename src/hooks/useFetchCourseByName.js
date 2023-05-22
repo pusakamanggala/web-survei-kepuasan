@@ -4,7 +4,7 @@ const useFetchCourseByName = ({ keyword, autoFetch = true }) => {
   const fetchCourse = async () => {
     // Define async function to fetch course data
     const response = await fetch(
-      `http://localhost:8000/matkul/suggest?query=${keyword}`
+      `${process.env.REACT_APP_API_ENDPOINT}/matkul/suggest?query=${keyword}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch course data");

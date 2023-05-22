@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 
 function useUpdateUser({ role, id }) {
   const updateUserMutation = useMutation((data) =>
-    fetch(`http://localhost:8000/${role}/${id}`, {
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/${role}/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

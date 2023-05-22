@@ -3,7 +3,9 @@ import { useQuery } from "react-query";
 const useFetchClassDetails = ({ id }) => {
   const fetchClassDetails = async () => {
     // Define async function to fetch class data
-    const response = await fetch(`http://localhost:8000/kelas/${id}`);
+    const response = await fetch(
+      `${process.env.REACT_APP_API_ENDPOINT}/kelas/${id}`
+    );
     if (response.status === 400) {
       const errorData = await response.json();
       throw new Error(errorData.message);
