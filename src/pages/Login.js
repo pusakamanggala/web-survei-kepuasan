@@ -7,6 +7,7 @@ function Login() {
   const [selectedRole, setSelectedRole] = useState("mahasiswa");
   const loginMutation = useLogin(selectedRole);
 
+  // to post the login data
   const handleLogin = (event) => {
     event.preventDefault();
 
@@ -16,6 +17,9 @@ function Login() {
       password: password,
     };
 
+    if (!userId || !password || !selectedRole)
+      return alert("NIM/NIP atau Password tidak boleh kosong");
+
     // Call the login mutation
     loginMutation.mutate(formData); // Pass the role and form data
 
@@ -24,8 +28,16 @@ function Login() {
     setPassword("");
   };
 
+  // Set the cookie to expire in 3 days
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 3); // Set expiration date to 3 days from now
+
+  // If the login is success, reload the page and set the cookie from the response
   if (loginMutation.isSuccess) {
     // reload the page
+    document.cookie = `Authorization=${
+      loginMutation.data.token
+    }; expires=${expirationDate.toUTCString()}; path=/;`;
     window.location.reload();
   }
 
@@ -44,7 +56,7 @@ function Login() {
         {/* end of left panel */}
         {/* right panel */}
         <div className="w-full md:w-1/2 bg-white px-10 py-10 flex flex-col justify-center">
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="text-center mb-14">
               <h1 className="text-3xl font-bold text-primary-color ">Logo</h1>
             </div>
@@ -69,13 +81,16 @@ function Login() {
             </div>
             <div className="mb-5 text-secondary-color">
               <label htmlFor="userId" className="block font-bold mb-2">
-                {selectedRole === "Admin" || selectedRole === "Dosen"
-                  ? "NPM"
-                  : "NIM"}
+                {selectedRole === "admin" || selectedRole === "dosen" ? (
+                  <label>{selectedRole === "admin" ? "Username" : "NIP"}</label>
+                ) : (
+                  <label>NIM</label>
+                )}
               </label>
               <input
-                type="text"
+                type={selectedRole !== "admin" ? "number" : "text"}
                 id="userId"
+                autoComplete="off"
                 required
                 className="border-2  p-2 w-full rounded-md"
                 value={userId}
@@ -93,14 +108,13 @@ function Login() {
                 value={password}
                 required
                 onChange={(event) => setPassword(event.target.value)}
-                autoComplete="current-password"
+                autoComplete="off"
               />
             </div>
             <div className="flex justify-end items-center">
               <button
                 type="submit"
                 className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded-md"
-                onClick={handleLogin}
               >
                 Login
               </button>
