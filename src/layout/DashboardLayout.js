@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import { useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+import useFetchUserById from "../hooks/useFetchUserById";
 
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
   const { role } = useParams();
   const { id } = useParams();
+  const [autoFetch, setAutoFetch] = useState(false); // state to trigger useFetchUserById
+
+  const { userRole, userId } = useContext(UserContext); // get logged in user role and id from user context
+
+  //get user name using useFetchUserById
+  const { data: userData, isSuccess: isUserDataSuccess } = useFetchUserById({
+    role: userRole,
+    id: userId,
+    autoFetch: autoFetch,
+  });
+
+  console.log(userRole);
+
+  // only fetch user data when role is not ADMIN
+  useEffect(() => {
+    if (userRole !== "ADMIN") {
+      setAutoFetch(true);
+    }
+  }, [userRole, setAutoFetch]);
 
   let pageTitle;
   switch (location.pathname) {
@@ -28,6 +49,9 @@ const DashboardLayout = ({ children }) => {
       break;
     case "/kelas/tambah":
       pageTitle = "Tambah Kelas";
+      break;
+    case "/profil":
+      pageTitle = "Profil Saya";
       break;
 
     default:
@@ -92,7 +116,16 @@ const DashboardLayout = ({ children }) => {
               {pageTitle}
             </h1>
             <div className="flex justify-center items-center">
-              <h1 className="text-white text-lg font-semibold">John Doe</h1>
+              {/* show user name when fetch is success */}
+              {isUserDataSuccess && (
+                <h1 className="text-white text-lg font-semibold">
+                  {userData.data.nama}
+                </h1>
+              )}
+              {/* name set to ADMIN when user role is ADMIN */}
+              {userRole === "ADMIN" && (
+                <h1 className="text-white text-lg font-semibold">ADMIN</h1>
+              )}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
