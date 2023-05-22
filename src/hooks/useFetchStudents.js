@@ -2,13 +2,15 @@ import { useQuery } from "react-query";
 
 const useFetchStudents = ({ sortBy, orderBy, limit, page, angkatan }) => {
   const fetchStudents = async () => {
-    let url = `http://localhost:8000/mahasiswa?sortBy=${sortBy}&orderBy=${orderBy}&limit=${limit}&page=${page}`;
+    let url = `${process.env.REACT_APP_API_ENDPOINT}/mahasiswa?sortBy=${sortBy}&orderBy=${orderBy}&limit=${limit}&page=${page}`;
 
     if (angkatan !== "") {
       url += `&angkatan=${angkatan}`;
     }
     // Define async function to fetch students data
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      credentials: "include", // Include credentials in the request
+    });
     if (!response.ok) {
       throw new Error("Failed to fetch student data");
     }
