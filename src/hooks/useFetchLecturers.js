@@ -4,7 +4,10 @@ const useFetchLectures = ({ limit, page }) => {
   // Define async function to fetch lectures data
   const fetchLectures = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/dosen?limit=${limit}&page=${page}`
+      `${process.env.REACT_APP_API_ENDPOINT}/dosen?limit=${limit}&page=${page}`,
+      {
+        credentials: "include", // Include credentials in the request
+      }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch lecture data");

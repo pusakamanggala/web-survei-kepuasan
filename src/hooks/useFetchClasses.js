@@ -4,7 +4,10 @@ const useFetchClasses = ({ limit, page }) => {
   // Define async function to fetch courses data
   const fetchClasses = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/kelas?limit=${limit}&page=${page}`
+      `${process.env.REACT_APP_API_ENDPOINT}/kelas?limit=${limit}&page=${page}`,
+      {
+        credentials: "include", // Include credentials in the request
+      }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch classes data");

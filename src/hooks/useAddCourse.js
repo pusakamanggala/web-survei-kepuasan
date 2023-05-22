@@ -8,6 +8,7 @@ function useAddCourse() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(course),
+      credentials: "include",
     }).then((res) => {
       if (!res.ok) {
         throw new Error("Failed to add course");

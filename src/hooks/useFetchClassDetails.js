@@ -4,7 +4,10 @@ const useFetchClassDetails = ({ id }) => {
   const fetchClassDetails = async () => {
     // Define async function to fetch class data
     const response = await fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/kelas/${id}`
+      `${process.env.REACT_APP_API_ENDPOINT}/kelas/${id}`,
+      {
+        credentials: "include", // Include credentials in the request
+      }
     );
     if (response.status === 400) {
       const errorData = await response.json();

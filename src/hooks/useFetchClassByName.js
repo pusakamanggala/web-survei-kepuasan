@@ -4,7 +4,10 @@ const useFetchClassByName = ({ keyword, autoFetch = true }) => {
   const fetchClass = async () => {
     // Define async function to fetch class data
     const response = await fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/kelas/suggest?query=${keyword}`
+      `${process.env.REACT_APP_API_ENDPOINT}/kelas/suggest?query=${keyword}`,
+      {
+        credentials: "include", // Include credentials in the request
+      }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch class data");

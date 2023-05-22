@@ -4,7 +4,10 @@ const useFetchQuestionByName = ({ keyword, autoFetch = true }) => {
   const fetchQuestion = async () => {
     // Define async function to fetch question data
     const response = await fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/question/suggest?query=${keyword}`
+      `${process.env.REACT_APP_API_ENDPOINT}/question/suggest?query=${keyword}`,
+      {
+        credentials: "include", // Include credentials in the request
+      }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch question data");

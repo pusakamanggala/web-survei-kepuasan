@@ -8,7 +8,9 @@ const useFetchAlumni = ({ sortBy, orderBy, limit, page, angkatan }) => {
     if (angkatan !== "") {
       url += `&angkatan=${angkatan}`;
     }
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      credentials: "include", // Include credentials in the request
+    });
     if (!response.ok) {
       throw new Error("Failed to fetch alumni data");
     }

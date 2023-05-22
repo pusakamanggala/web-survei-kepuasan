@@ -8,6 +8,7 @@ function useAddLecturer() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(lecturer),
+      credentials: "include",
     }).then((res) => {
       if (!res.ok) {
         throw new Error("Failed to add lecturer");

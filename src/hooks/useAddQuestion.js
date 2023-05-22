@@ -8,6 +8,7 @@ function useAddQuestion() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(question),
+      credentials: "include",
     }).then((res) => {
       if (!res.ok) {
         throw new Error("Failed to add question");

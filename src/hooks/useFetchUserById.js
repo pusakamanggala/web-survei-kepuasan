@@ -4,7 +4,10 @@ const useFetchUserById = ({ role, id, autoFetch = true }) => {
   const fetchUser = async () => {
     // Define async function to fetch user data
     const response = await fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/${role}/${id}`
+      `${process.env.REACT_APP_API_ENDPOINT}/${role}/${id}`,
+      {
+        credentials: "include", // Include credentials in the request
+      }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch user data");

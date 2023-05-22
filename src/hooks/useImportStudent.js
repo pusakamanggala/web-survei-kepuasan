@@ -8,6 +8,7 @@ function useImportStudent() {
     return fetch(`${process.env.REACT_APP_API_ENDPOINT}/mahasiswa/bulk`, {
       method: "POST",
       body: formData,
+      credentials: "include",
     }).then((res) => {
       if (!res.ok) {
         throw new Error("Failed to add student");

@@ -7,6 +7,7 @@ const useDeleteStudentFromClass = () => {
         `${process.env.REACT_APP_API_ENDPOINT}/remove-student?classId=${classId}&nim=${nim}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
       if (!response.ok) {

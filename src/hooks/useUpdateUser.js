@@ -8,6 +8,7 @@ function useUpdateUser({ role, id }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     }).then((res) => {
       if (!res.ok) {
         throw new Error("Failed to update user");

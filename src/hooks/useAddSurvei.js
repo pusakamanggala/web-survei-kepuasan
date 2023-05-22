@@ -8,6 +8,7 @@ function useAddSurvei() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(survei),
+      credentials: "include",
     }).then((res) => {
       if (!res.ok) {
         throw new Error("Failed to add survei");

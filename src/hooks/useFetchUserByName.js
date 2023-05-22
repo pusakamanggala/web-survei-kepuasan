@@ -4,7 +4,10 @@ const useFetchUserByName = ({ role, keyword, autoFetch = true }) => {
   const fetchUser = async () => {
     // Define async function to fetch user data
     const response = await fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/${role}/suggest?query=${keyword}`
+      `${process.env.REACT_APP_API_ENDPOINT}/${role}/suggest?query=${keyword}`,
+      {
+        credentials: "include", // Include credentials in the request
+      }
     );
     if (!response.ok) {
       throw new Error("Failed to fetch user data");
