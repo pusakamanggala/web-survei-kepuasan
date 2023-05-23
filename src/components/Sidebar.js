@@ -9,7 +9,8 @@ const Sidebar = () => {
   const { userRole } = useContext(UserContext);
 
   const handleSignOut = () => {
-    document.cookie = "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+    document.cookie =
+      "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.up.railway.app";
     window.location.reload();
   };
 
