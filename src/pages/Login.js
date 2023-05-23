@@ -37,7 +37,7 @@ function Login() {
     // reload the page
     document.cookie = `Authorization=${
       loginMutation.data.token
-    }; expires=${expirationDate.toUTCString()}; Path=/; SameSite=None; Secure`;
+    }; expires=${expirationDate.toUTCString()}; Domain=.up.railway.app; Path=/; SameSite=None; Secure`;
 
     window.location.reload();
   }
