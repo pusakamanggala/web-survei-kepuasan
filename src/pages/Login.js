@@ -37,7 +37,8 @@ function Login() {
     // reload the page
     document.cookie = `Authorization=${
       loginMutation.data.token
-    }; expires=${expirationDate.toUTCString()}; path=/;`;
+    }; expires=${expirationDate.toUTCString()}; Path=/; SameSite=None; Secure`;
+
     window.location.reload();
   }
 
