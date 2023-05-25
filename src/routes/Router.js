@@ -18,6 +18,7 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import jwtDecode from "jwt-decode";
 import MyProfile from "../pages/MyProfile";
+import MySurvey from "../pages/MySurvey";
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
@@ -157,14 +158,24 @@ const Router = () => {
           userRole === "ALUMNI" ||
           userRole === "DOSEN") &&
           isAuthenticated && (
-            <Route
-              path="/profil"
-              element={
-                <DashboardLayout>
-                  <MyProfile />
-                </DashboardLayout>
-              }
-            />
+            <>
+              <Route
+                path="/profil"
+                element={
+                  <DashboardLayout>
+                    <MyProfile />
+                  </DashboardLayout>
+                }
+              />
+              <Route
+                path="/survei-kepuasan/survei-saya"
+                element={
+                  <DashboardLayout>
+                    <MySurvey />
+                  </DashboardLayout>
+                }
+              />
+            </>
           )}
 
         <Route
