@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const MySurveyCard = ({ surveyData }) => {
-  const { userRole } = useContext(UserContext);
+  const { userRole, setSurvey, survey } = useContext(UserContext);
+  const navigate = useNavigate();
 
   // to convert UNIX timestamp to date
   function convertUnixToDate(unixTimestamp) {
@@ -15,10 +17,19 @@ const MySurveyCard = ({ surveyData }) => {
     return `${day}-${month}-${year}`;
   }
 
-  console.log("survey data di card", surveyData);
+  const handleSelectSurvey = () => {
+    setSurvey(surveyData);
+    localStorage.setItem("survey", JSON.stringify(surveyData));
+    navigate(`/survei-kepuasan/survei-saya/${surveyData.idSurvei}`);
+  };
+
+  console.log("survey data di context", survey);
 
   return (
-    <div className="bg-white rounded-lg overflow-hidden shadow-md p-3 flex justify-between items-center cursor-pointer hover:scale-102 transition-all duration-300 mb-2">
+    <div
+      className="bg-white rounded-lg overflow-hidden shadow-md p-3 flex justify-between items-center cursor-pointer hover:scale-102 transition-all duration-300 mb-2"
+      onClick={handleSelectSurvey}
+    >
       <div className="flex justify-between w-full items-center">
         <div>
           {/* Survey Title */}
