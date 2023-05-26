@@ -66,6 +66,7 @@ const AddUser = () => {
 
       // Call addStudent mutation to submit the data
       addStudentMutation.mutate(studentData);
+      console.log(studentData);
     } else if (role === "alumni") {
       // Create alumni data object
       const alumniData = { nim, tahunKelulusan: tahunLulus };
