@@ -245,7 +245,7 @@ const Sidebar = () => {
           userRole === "DOSEN") && (
           <div className={`px-3 ${subMenu ? "" : "hidden"}`}>
             <NavLink
-              // to="/survei-kepuasan/template-survei"
+              to="/survei-kepuasan/survei-saya"
               className={({ isActive }) => (isActive ? "active" : "inActive")}
             >
               <svg
