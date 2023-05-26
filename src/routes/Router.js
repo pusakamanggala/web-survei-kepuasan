@@ -19,10 +19,11 @@ import { UserContext } from "../context/UserContext";
 import jwtDecode from "jwt-decode";
 import MyProfile from "../pages/MyProfile";
 import MySurvey from "../pages/MySurvey";
+import FillSurvey from "../pages/FillSurvey";
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
-  const { userRole, setUser } = useContext(UserContext);
+  const { userRole, setUser, survey } = useContext(UserContext);
 
   const isAuthorized = () => {
     const cookieName = "Authorization";
@@ -175,6 +176,16 @@ const Router = () => {
                   </DashboardLayout>
                 }
               />
+              {survey && (
+                <Route
+                  path="/survei-kepuasan/survei-saya/:idSurvey"
+                  element={
+                    <DashboardLayout>
+                      <FillSurvey />
+                    </DashboardLayout>
+                  }
+                />
+              )}
             </>
           )}
 
