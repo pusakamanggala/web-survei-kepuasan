@@ -21,8 +21,6 @@ const DashboardLayout = ({ children }) => {
     autoFetch: autoFetch,
   });
 
-  console.log(userRole);
-
   // only fetch user data when role is not ADMIN
   useEffect(() => {
     if (userRole !== "ADMIN") {
@@ -30,6 +28,7 @@ const DashboardLayout = ({ children }) => {
     }
   }, [userRole, setAutoFetch]);
 
+  // set page title based on current path
   let pageTitle;
   switch (location.pathname) {
     case "/beranda":
@@ -52,6 +51,12 @@ const DashboardLayout = ({ children }) => {
       break;
     case "/profil":
       pageTitle = "Profil Saya";
+      break;
+    case "/survei-kepuasan/survei-saya":
+      pageTitle = "Survei Saya";
+      break;
+    case "/survei-kepuasan/survei-saya/:idSurvey":
+      pageTitle = "Isi Survei";
       break;
 
     default:
