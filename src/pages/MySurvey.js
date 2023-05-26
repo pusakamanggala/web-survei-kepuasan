@@ -16,7 +16,6 @@ const MySurvey = () => {
     id: userId,
   });
 
-  console.log(surveyData);
   return (
     <div>
       {isSurveyLoading && <h1>Loading...</h1>}
