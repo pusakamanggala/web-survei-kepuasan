@@ -11,6 +11,7 @@ const Sidebar = () => {
   const handleSignOut = () => {
     document.cookie =
       "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.up.railway.app";
+    localStorage.removeItem("survey"); // Remove the "survey" key from local storage
     window.location.reload();
   };
 
