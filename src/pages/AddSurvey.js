@@ -48,23 +48,25 @@ const AddSurvey = () => {
     const currentYear = new Date().getFullYear();
 
     // period one for the student survey is the last three weeks of June
-    let startOfPeriodOne = "9-6-" + currentYear;
-    let endOfPeriodOne = "30-6-" + currentYear;
-
-    // // for testing
-    // let startOfPeriodOne = "{today}-{month}-" + currentYear;
-    // let endOfPeriodOne = "{today}-{month}-" + currentYear;
+    let startOfPeriodOne =
+      process.env.REACT_APP_STUDENT_SURVEY_ONE_START_DATE + currentYear;
+    let endOfPeriodOne =
+      process.env.REACT_APP_STUDENT_SURVEY_ONE_END_DATE + currentYear;
 
     // period one for the lecture survey is in early June until the end of July.
     if (surveyRole === "dosen") {
-      startOfPeriodOne = "1-6-" + currentYear;
-      endOfPeriodOne = "31-7-" + currentYear;
+      startOfPeriodOne =
+        process.env.REACT_APP_LECTURE_SURVEY_ONE_START_DATE + currentYear;
+      endOfPeriodOne =
+        process.env.REACT_APP_LECTURE_SURVEY_ONE_END_DATE + currentYear;
     }
 
     // period one for the alumni survey is in early November until the end of December.
     if (surveyRole === "alumni") {
-      startOfPeriodOne = "1-11-" + currentYear;
-      endOfPeriodOne = "31-12-" + currentYear;
+      startOfPeriodOne =
+        process.env.REACT_APP_ALUMNI_SURVEY_ONE_START_DATE + currentYear;
+      endOfPeriodOne =
+        process.env.REACT_APP_ALUMNI_SURVEY_ONE_END_DATE + currentYear;
     }
     return {
       startOfPeriodOne,
@@ -72,13 +74,17 @@ const AddSurvey = () => {
     };
   };
 
+  console.log(startDate);
+
   // to get survey start and end date in period two (student survey only)
   const getSurveyPeriodTwo = () => {
     const currentYear = new Date().getFullYear();
 
     // period two for the student survey is the last three weeks of December
-    const startOfPeriodTwo = "10-12-" + currentYear;
-    const endOfPeriodTwo = "31-12-" + currentYear;
+    const startOfPeriodTwo =
+      process.env.REACT_APP_STUDENT_SURVEY_TWO_START_DATE + currentYear;
+    const endOfPeriodTwo =
+      process.env.REACT_APP_STUDENT_SURVEY_TWO_END_DATE + currentYear;
 
     return {
       startOfPeriodTwo,
