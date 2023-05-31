@@ -8,8 +8,7 @@ import useFetchUserById from "../hooks/useFetchUserById";
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
-  const { role } = useParams();
-  const { id } = useParams();
+  const { id, role, idSurvey } = useParams(); // get value from url params
   const [autoFetch, setAutoFetch] = useState(false); // state to trigger useFetchUserById
 
   const { userRole, userId } = useContext(UserContext); // get logged in user role and id from user context
@@ -55,7 +54,7 @@ const DashboardLayout = ({ children }) => {
     case "/survei-kepuasan/survei-saya":
       pageTitle = "Survei Saya";
       break;
-    case "/survei-kepuasan/survei-saya/:idSurvey":
+    case `/survei-kepuasan/survei-saya/${idSurvey}`:
       pageTitle = "Isi Survei";
       break;
 
