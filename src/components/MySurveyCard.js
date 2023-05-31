@@ -3,7 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 const MySurveyCard = ({ surveyData }) => {
-  const { userRole, setSurvey, survey } = useContext(UserContext);
+  const { userRole, setSurvey } = useContext(UserContext);
   const navigate = useNavigate();
 
   // to convert UNIX timestamp to date
@@ -17,13 +17,12 @@ const MySurveyCard = ({ surveyData }) => {
     return `${day}-${month}-${year}`;
   }
 
+  // to select survey and save it to localStorage
   const handleSelectSurvey = () => {
     setSurvey(surveyData);
     localStorage.setItem("survey", JSON.stringify(surveyData));
     navigate(`/survei-kepuasan/survei-saya/${surveyData.idSurvei}`);
   };
-
-  console.log("survey data di context", survey);
 
   return (
     <div
