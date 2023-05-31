@@ -19,7 +19,7 @@ const useFetchSurvey = ({ role, id, autoFetch = true }) => {
   return useQuery(["survey", role, id], fetchSurvey, {
     refetchOnWindowFocus: false,
     staleTime: 60000, // 1 minute
-    cacheTime: 3600000, // 1 hour
+    cacheTime: 0, // Disable caching
     enabled: autoFetch, // to set auto fetch or not
   });
 };
