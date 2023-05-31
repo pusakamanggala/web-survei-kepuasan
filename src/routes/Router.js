@@ -20,6 +20,7 @@ import jwtDecode from "jwt-decode";
 import MyProfile from "../pages/MyProfile";
 import MySurvey from "../pages/MySurvey";
 import FillSurvey from "../pages/FillSurvey";
+import SurveyHistory from "../pages/SurveyHistory";
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
@@ -186,6 +187,14 @@ const Router = () => {
                   }
                 />
               )}
+              <Route
+                path="/survei-kepuasan/riwayat-survei"
+                element={
+                  <DashboardLayout>
+                    <SurveyHistory />
+                  </DashboardLayout>
+                }
+              />
             </>
           )}
 
