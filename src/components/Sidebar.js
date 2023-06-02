@@ -24,7 +24,9 @@ const Sidebar = () => {
       <div className="h-full overflow-y-auto">
         <NavLink
           to="/beranda"
-          className={({ isActive }) => (isActive ? "active" : "inActive")}
+          className={({ isActive }) =>
+            isActive ? "active" : "inActive hover:bg-red-500"
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +49,9 @@ const Sidebar = () => {
           userRole === "DOSEN") && (
           <NavLink
             to="/profil"
-            className={({ isActive }) => (isActive ? "active" : "inActive")}
+            className={({ isActive }) =>
+              isActive ? "active" : "inActive hover:bg-red-500"
+            }
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +82,7 @@ const Sidebar = () => {
                 location.pathname === "/pengguna/tambah/alumni" ||
                 location.pathname === "/pengguna/tambah/dosen"
                   ? "active"
-                  : "inActive"
+                  : "inActive hover:bg-red-500"
               }
             >
               <svg
@@ -99,7 +103,9 @@ const Sidebar = () => {
             </NavLink>
             <NavLink
               to="/kelas"
-              className={({ isActive }) => (isActive ? "active" : "inActive")}
+              className={({ isActive }) =>
+                isActive ? "active" : "inActive hover:bg-red-500"
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +128,7 @@ const Sidebar = () => {
           </>
         )}
         <button
-          className="p-5 flex w-full focus:bg-red-700 items-center relative"
+          className="p-5 flex w-full items-center relative hover:bg-red-500"
           onClick={() => setSubMenu(!subMenu)}
         >
           <svg
@@ -163,7 +169,9 @@ const Sidebar = () => {
           <div className={`px-3 ${subMenu ? "" : "hidden"}`}>
             <NavLink
               to="/survei-kepuasan/pertanyaan"
-              className={({ isActive }) => (isActive ? "active" : "inActive")}
+              className={({ isActive }) =>
+                isActive ? "active" : "inActive hover:bg-red-500"
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +191,9 @@ const Sidebar = () => {
             </NavLink>
             <NavLink
               to="/survei-kepuasan/template-survei"
-              className={({ isActive }) => (isActive ? "active" : "inActive")}
+              className={({ isActive }) =>
+                isActive ? "active" : "inActive hover:bg-red-500"
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +213,9 @@ const Sidebar = () => {
             </NavLink>
             <NavLink
               to="/survei-kepuasan/survei-aktif"
-              className={({ isActive }) => (isActive ? "active" : "inActive")}
+              className={({ isActive }) =>
+                isActive ? "active" : "inActive hover:bg-red-500"
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -247,7 +259,9 @@ const Sidebar = () => {
           <div className={`px-3 ${subMenu ? "" : "hidden"}`}>
             <NavLink
               to="/survei-kepuasan/survei-saya"
-              className={({ isActive }) => (isActive ? "active" : "inActive")}
+              className={({ isActive }) =>
+                isActive ? "active" : "inActive hover:bg-red-500"
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +281,9 @@ const Sidebar = () => {
             </NavLink>
             <NavLink
               to="/survei-kepuasan/riwayat-survei"
-              className={({ isActive }) => (isActive ? "active" : "inActive")}
+              className={({ isActive }) =>
+                isActive ? "active" : "inActive hover:bg-red-500"
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
