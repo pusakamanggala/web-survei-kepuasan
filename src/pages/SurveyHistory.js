@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import useFetchSurveyHistory from "../hooks/useFetchSurveyHistory";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const SurveyHistory = () => {
   const { userRole, userId } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const {
     data: surveyHistory,
@@ -31,28 +34,48 @@ const SurveyHistory = () => {
       </h1>
     );
 
+  const handleSeeSurveyResult = (survey) => {
+    if (userRole === "MAHASISWA") {
+      navigate(
+        `/survei-kepuasan/riwayat-survei/hasil-survei/${survey.id_survei_mahasiswa}`
+      );
+    }
+    if (userRole === "DOSEN") {
+      navigate(
+        `/survei-kepuasan/riwayat-survei/hasil-survei/${survey.id_survei_dosen}`
+      );
+    }
+    if (userRole === "ALUMNI") {
+      navigate(
+        `/survei-kepuasan/riwayat-survei/hasil-survei/${survey.id_survei_alumni}`
+      );
+    }
+  };
+
   return (
     <div>
-      {isSurveyHistorySuccess &&
-        surveyHistory.data.map((survey, index) => (
-          <div
-            className="bg-white rounded-lg overflow-hidden shadow-md p-3 flex justify-between items-center cursor-pointer hover:scale-102 transition-all duration-300 mb-2"
-            key={index}
-          >
-            <div>
-              <h1 className="text-secondary-color font-bold text-lg">
-                {survey.judul_survei}
-              </h1>
-              <h1>
-                Periode : {convertUnixToDate(survey.start_date)} -{" "}
-                {convertUnixToDate(survey.end_date)}
-              </h1>
-              <h1 className="mt-2">
-                Disubmit : {convertUnixToDate(survey.submission_date)}
-              </h1>
+      {isSurveyHistorySuccess && surveyHistory.data
+        ? surveyHistory.data.map((survey, index) => (
+            <div
+              className="bg-white rounded-lg overflow-hidden shadow-md p-3 flex justify-between items-center cursor-pointer hover:scale-102 transition-all duration-300 mb-2"
+              key={index}
+              onClick={() => handleSeeSurveyResult(survey)}
+            >
+              <div>
+                <h1 className="text-secondary-color font-bold text-lg">
+                  {survey.judul_survei}
+                </h1>
+                <h1>
+                  Periode : {convertUnixToDate(survey.start_date)} -{" "}
+                  {convertUnixToDate(survey.end_date)}
+                </h1>
+                <h1 className="mt-2">
+                  Disubmit : {convertUnixToDate(survey.submission_date)}
+                </h1>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        : "Belum ada survei yang sudah diisi"}
     </div>
   );
 };
