@@ -210,7 +210,7 @@ const SurveyHistoryDetail = () => {
                         <span className="text-slate-500">
                           Indeks Kepuasan :{" "}
                         </span>
-                        {survey.ikm}
+                        {survey.ikm.toFixed(2)}
                       </td>
                     </tr>
                   </tbody>
