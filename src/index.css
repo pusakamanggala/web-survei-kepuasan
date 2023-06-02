@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .active {
-  @apply p-5 flex w-full bg-secondary-color cursor-default;
+  @apply p-5 flex w-full bg-secondary-color font-semibold cursor-default;
 }
 
 .inActive {
