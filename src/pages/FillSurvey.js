@@ -167,12 +167,23 @@ const FillSurvey = () => {
       return;
     }
 
-    const data = {
-      nim: userId,
-      idSurvei: survey.idSurvei,
-      submissionDate: getCurrentUnixTimestamp(),
-      jawaban: allAnswer,
-    };
+    let data = {};
+
+    if (userRole === "MAHASISWA" || userRole === "ALUMNI") {
+      data = {
+        nim: userId,
+        idSurvei: survey.idSurvei,
+        submissionDate: getCurrentUnixTimestamp(),
+        jawaban: allAnswer,
+      };
+    } else if (userRole === "DOSEN") {
+      data = {
+        nip: userId,
+        idSurvei: survey.idSurvei,
+        submissionDate: getCurrentUnixTimestamp(),
+        jawaban: allAnswer,
+      };
+    }
 
     // post data using hook
     fillSurveyMutation.mutate(data);
