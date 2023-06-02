@@ -21,6 +21,7 @@ import MyProfile from "../pages/MyProfile";
 import MySurvey from "../pages/MySurvey";
 import FillSurvey from "../pages/FillSurvey";
 import SurveyHistory from "../pages/SurveyHistory";
+import SurveyHistoryDetail from "../pages/SurveyHistoryDetail";
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
@@ -192,6 +193,14 @@ const Router = () => {
                 element={
                   <DashboardLayout>
                     <SurveyHistory />
+                  </DashboardLayout>
+                }
+              />
+              <Route
+                path="/survei-kepuasan/riwayat-survei/hasil-survei/:idSurvey"
+                element={
+                  <DashboardLayout>
+                    <SurveyHistoryDetail />
                   </DashboardLayout>
                 }
               />
