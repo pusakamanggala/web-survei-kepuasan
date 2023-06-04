@@ -22,6 +22,7 @@ import FillSurvey from "../pages/FillSurvey";
 import SurveyHistory from "../pages/SurveyHistory";
 import SurveyHistoryDetail from "../pages/SurveyHistoryDetail";
 import Home from "../pages/Home";
+import SurveyList from "../pages/SurveyList";
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
@@ -151,6 +152,14 @@ const Router = () => {
               element={
                 <DashboardLayout>
                   <AddSurvey />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/survei-kepuasan/laporan-survei"
+              element={
+                <DashboardLayout>
+                  <SurveyList />
                 </DashboardLayout>
               }
             />

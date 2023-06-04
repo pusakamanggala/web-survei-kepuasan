@@ -238,7 +238,12 @@ const Sidebar = () => {
               </svg>
               <h1>Tambah Survei</h1>
             </NavLink>
-            <button className="p-5 flex w-full focus:bg-red-700">
+            <NavLink
+              to="/survei-kepuasan/laporan-survei"
+              className={({ isActive }) =>
+                isActive ? "active" : "inActive hover:bg-red-500"
+              }
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -254,7 +259,7 @@ const Sidebar = () => {
                 />
               </svg>
               <h1>Laporan Survei</h1>
-            </button>
+            </NavLink>
           </div>
         )}
         {/* student, lecturer, and alumni menu */}
