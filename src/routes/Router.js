@@ -22,6 +22,7 @@ import MySurvey from "../pages/MySurvey";
 import FillSurvey from "../pages/FillSurvey";
 import SurveyHistory from "../pages/SurveyHistory";
 import SurveyHistoryDetail from "../pages/SurveyHistoryDetail";
+import Home from "../pages/Home";
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
@@ -65,7 +66,7 @@ const Router = () => {
           element={
             isAuthenticated ? (
               <DashboardLayout>
-                <HomeAdmin />
+                {userRole === "ADMIN" ? <HomeAdmin /> : <Home />}
               </DashboardLayout>
             ) : (
               <Navigate to="/" />
