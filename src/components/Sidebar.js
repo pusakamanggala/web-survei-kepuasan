@@ -8,11 +8,16 @@ const Sidebar = () => {
 
   const { userRole } = useContext(UserContext);
 
+  // to handle sign out
   const handleSignOut = () => {
-    document.cookie =
-      "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.up.railway.app";
-    localStorage.removeItem("survey"); // Remove the "survey" key from local storage
-    window.location.reload();
+    const confirmed = window.confirm("Apakah anda yakin ingin keluar ?"); // Display confirmation dialog
+
+    if (confirmed) {
+      document.cookie =
+        "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.up.railway.app"; // set cookie expiration date to past
+      localStorage.removeItem("survey"); // Remove the "survey" key from local storage
+      window.location.reload();
+    }
   };
 
   return (
