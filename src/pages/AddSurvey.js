@@ -215,6 +215,19 @@ const AddSurvey = () => {
   const { startOfPeriodOne, endOfPeriodOne } = getSurveyPeriodOne();
   const { startOfPeriodTwo, endOfPeriodTwo } = getSurveyPeriodTwo();
 
+  // if add survey mutation is success, delete all data
+  useEffect(() => {
+    if (addSurveiMutation.isSuccess) {
+      setSurveyTitle("");
+      setSurveyDetail("");
+      setSurveyTemplatesId("");
+      setSurveyPeriod("");
+      setStartDate("");
+      setEndDate("");
+      setSurveyClass("");
+    }
+  }, [addSurveiMutation.isSuccess]);
+
   return (
     <div>
       <div className="mb-4 grid lg:grid-cols-2 gap-3">
