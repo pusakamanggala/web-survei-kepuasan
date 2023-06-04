@@ -74,8 +74,6 @@ const AddSurvey = () => {
     };
   };
 
-  console.log(startDate);
-
   // to get survey start and end date in period two (student survey only)
   const getSurveyPeriodTwo = () => {
     const currentYear = new Date().getFullYear();
