@@ -12,7 +12,6 @@ import AddClass from "../pages/AddClass";
 import Questions from "../pages/Questions";
 import AddSurveyTemplate from "../pages/AddSurveyTemplate";
 import SurveyTemplates from "../pages/SurveyTemplates";
-import ActiveSurveys from "../pages/ActiveSurveys";
 import AddSurvey from "../pages/AddSurvey";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
@@ -140,15 +139,15 @@ const Router = () => {
               }
             />
             <Route
-              path="/survei-kepuasan/survei-aktif"
+              path="/survei-kepuasan/survei-aktif/tambah"
               element={
                 <DashboardLayout>
-                  <ActiveSurveys />
+                  <AddSurvey />
                 </DashboardLayout>
               }
             />
             <Route
-              path="/survei-kepuasan/survei-aktif/tambah"
+              path="/survei-kepuasan/tambah-survei"
               element={
                 <DashboardLayout>
                   <AddSurvey />
