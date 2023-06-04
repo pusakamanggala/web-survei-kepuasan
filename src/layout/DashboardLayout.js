@@ -27,6 +27,14 @@ const DashboardLayout = ({ children }) => {
     }
   }, [userRole, setAutoFetch]);
 
+  // to handle sign out
+  const handleSignOut = () => {
+    document.cookie =
+      "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.up.railway.app";
+    localStorage.removeItem("survey"); // Remove the "survey" key from local storage
+    window.location.reload();
+  };
+
   // set page title based on current path
   let pageTitle;
   switch (location.pathname) {
@@ -151,7 +159,8 @@ const DashboardLayout = ({ children }) => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="#ffffff"
-                className="w-6 h-6 ml-2"
+                className="w-6 h-6 ml-2 cursor-pointer"
+                onClick={handleSignOut}
               >
                 <path
                   strokeLinecap="round"
