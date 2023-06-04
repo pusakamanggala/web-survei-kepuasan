@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SummaryCard = (props) => {
   const navigate = useNavigate();
@@ -42,19 +43,10 @@ const SummaryCard = (props) => {
       onClick={() => navigate(props.route)}
       title="Klik untuk melihat detail"
     >
-      <div className="h-24 lg:col-span-2 justify-center flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="#ec161e"
-          className="md:w-10 md:h-10 w-16"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d={props.icon} />
-        </svg>
+      <div className="h-24 lg:col-span-2 justify-center flex items-center md:p-6 p-4">
+        <FontAwesomeIcon icon={props.icon} className="h-full" />
       </div>
-      <div className="p-4 lg:col-span-3  text-center md:text-start">
+      <div className="pb-4 md:p-4 lg:col-span-3  text-center md:text-start">
         {useAnimatedNumber(2000, 0, `${props.cardValue}`)}
         <h2 className="text-base font-semibold ">{props.cardTitle}</h2>
       </div>
