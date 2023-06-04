@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BarChart from "../components/BarChart";
 import SummaryCard from "../components/SummaryCard";
 import { useNavigate } from "react-router-dom";
@@ -6,33 +6,112 @@ import { faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { faUserGraduate } from "@fortawesome/free-solid-svg-icons";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
+import useFetchClasses from "../hooks/useFetchClasses";
+import useFetchTotalRecordOfUser from "../hooks/useFetchTotalRecordOfUser";
 
 const HomeAdmin = () => {
   const navigate = useNavigate();
+  const [totalClass, setTotalClass] = useState(null);
+  const [totalStudent, setTotalStudent] = useState(null);
+  const [totalLecturer, setTotalLecturer] = useState(null);
+  const [totalAlumni, setTotalAlumni] = useState(null);
+
+  // to get the total class
+  const {
+    data: classData,
+    isLoading: isClassLoading,
+    isError: isClassError,
+    isSuccess: isClassSuccess,
+  } = useFetchClasses({
+    limit: 1,
+    page: 1,
+  });
+
+  // to get the total student
+  const {
+    data: studentRecord,
+    isLoading: isStudentRecordLoading,
+    isError: isStudentRecordError,
+    isSuccess: isStudentRecordSuccess,
+  } = useFetchTotalRecordOfUser({ role: "mahasiswa" });
+
+  // to get the total lecturer
+  const {
+    data: lecturerRecord,
+    isLoading: isLecturerRecordLoading,
+    isError: isLecturerRecordError,
+    isSuccess: isLecturerRecordSuccess,
+  } = useFetchTotalRecordOfUser({ role: "dosen" });
+
+  // to get the total alumni
+  const {
+    data: alumniRecord,
+    isLoading: isAlumniRecordLoading,
+    isError: isAlumniRecordError,
+    isSuccess: isAlumniRecordSuccess,
+  } = useFetchTotalRecordOfUser({ role: "alumni" });
+
+  // set the total record of each entity
+  useEffect(() => {
+    if (isStudentRecordSuccess) setTotalStudent(studentRecord.data);
+    if (isStudentRecordError) setTotalStudent("Error");
+    if (isStudentRecordLoading) setTotalStudent("...");
+  }, [
+    isStudentRecordSuccess,
+    studentRecord,
+    isStudentRecordError,
+    isStudentRecordLoading,
+  ]);
+  useEffect(() => {
+    if (isLecturerRecordSuccess) setTotalLecturer(lecturerRecord.data);
+    if (isLecturerRecordError) setTotalLecturer("Error");
+    if (isLecturerRecordLoading) setTotalLecturer("...");
+  }, [
+    isLecturerRecordSuccess,
+    lecturerRecord,
+    isLecturerRecordError,
+    isLecturerRecordLoading,
+  ]);
+  useEffect(() => {
+    if (isAlumniRecordSuccess) setTotalAlumni(alumniRecord.data);
+    if (isAlumniRecordError) setTotalAlumni("Error");
+    if (isAlumniRecordLoading) setTotalAlumni("...");
+  }, [
+    isAlumniRecordSuccess,
+    alumniRecord,
+    isAlumniRecordError,
+    isAlumniRecordLoading,
+  ]);
+  useEffect(() => {
+    if (isClassError) setTotalClass("Error");
+    if (isClassLoading) setTotalClass("...");
+    if (isClassSuccess) setTotalClass(classData.totalRecords);
+  }, [isClassSuccess, classData, isClassLoading, isClassError]);
+
   return (
     <div>
       <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2  gap-4 mb-4">
         <SummaryCard
           cardTitle="Mahasiswa"
-          cardValue="1042"
+          cardValue={totalStudent}
           route="/pengguna/mahasiswa"
           icon={faUserAlt}
         />
         <SummaryCard
           cardTitle="Dosen"
-          cardValue="1042"
+          cardValue={totalLecturer}
           route="/pengguna/dosen"
           icon={faUserTie}
         />
         <SummaryCard
           cardTitle="Alumni"
-          cardValue="1042"
+          cardValue={totalAlumni}
           route="/pengguna/alumni"
           icon={faUserGraduate}
         />
         <SummaryCard
           cardTitle="Kelas"
-          cardValue="1042"
+          cardValue={totalClass}
           route="/kelas"
           icon={faChalkboardTeacher}
         />
