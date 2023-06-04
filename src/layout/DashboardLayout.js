@@ -22,8 +22,10 @@ const DashboardLayout = ({ children }) => {
 
   // only fetch user data when role is not ADMIN
   useEffect(() => {
-    if (userRole !== "ADMIN") {
-      setAutoFetch(true);
+    if (userRole) {
+      if (userRole !== "ADMIN") {
+        setAutoFetch(true);
+      }
     }
   }, [userRole, setAutoFetch]);
 
