@@ -63,6 +63,15 @@ const DashboardLayout = ({ children }) => {
     case `/survei-kepuasan/riwayat-survei/hasil-survei/${idSurvey}`:
       pageTitle = "Hasil Survei";
       break;
+    case `/survei-kepuasan/pertanyaan`:
+      pageTitle = "Pertanyaan Survei";
+      break;
+    case `/survei-kepuasan/template-survei`:
+      pageTitle = "Template Survei";
+      break;
+    case `/survei-kepuasan/survei-aktif`:
+      pageTitle = "Survei Aktif";
+      break;
 
     default:
       pageTitle = "Halaman Tidak Ditemukan";
