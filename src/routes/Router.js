@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/Login";
 import DashboardLayout from "../layout/DashboardLayout";
 import UserAccount from "../pages/UserAccount";
-import Home from "../pages/Home";
+import HomeAdmin from "../pages/HomeAdmin";
 import PageNotFound from "../pages/PageNotFound";
 import AddUser from "../pages/AddUser";
 import Classes from "../pages/Classes";
@@ -65,7 +65,7 @@ const Router = () => {
           element={
             isAuthenticated ? (
               <DashboardLayout>
-                <Home />
+                <HomeAdmin />
               </DashboardLayout>
             ) : (
               <Navigate to="/" />
