@@ -275,8 +275,7 @@ const AddSurvey = () => {
           Periode Survei :
         </label>
         <select
-          name=""
-          id=""
+          title="Periode Survei"
           className=" h-12 w-full items-center rounded-lg focus-within:shadow-md bg-white overflow-hidden border-2  shadow-sm"
           value={surveyPeriod}
           onChange={(event) => {
