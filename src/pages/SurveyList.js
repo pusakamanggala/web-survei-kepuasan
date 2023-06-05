@@ -137,6 +137,7 @@ const SurveyList = () => {
         </select>
         {/* select period dropdown */}
         <select
+          title="Periode Survei"
           className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
           value={period}
           onChange={handleChangePeriod}
