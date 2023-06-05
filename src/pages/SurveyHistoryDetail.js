@@ -6,7 +6,7 @@ import UserRatingPieChart from "../components/UserRatingPieChart";
 
 const SurveyHistoryDetail = () => {
   const { userRole } = useContext(UserContext);
-  const { idSurvey } = useParams(); // get value from url params
+  const { role, idSurvey } = useParams(); // get value from url params
   const [surveyData, setSurveyData] = useState(null); // state for survey data
   const [averageIkm, setAverageIkm] = useState(null); // state for average ikm
   const [totalRatings, setTotalRatings] = useState(null); // state for total ratings
@@ -18,13 +18,13 @@ const SurveyHistoryDetail = () => {
     isLoading: isSurveyHistoryResultLoading,
     isError: isSurveyHistoryResultError,
   } = useFetchSurveyHistoryResult({
-    role: userRole,
+    role: userRole === "ADMIN" ? role : userRole,
     id: idSurvey,
   });
 
   // to get survey data for each question
   useEffect(() => {
-    if (isSurveyHistoryResultDataSuccess) {
+    if (isSurveyHistoryResultDataSuccess && data.data) {
       const result = data.data.surveyData.map((e) => {
         let obj = {};
         let tempJawaban = {};
@@ -92,7 +92,7 @@ const SurveyHistoryDetail = () => {
     }
   }, [surveyData]);
 
-  if (isSurveyHistoryResultLoading) return <h1>Loading...</h1>;
+  if (isSurveyHistoryResultLoading) return <h1>Memuat hasil survei...</h1>;
 
   if (isSurveyHistoryResultError) {
     return (
@@ -102,9 +102,19 @@ const SurveyHistoryDetail = () => {
     );
   }
 
+  if (isSurveyHistoryResultDataSuccess) {
+    <h1 className="text-primary-color font-bold">
+      Terjadi kesalahan saat memproses permintaan
+    </h1>;
+  }
+
   return (
     <div>
-      {isSurveyHistoryResultDataSuccess && (
+      {isSurveyHistoryResultDataSuccess &&
+        data.message === "There is no record with that query" && (
+          <h1 className="font-bold">Belum ada respon untuk survey ini</h1>
+        )}
+      {isSurveyHistoryResultDataSuccess && data.data && (
         <>
           <div className="flex justify-between mb-4">
             <div>
@@ -165,7 +175,6 @@ const SurveyHistoryDetail = () => {
           </div>
         </>
       )}
-
       {surveyData &&
         surveyData.map((survey, index) => (
           <div key={index} className="bg-white rounded-md shadow-lg p-4 mb-2">
@@ -207,9 +216,7 @@ const SurveyHistoryDetail = () => {
                         {survey["SANGAT BAIK"]}
                       </td>
                       <td>
-                        <span className="text-slate-500">
-                          Indeks Kepuasan :{" "}
-                        </span>
+                        <span className="text-slate-500">Indeks Soal : </span>
                         {survey.ikm.toFixed(2)}
                       </td>
                     </tr>
@@ -234,8 +241,8 @@ const SurveyHistoryDetail = () => {
                     {survey["SANGAT BAIK"]}
                   </h1>
                   <h1>
-                    <span className="text-slate-500">Indeks Kepuasan : </span>
-                    {survey.ikm}
+                    <span className="text-slate-500">Indeks Soal : </span>
+                    {survey.ikm.toFixed(2)}
                   </h1>
                 </div>
               </>
