@@ -71,6 +71,7 @@ function Login() {
                 Masuk sebagai
               </label>
               <select
+                title="Jenis Pengguna"
                 id="role"
                 className="border-2  p-2 w-full rounded-md "
                 value={selectedRole}

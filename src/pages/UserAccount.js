@@ -176,6 +176,7 @@ const UserAccount = () => {
             {/* end of Search bar Angkatan*/}
             {/* select dropdown */}
             <select
+              title="Jenis Pengguna"
               className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
               onChange={handleChangeData}
               value={role}

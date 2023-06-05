@@ -189,8 +189,9 @@ const Classes = () => {
             <>
               <h1>Tampilkan</h1>
               <select
-                name=""
-                id=""
+                title="Jumlah Data"
+                name="dataLength"
+                id="dataLength"
                 className="text-secondary-color bg-gray-100"
                 value={pageSize}
                 onChange={handlePageSizeChange}
