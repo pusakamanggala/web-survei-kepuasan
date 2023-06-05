@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .active {
-  @apply p-5 flex w-full bg-secondary-color font-semibold cursor-default;
+  @apply p-5 flex w-full items-center bg-secondary-color font-semibold cursor-default;
 }
 
 .inActive {
-  @apply p-5 flex w-full;
+  @apply p-5 flex items-center w-full;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
