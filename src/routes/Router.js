@@ -163,6 +163,14 @@ const Router = () => {
                 </DashboardLayout>
               }
             />
+            <Route
+              path="/survei-kepuasan/laporan-survei/:role/:idSurvey"
+              element={
+                <DashboardLayout>
+                  <SurveyHistoryDetail />
+                </DashboardLayout>
+              }
+            />
           </>
         )}
 
