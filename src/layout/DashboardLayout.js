@@ -89,6 +89,9 @@ const DashboardLayout = ({ children }) => {
     case `/survei-kepuasan/laporan-survei`:
       pageTitle = "Laporan Survei";
       break;
+    case `/survei-kepuasan/laporan-survei/${role}/${idSurvey}`:
+      pageTitle = "Laporan Survei";
+      break;
 
     default:
       pageTitle = "Halaman Tidak Ditemukan";
