@@ -342,8 +342,9 @@ const StudentTable = ({ keyword, angkatan }) => {
             <>
               <h1>Tampilkan</h1>
               <select
-                name=""
-                id=""
+                title="Jumlah Data"
+                name="dataLength"
+                id="dataLength"
                 className="text-secondary-color"
                 value={pageSize}
                 onChange={handlePageSizeChange}
