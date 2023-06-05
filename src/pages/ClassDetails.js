@@ -90,6 +90,7 @@ const ClassDetails = () => {
         <div>
           {/* add button */}
           <button
+            title="Tambah Mahasiswa"
             className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
             onClick={() => {
               setSelectedClass(data.data);

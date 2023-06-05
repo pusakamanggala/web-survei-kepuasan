@@ -96,6 +96,7 @@ const Sidebar = () => {
           </>
         )}
         <button
+          title="Survei Kepuasan"
           className="p-5 flex w-full items-center relative hover:bg-red-500"
           onClick={() => setSubMenu(!subMenu)}
         >
@@ -196,6 +197,7 @@ const Sidebar = () => {
         {/*end of survei sub menu */}
 
         <button
+          title="Keluar"
           className="p-5 flex w-full items-center hover:bg-red-500"
           onClick={handleSignOut}
         >

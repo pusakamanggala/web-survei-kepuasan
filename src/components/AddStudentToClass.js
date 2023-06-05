@@ -91,6 +91,7 @@ function AddStudentToClass(props) {
                   <h1>Mahasiswa berhasil ditambahkan</h1>
                   <div className="flex justify-end mt-4">
                     <button
+                      title="OK"
                       className="font-bold py-1 px-4 rounded text-base text-white bg-primary-color hover:bg-secondary-color"
                       onClick={() => window.location.reload()}
                     >

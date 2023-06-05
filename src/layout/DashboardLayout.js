@@ -105,6 +105,7 @@ const DashboardLayout = ({ children }) => {
     <div className="flex h-screen overflow-hidden">
       {/* Show toggle button on mobile */}
       <button
+        title="Buka Menu"
         className="lg:hidden bg-primary-color p-2 rounded-full fixed bottom-4 right-4 z-10 shadow-md shadow-secondary-color"
         onClick={handleToggleSidebar}
       >

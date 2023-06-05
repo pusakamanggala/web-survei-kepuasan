@@ -37,6 +37,7 @@ function GraduateStudent(props) {
                   <h1>Mahasiswa berhasil diluluskan</h1>
                   <div className="flex justify-end mt-2">
                     <button
+                      title="OK"
                       className="font-bold py-1 px-4 rounded text-base text-white bg-primary-color hover:bg-secondary-color"
                       onClick={() => window.location.reload()}
                     >
@@ -85,12 +86,14 @@ function GraduateStudent(props) {
                     </label>
                     <div className="mt-4">
                       <button
+                        title="Batal"
                         className="font-bold py-2 px-4 rounded mr-2 text-white bg-primary-color hover:bg-secondary-color"
                         onClick={() => setIsShow(false)}
                       >
                         Cancel
                       </button>
                       <button
+                        title="Submit"
                         className="font-bold py-2 px-4 rounded mr-2 text-white bg-primary-color hover:bg-secondary-color"
                         type="submit"
                       >

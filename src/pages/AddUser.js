@@ -132,6 +132,7 @@ const AddUser = () => {
             ) : null}
             <div className="flex justify-end w-full mb-2">
               <button
+                title="Tambah secara manual"
                 className="flex justify-evenly h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
                 onClick={() => setInputType("manual")}
               >
@@ -175,12 +176,14 @@ const AddUser = () => {
                   </div>
                   <div className="flex justify-end">
                     <button
+                      title="Batal"
                       className="bg-primary-color mr-2 hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                       onClick={() => navigate(`/pengguna/${role}`)}
                     >
                       Cancel
                     </button>
                     <button
+                      title="Impor"
                       disabled={selectedFile === null}
                       type="submit"
                       className={`${
@@ -230,6 +233,7 @@ const AddUser = () => {
           {/* button for import excel menu*/}
           <div className="flex justify-end w-full mb-2">
             <button
+              title="Impor Excel"
               className="flex justify-evenly h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
               onClick={() => setInputType("bulk")}
             >
@@ -352,12 +356,14 @@ const AddUser = () => {
               </div>
               <div className="w-full flex justify-end">
                 <button
+                  title="Batal"
                   className="bg-primary-color mr-2 hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   onClick={() => navigate(`/pengguna/${role}`)}
                 >
                   Cancel
                 </button>
                 <button
+                  title="Submit"
                   type="submit"
                   className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
@@ -447,12 +453,14 @@ const AddUser = () => {
               </div>
               <div className="w-full flex justify-end">
                 <button
+                  title="Batal"
                   className="bg-primary-color mr-2 hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   onClick={() => navigate(`/pengguna/${role}`)}
                 >
                   Cancel
                 </button>
                 <button
+                  title="Submit"
                   type="submit"
                   className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
@@ -506,12 +514,14 @@ const AddUser = () => {
               </div>
               <div className="w-full flex justify-end">
                 <button
+                  title="Batal"
                   className="bg-primary-color mr-2 hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   onClick={() => navigate(`/pengguna/${role}`)}
                 >
                   Cancel
                 </button>
                 <button
+                  title="Submit"
                   type="submit"
                   className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >

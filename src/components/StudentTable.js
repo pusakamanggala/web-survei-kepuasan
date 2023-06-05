@@ -238,6 +238,7 @@ const StudentTable = ({ keyword, angkatan }) => {
                 {/* Actions Buttons */}
                 <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
                   <button
+                    title="Edit data mahasiswa"
                     className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
                     onClick={() => {
                       setSelectedStudent(res);
@@ -255,6 +256,7 @@ const StudentTable = ({ keyword, angkatan }) => {
                     />
                   )}
                   <button
+                    title="Luluskan mahasiswa"
                     className="bg-green-500 text-white font-medium px-4 py-2 rounded-md shadow-md"
                     onClick={() => {
                       setSelectedStudent(res);
@@ -292,6 +294,7 @@ const StudentTable = ({ keyword, angkatan }) => {
               {/* Actions Buttons */}
               <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
                 <button
+                  title="Edit data mahasiswa"
                   className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
                   onClick={() => {
                     setSelectedStudent(studentData.data);
@@ -309,6 +312,7 @@ const StudentTable = ({ keyword, angkatan }) => {
                   />
                 )}
                 <button
+                  title="Luluskan mahasiswa"
                   className="bg-green-500 text-white font-medium px-4 py-2 rounded-md shadow-md"
                   onClick={() => {
                     setSelectedStudent(studentData.data);
@@ -355,6 +359,7 @@ const StudentTable = ({ keyword, angkatan }) => {
           <div>
             {pageNumber !== 1 ? (
               <button
+                title="Pertama"
                 onClick={handleFirstPage}
                 disabled={pageNumber === 1}
                 className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -379,6 +384,7 @@ const StudentTable = ({ keyword, angkatan }) => {
               Prev
             </button>
             <button
+              title="Selanjutnya"
               onClick={handleNextPage}
               disabled={pageNumber === studentData.totalPage}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${

@@ -148,6 +148,7 @@ const LecturerTable = ({ keyword }) => {
                 {/* Actions Buttons */}
                 <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
                   <button
+                    title="Edit data dosen"
                     className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
                     onClick={() => {
                       setSelectedLecturer(res);
@@ -227,6 +228,7 @@ const LecturerTable = ({ keyword }) => {
           <div>
             {pageNumber !== 1 ? (
               <button
+                title="Pertama"
                 onClick={handleFirstPage}
                 disabled={pageNumber === 1}
                 className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -240,6 +242,7 @@ const LecturerTable = ({ keyword }) => {
             ) : null}
 
             <button
+              title="Sebelumnya"
               onClick={handlePrevPage}
               disabled={pageNumber === 1}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -251,6 +254,7 @@ const LecturerTable = ({ keyword }) => {
               Prev
             </button>
             <button
+              title="Selanjutnya"
               onClick={handleNextPage}
               disabled={pageNumber === lecturerData.totalPage}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -262,6 +266,7 @@ const LecturerTable = ({ keyword }) => {
               Next
             </button>
             <button
+              title="Terakhir"
               onClick={() => handleLastPage(lecturerData.totalPage)}
               disabled={pageNumber === lecturerData.totalPage}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${

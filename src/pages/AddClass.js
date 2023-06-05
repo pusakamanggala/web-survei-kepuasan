@@ -370,12 +370,14 @@ const AddClass = () => {
       </div>
       <div className="w-full flex justify-end">
         <button
+          title="Batal"
           className="bg-primary-color mr-2 hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           onClick={() => navigate(`/kelas`)}
         >
           Cancel
         </button>
         <button
+          title="Submit"
           className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           onClick={handleSubmitClass}
         >

@@ -243,6 +243,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
                 {/* Actions Buttons */}
                 <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
                   <button
+                    title="Edit data alumni"
                     className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
                     onClick={() => {
                       setSelectedAlumni(res);
@@ -282,6 +283,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
               {/* Actions Buttons */}
               <td className="text-sm text-gray-900 font-base px-6 py-4 whitespace-nowrap text-center w-auto">
                 <button
+                  title="Edit data alumni"
                   className="mr-2 bg-yellow-400 text-white font-medium px-4 py-2 rounded-md shadow-md"
                   onClick={() => {
                     setSelectedAlumni(alumniData.data);
@@ -327,6 +329,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
           <div>
             {pageNumber !== 1 ? (
               <button
+                title="Pertama"
                 onClick={handleFirstPage}
                 disabled={pageNumber === 1}
                 className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -340,6 +343,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
             ) : null}
 
             <button
+              title="Sebelumnya"
               onClick={handlePrevPage}
               disabled={pageNumber === 1}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -351,6 +355,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
               Prev
             </button>
             <button
+              title="Selanjutnya"
               onClick={handleNextPage}
               disabled={pageNumber === alumniData.totalPage}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -362,6 +367,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
               Next
             </button>
             <button
+              title="Terakhir"
               onClick={() => handleLastPage(alumniData.totalPage)}
               disabled={pageNumber === alumniData.totalPage}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${

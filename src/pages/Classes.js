@@ -206,6 +206,7 @@ const Classes = () => {
           <div>
             {pageNumber !== 1 ? (
               <button
+                title="Pertama"
                 onClick={handleFirstPage}
                 disabled={pageNumber === 1}
                 className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -219,6 +220,7 @@ const Classes = () => {
             ) : null}
 
             <button
+              title="Sebelumnya"
               onClick={handlePrevPage}
               disabled={pageNumber === 1}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -230,6 +232,7 @@ const Classes = () => {
               Prev
             </button>
             <button
+              title="Selanjutnya"
               onClick={handleNextPage}
               disabled={pageNumber === data.totalPage}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${
@@ -241,6 +244,7 @@ const Classes = () => {
               Next
             </button>
             <button
+              title="Terkahir"
               onClick={() => handleLastPage(data.totalPage)}
               disabled={pageNumber === data.totalPage}
               className={`font-bold py-2 px-4 rounded mr-2 text-white ${

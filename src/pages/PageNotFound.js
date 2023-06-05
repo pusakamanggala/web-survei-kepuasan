@@ -14,6 +14,7 @@ const PageNotFound = () => {
       />
 
       <button
+        title="Kembali"
         onClick={() => navigate("/beranda")}
         className="bg-primary-color w-fit mx-auto p-2 rounded-md shadow-md"
       >

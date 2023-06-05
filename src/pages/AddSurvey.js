@@ -4,11 +4,8 @@ import SurveyTemplateCard from "../components/SurveyTemplateCard";
 import useFetchClassByName from "../hooks/useFetchClassByName";
 import ClassCard from "../components/ClassCard";
 import useAddSurvei from "../hooks/useAddSurvei";
-import { useNavigate } from "react-router-dom";
 
 const AddSurvey = () => {
-  const navigate = useNavigate();
-
   const [surveyTitle, setSurveyTitle] = useState("");
   const [surveyDetail, setSurveyDetail] = useState("");
   const [surveyTemplatesId, setSurveyTemplatesId] = useState("");
@@ -442,12 +439,7 @@ const AddSurvey = () => {
       {/* submit and cancel button */}
       <div className="w-full flex justify-end mt-11">
         <button
-          className="bg-primary-color mr-2 hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          onClick={() => navigate("/survei-kepuasan/survei-aktif")}
-        >
-          Cancel
-        </button>
-        <button
+          title="Submit"
           className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           onClick={(event) => handleSubmitAddSurvey(event)}
         >

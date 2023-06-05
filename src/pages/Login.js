@@ -116,6 +116,7 @@ function Login() {
             </div>
             <div className="flex justify-end items-center">
               <button
+                title="Login"
                 type="submit"
                 className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded-md"
               >
