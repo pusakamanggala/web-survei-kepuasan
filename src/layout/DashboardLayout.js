@@ -36,7 +36,7 @@ const DashboardLayout = ({ children }) => {
 
     if (confirmed) {
       document.cookie =
-        "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.up.railway.app"; // set cookie expiration date to past
+        "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=localhost"; // set cookie expiration date to past
       localStorage.removeItem("survey"); // Remove the "survey" key from local storage
       window.location.reload();
     }

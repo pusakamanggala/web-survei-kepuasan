@@ -28,8 +28,7 @@ const Sidebar = () => {
     const confirmed = window.confirm("Apakah anda yakin ingin keluar ?"); // Display confirmation dialog
 
     if (confirmed) {
-      document.cookie =
-        "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.up.railway.app"; // set cookie expiration date to past
+      document.cookie = `Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${process.env.REACT_APP_COOKIE_DOMAIN}`; // set cookie expiration date to past
       localStorage.removeItem("survey"); // Remove the "survey" key from local storage
       window.location.reload();
     }
