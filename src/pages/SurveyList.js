@@ -147,7 +147,7 @@ const SurveyList = () => {
         </select>
         {/* input year */}
         <form
-          className="h-12 w-40 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
+          className="h-12 w-32 ml-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
           onSubmit={handleYearSubmit}
         >
           <input
@@ -165,20 +165,68 @@ const SurveyList = () => {
       {isSurveyListError && <div>Error...</div>}
       {isSurveyListSuccess &&
         surveyListData.data &&
-        surveyListData.data.length > 0 &&
-        surveyListData.data.map((survey, index) => (
-          <div
-            className="bg-white rounded-lg overflow-hidden shadow-md p-3 flex justify-between items-center cursor-pointer hover:scale-102 transition-all duration-300 mb-2"
-            key={index}
-            onClick={() => handleSeeSurveyResult(survey)}
-          >
-            <div>
-              <h1 className="text-secondary-color font-bold text-lg">
-                {survey.judul_survei}
+        surveyListData.data.length > 0 && (
+          <>
+            <div className="flex justify-between items-center">
+              <h1>
+                Survei Periode {startDate} - {endDate}
               </h1>
+              {/* survei recap for student survei */}
+              {role === "mahasiswa" && (
+                <button
+                  title="Rekap Survei"
+                  className="bg-primary-color shadow-md hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-2"
+                  onClick={() =>
+                    navigate(
+                      `/survei-kepuasan/laporan-survei/rekap-survei/${role}/startDate=${convertDateToUnix(
+                        startDate,
+                        true
+                      )}&endDate=${convertDateToUnix(endDate)}`
+                    )
+                  }
+                >
+                  Rekap Survei
+                </button>
+              )}
             </div>
-          </div>
-        ))}
+            {surveyListData.data.map((survey, index) => (
+              <div
+                className="bg-white rounded-lg overflow-hidden shadow-md p-3 flex justify-between items-center mb-2"
+                key={index}
+              >
+                <div>
+                  <h1 className="text-secondary-color font-bold text-lg">
+                    {survey.judul_survei}
+                  </h1>
+                </div>
+                <div>
+                  <button
+                    onClick={() => handleSeeSurveyResult(survey)}
+                    className="bg-primary-color shadow-md hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Lihat Hasil
+                  </button>
+                  {/* survey recap button for alumni or lecturer */}
+                  {(role === "alumni" || role === "dosen") && (
+                    <button
+                      title="Rekap Survei"
+                      className="bg-primary-color shadow-md hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2"
+                      onClick={() =>
+                        navigate(
+                          `/survei-kepuasan/laporan-survei/rekap-survei/${role}/id=${
+                            survey[`id_survei_${role}`]
+                          }`
+                        )
+                      }
+                    >
+                      Rekap Survei
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </>
+        )}
       {isSurveyListSuccess &&
         surveyListData.message &&
         surveyListData.message === "There is no record with that query" && (

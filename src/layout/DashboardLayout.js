@@ -9,7 +9,7 @@ import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
-  const { id, role, idSurvey } = useParams(); // get value from url params
+  const { id, role, idSurvey, survey } = useParams(); // get value from url params
   const [autoFetch, setAutoFetch] = useState(false); // state to trigger useFetchUserById
 
   const { userRole, userId } = useContext(UserContext); // get logged in user role and id from user context
@@ -91,6 +91,9 @@ const DashboardLayout = ({ children }) => {
       break;
     case `/survei-kepuasan/laporan-survei/${role}/${idSurvey}`:
       pageTitle = "Laporan Survei";
+      break;
+    case `/survei-kepuasan/laporan-survei/rekap-survei/${role}/${survey}`:
+      pageTitle = "Rekapitulasi Survei";
       break;
 
     default:

@@ -23,6 +23,7 @@ import SurveyHistory from "../pages/SurveyHistory";
 import SurveyHistoryDetail from "../pages/SurveyHistoryDetail";
 import Home from "../pages/Home";
 import SurveyList from "../pages/SurveyList";
+import SurveyRecap from "../pages/SurveyRecap";
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
@@ -168,6 +169,14 @@ const Router = () => {
               element={
                 <DashboardLayout>
                   <SurveyHistoryDetail />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/survei-kepuasan/laporan-survei/rekap-survei/:role/:survey"
+              element={
+                <DashboardLayout>
+                  <SurveyRecap />
                 </DashboardLayout>
               }
             />
