@@ -2,9 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useFetchSurveyRecap from "../hooks/useFetchSurveyRecap";
 import UserRatingPieChart from "../components/UserRatingPieChart";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileExport } from "@fortawesome/free-solid-svg-icons";
 import LecturerRecapBarChart from "../components/LecturerRecapBarChart";
+import ExportSurveyRecapButton from "../components/ExportSurveyRecapButton";
 
 const SurveyRecap = () => {
   const { role, survey } = useParams();
@@ -59,15 +58,17 @@ const SurveyRecap = () => {
         <h1 className="capitalize font-bold text-primary-color text-xl">
           Rekap Survey {role}
         </h1>
-        <button
-          type="button"
-          className="flex items-center bg-primary-color shadow-md hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          <h1 className="flex">
-            Ekpor <span className="hidden md:block ml-1">Rekap</span>
-          </h1>
-          <FontAwesomeIcon icon={faFileExport} className="ml-2" />
-        </button>
+        {role === "mahasiswa" ? (
+          <ExportSurveyRecapButton
+            exportData={surveyRecapData.data}
+            tableIds={surveyRecapData.data.map((item) => item.namaDosen)}
+          />
+        ) : (
+          <ExportSurveyRecapButton
+            exportData={surveyRecapData.data}
+            tableIds={["rekap survei dosen"]}
+          />
+        )}
       </div>
       {/* responden and ikm bar chart for student survei */}
       {role === "mahasiswa" && (
@@ -98,7 +99,10 @@ const SurveyRecap = () => {
                   />
                 </div>
                 <div>
-                  <table className="table-fixed border border-black w-full mb-2">
+                  <table
+                    id="rekap survei dosen"
+                    className="table-fixed w-full mb-2"
+                  >
                     <thead className="bg-primary-color text-white">
                       <tr>
                         <th className="border border-black">Bobot</th>
@@ -146,29 +150,35 @@ const SurveyRecap = () => {
                           }
                         </td>
                       </tr>
-                    </tbody>
-                  </table>
-                  <table className="table-fixed border bg-primary-color text-white font-semibold border-black w-full text-center">
-                    <thead>
-                      <tr className="border border-black">
-                        <td className="border border-white">Total Respon</td>
-                        <td className="border border-white">
+                      <tr>
+                        <td className="py-2"></td>
+                        <td></td>
+                      </tr>
+                      <tr className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
+                        <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
+                          Total Respon
+                        </td>
+                        <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
                           {surveyRecapData.data.hasilRekap.totalRespon}
                         </td>
                       </tr>
                       <tr>
-                        <td className="border border-white">Responden</td>
-                        <td className="border border-white">
+                        <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
+                          Responden
+                        </td>
+                        <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
                           {surveyRecapData.data.hasilRekap.responden}
                         </td>
                       </tr>
                       <tr>
-                        <td className="border border-white">IKM</td>
-                        <td className="border border-white">
+                        <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
+                          IKM
+                        </td>
+                        <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
                           {surveyRecapData.data.hasilRekap.ikm.toFixed(2)}
                         </td>
                       </tr>
-                    </thead>
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -204,7 +214,10 @@ const SurveyRecap = () => {
                       <UserRatingPieChart rating={getRatingArray(item)} />
                     </div>
                     <div>
-                      <table className="table-fixed border border-black w-full mb-2">
+                      <table
+                        id={item.namaDosen}
+                        className="table-fixed w-full mb-2"
+                      >
                         <thead className="bg-primary-color text-white">
                           <tr>
                             <th className="border border-black">Bobot</th>
@@ -238,31 +251,35 @@ const SurveyRecap = () => {
                               {item.hasilRekap["z5OHO3jjoYXq4GHXacIR"].total}
                             </td>
                           </tr>
-                        </tbody>
-                      </table>
-                      <table className="table-fixed border bg-primary-color text-white font-semibold border-black w-full text-center">
-                        <thead>
-                          <tr className="border border-black">
-                            <td className="border border-white">
+                          <tr>
+                            <td className="py-2"></td>
+                            <td></td>
+                          </tr>
+                          <tr className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
+                            <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
                               Total Respon
                             </td>
-                            <td className="border border-white">
+                            <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
                               {item.hasilRekap.totalRespon}
                             </td>
                           </tr>
                           <tr>
-                            <td className="border border-white">Responden</td>
-                            <td className="border border-white">
+                            <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
+                              Responden
+                            </td>
+                            <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
                               {item.hasilRekap.responden}
                             </td>
                           </tr>
                           <tr>
-                            <td className="border border-white">IKM</td>
-                            <td className="border border-white">
+                            <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
+                              IKM
+                            </td>
+                            <td className="border border-white font-semibold p-1 text-center bg-primary-color text-white">
                               {item.hasilRekap.ikm.toFixed(2)}
                             </td>
                           </tr>
-                        </thead>
+                        </tbody>
                       </table>
                     </div>
                   </div>
