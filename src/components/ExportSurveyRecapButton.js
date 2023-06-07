@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileExport } from "@fortawesome/free-solid-svg-icons";
 
-function ExportSurveyRecapButton({ exportData, tableIds }) {
+function ExportSurveyRecapButton({ tableIds }) {
   const handleExportExcel = () => {
     const workbook = XLSX.utils.book_new();
 
