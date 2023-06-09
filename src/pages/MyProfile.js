@@ -3,7 +3,7 @@ import useFetchUserById from "../hooks/useFetchUserById";
 import { UserContext } from "../context/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const { userId, userRole } = useContext(UserContext);

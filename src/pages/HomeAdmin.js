@@ -8,7 +8,7 @@ import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
 import useFetchClasses from "../hooks/useFetchClasses";
 import useFetchTotalRecordOfUser from "../hooks/useFetchTotalRecordOfUser";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const HomeAdmin = () => {
   const navigate = useNavigate();

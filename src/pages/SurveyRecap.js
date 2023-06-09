@@ -4,7 +4,7 @@ import useFetchSurveyRecap from "../hooks/useFetchSurveyRecap";
 import UserRatingPieChart from "../components/UserRatingPieChart";
 import LecturerRecapBarChart from "../components/LecturerRecapBarChart";
 import ExportSurveyRecapButton from "../components/ExportSurveyRecapButton";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const SurveyRecap = () => {
   const { role, survey } = useParams();

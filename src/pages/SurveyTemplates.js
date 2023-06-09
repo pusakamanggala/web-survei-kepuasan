@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useFetchSurveyTemplate from "../hooks/useFetchSurveyTemplates";
 import SurveyTemplateCard from "../components/SurveyTemplateCard";
 import SurveyTemplatesDetails from "../components/SurveyTemplateDetails";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const SurveyTemplates = () => {
   const [role, setRole] = useState("mahasiswa"); // to store survey role template

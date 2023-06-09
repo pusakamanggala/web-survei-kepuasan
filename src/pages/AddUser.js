@@ -8,7 +8,7 @@ import useImportLecturer from "../hooks/useImportLecturer";
 import useImportAlumni from "../hooks/useImportAlumni";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const AddUser = () => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import useFetchSurveyHistory from "../hooks/useFetchSurveyHistory";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const SurveyHistory = () => {
   const { userRole, userId } = useContext(UserContext);

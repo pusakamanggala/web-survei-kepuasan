@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useAddClass from "../hooks/useAddClass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const AddClass = () => {
   const navigate = useNavigate();

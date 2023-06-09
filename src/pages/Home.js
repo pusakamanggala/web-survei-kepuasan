@@ -2,7 +2,7 @@ import React from "react";
 import SurveyMenuImg from "../img/surveyMenu.png";
 import SidebarButtonImg from "../img/mobileSidebarButton.png";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const navigate = useNavigate();

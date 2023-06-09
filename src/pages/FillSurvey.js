@@ -3,7 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useFillSurvey from "../hooks/useFillSurvey";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const FillSurvey = () => {
   const { userRole, survey, userId } = useContext(UserContext);

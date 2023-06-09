@@ -3,7 +3,7 @@ import useFetchSurveyHistoryResult from "../hooks/useFetchSurveyHistoryResult";
 import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 import UserRatingPieChart from "../components/UserRatingPieChart";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const SurveyHistoryDetail = () => {
   const { userRole } = useContext(UserContext);

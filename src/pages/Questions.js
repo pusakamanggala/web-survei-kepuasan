@@ -3,7 +3,7 @@ import useFetchQuestionByName from "../hooks/useFetchQuestionByName";
 import AddQuestion from "../components/AddQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Questions = () => {
   // to store search value and keyword

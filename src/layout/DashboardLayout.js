@@ -10,12 +10,11 @@ import {
   faBars,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from "react-helmet";
 
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
-  const { idSurvey } = useParams(); // get value from url params
+  const { idSurvey, role, id, survey } = useParams(); // get value from url params
   const [autoFetch, setAutoFetch] = useState(false); // state to trigger useFetchUserById
 
   const { userRole, userId } = useContext(UserContext); // get logged in user role and id from user context
@@ -27,19 +26,67 @@ const DashboardLayout = ({ children }) => {
     autoFetch: autoFetch,
   });
 
-  const [pageTitle, setPageTitle] = useState(""); // state for page title
+  // set page title based on current path
+  let pageTitle;
+  switch (location.pathname) {
+    case "/beranda":
+      pageTitle = "Beranda";
+      break;
+    case `/pengguna/${role}`:
+      pageTitle = `${role}`;
+      break;
+    case `/pengguna/tambah/${role}`:
+      pageTitle = `Tambah ${role}`;
+      break;
+    case `/kelas`:
+      pageTitle = `Kelas`;
+      break;
+    case `/kelas/${id}`:
+      pageTitle = `Detail Kelas`;
+      break;
+    case "/kelas/tambah":
+      pageTitle = "Tambah Kelas";
+      break;
+    case "/profil":
+      pageTitle = "Profil Saya";
+      break;
+    case "/survei-kepuasan/survei-saya":
+      pageTitle = "Survei Saya";
+      break;
+    case `/survei-kepuasan/survei-saya/${idSurvey}`:
+      pageTitle = "Isi Survei";
+      break;
+    case `/survei-kepuasan/riwayat-survei`:
+      pageTitle = "Riwayat Survei";
+      break;
+    case `/survei-kepuasan/riwayat-survei/hasil-survei/${idSurvey}`:
+      pageTitle = "Hasil Survei";
+      break;
+    case `/survei-kepuasan/pertanyaan`:
+      pageTitle = "Pertanyaan Survei";
+      break;
+    case `/survei-kepuasan/template-survei`:
+      pageTitle = "Template Survei";
+      break;
+    case `/survei-kepuasan/template-survei/tambah`:
+      pageTitle = "Tambah Template Survei";
+      break;
+    case `/survei-kepuasan/tambah-survei`:
+      pageTitle = "Tambah Survei";
+      break;
+    case `/survei-kepuasan/laporan-survei`:
+      pageTitle = "Laporan Survei";
+      break;
+    case `/survei-kepuasan/laporan-survei/${role}/${idSurvey}`:
+      pageTitle = "Laporan Survei";
+      break;
+    case `/survei-kepuasan/laporan-survei/rekap-survei/${role}/${survey}`:
+      pageTitle = "Rekapitulasi Survei";
+      break;
 
-  useEffect(() => {
-    if (
-      location.pathname ===
-      `/survei-kepuasan/riwayat-survei/hasil-survei/${idSurvey}`
-    ) {
-      setPageTitle("Hasil Survei");
-    } else {
-      setPageTitle(Helmet.peek().title.split(" | ")[0]);
-    }
-  }, [location.pathname, idSurvey]);
-
+    default:
+      pageTitle = "Halaman Tidak Ditemukan";
+  }
   // only fetch user data when role is not ADMIN
   useEffect(() => {
     if (userRole) {

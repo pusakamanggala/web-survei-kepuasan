@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useFetchSurveyList from "../hooks/useFetchSurveyList";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const SurveyList = () => {
   const navigate = useNavigate();

@@ -11,7 +11,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const UserAccount = () => {
   const navigate = useNavigate(); //initializes the navigate function provided by the useNavigate hook from the react-router-dom library

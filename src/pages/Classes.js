@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import AddCourse from "../components/AddCourse";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Classes = () => {
   const [keyword, setKeyword] = useState("");

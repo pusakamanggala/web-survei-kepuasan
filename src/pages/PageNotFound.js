@@ -1,7 +1,7 @@
 import React from "react";
 import PageNoutFoundImage from "../img/404.jpg";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const PageNotFound = () => {
   const navigate = useNavigate();

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import useFetchSurvey from "../hooks/useFetchSurvey";
 import MySurveyCard from "../components/MySurveyCard";
 import { UserContext } from "../context/UserContext";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const MySurvey = () => {
   const { userId, userRole } = useContext(UserContext);

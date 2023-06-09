@@ -6,7 +6,7 @@ import ClassCard from "../components/ClassCard";
 import useAddSurvei from "../hooks/useAddSurvei";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const AddSurvey = () => {
   const [surveyTitle, setSurveyTitle] = useState("");
