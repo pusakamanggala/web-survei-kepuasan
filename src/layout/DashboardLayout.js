@@ -110,7 +110,7 @@ const DashboardLayout = ({ children }) => {
       <button
         title="Buka Menu"
         type="button"
-        className="lg:hidden bg-primary-color p-2 rounded-full fixed bottom-4 right-4 z-10 shadow-md shadow-secondary-color"
+        className="lg:hidden border-2 border-white bg-primary-color p-2 rounded-full fixed bottom-4 right-4 z-10 shadow-sm shadow-secondary-color"
         onClick={handleToggleSidebar}
       >
         {showSidebar ? (
@@ -153,7 +153,7 @@ const DashboardLayout = ({ children }) => {
       >
         <Sidebar />
       </div>
-      <div className="flex flex-col flex-1 w-full">
+      <div className="flex flex-col flex-1 w-full bg-secondary-color">
         <header className="bg-secondary-color py-4">
           <div className="mx-auto px-4 sm:px-6 lg:px-8 flex justify-between">
             <h1 className="text-white text-xl font-bold capitalize">
@@ -178,7 +178,7 @@ const DashboardLayout = ({ children }) => {
             </div>
           </div>
         </header>
-        <main className="flex-1 overflow-y-auto bg-gray-100">
+        <main className="flex-1 overflow-y-auto bg-gray-100 lg:rounded-tl-3xl">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {children}
           </div>
