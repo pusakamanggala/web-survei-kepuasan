@@ -15,7 +15,7 @@ import { Helmet } from "react-helmet";
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
-  const { id, role, idSurvey, survey } = useParams(); // get value from url params
+  const { idSurvey } = useParams(); // get value from url params
   const [autoFetch, setAutoFetch] = useState(false); // state to trigger useFetchUserById
 
   const { userRole, userId } = useContext(UserContext); // get logged in user role and id from user context
