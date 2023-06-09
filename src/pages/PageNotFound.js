@@ -9,7 +9,7 @@ const PageNotFound = () => {
   return (
     <div className="h-screen bg-white flex flex-col justify-center">
       <Helmet>
-        <title>Halaman Tidak Ditemukan</title>
+        <title>Halaman Tidak Ditemukan | Web Survei Kepuasan</title>
       </Helmet>
       <img
         src={PageNoutFoundImage}

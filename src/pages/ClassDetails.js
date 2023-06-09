@@ -55,12 +55,22 @@ const ClassDetails = () => {
     return formattedDate;
   };
   if (isFetchClassLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <>
+        <Helmet>
+          <title>Detail Kelas | Web Survei Kepuasan</title>
+        </Helmet>
+        <h1>Loading...</h1>
+      </>
+    );
   }
 
   if (isFetchClassError) {
     return (
       <div>
+        <Helmet>
+          <title>Detail Kelas | Web Survei Kepuasan</title>
+        </Helmet>
         {error.message === "Kelas ini belum memiliki mahasiswa" ? (
           <>
             <h1>
@@ -72,7 +82,9 @@ const ClassDetails = () => {
             />
           </>
         ) : (
-          <h1>Something went wrong...</h1>
+          <h1 className="text-primary-color font-semibold">
+            Terjadi kesalahan saat memproses permintaan.
+          </h1>
         )}
       </div>
     );
@@ -83,8 +95,9 @@ const ClassDetails = () => {
   return (
     <div className="bg-white rounded shadow-md p-4 text-secondary-color">
       <Helmet>
-        <title>{namaKelas} | Web Survei Kepuasan</title>
+        <title>Detail Kelas | Web Survei Kepuasan</title>
       </Helmet>
+      {isFetchClassLoading && <h1>Loading...</h1>}
       <div className="flex justify-between">
         <div>
           <h1 className="font-bold text-lg">{namaKelas}</h1>
