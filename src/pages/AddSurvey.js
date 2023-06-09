@@ -4,6 +4,8 @@ import SurveyTemplateCard from "../components/SurveyTemplateCard";
 import useFetchClassByName from "../hooks/useFetchClassByName";
 import ClassCard from "../components/ClassCard";
 import useAddSurvei from "../hooks/useAddSurvei";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const AddSurvey = () => {
   const [surveyTitle, setSurveyTitle] = useState("");
@@ -326,7 +328,7 @@ const AddSurvey = () => {
         {/* show survey template data*/}
         {isTemplateLoading && <div>Loading...</div>}
         {isTemplateError && <div>Error...</div>}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 md:gap-4 gap-2">
           {surveyTemplateData &&
             surveyTemplateData.data.map((template, index) => (
               <SurveyTemplateCard
@@ -358,20 +360,7 @@ const AddSurvey = () => {
           </label>
           <div className=" flex h-12 items-center rounded-lg focus-within:shadow-md bg-white overflow-hidden border-2  shadow-sm">
             <div className="grid place-items-center h-full w-12 text-gray-300">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+              <FontAwesomeIcon icon={faMagnifyingGlass} className="h-5 w-5" />
             </div>
             <form className="w-full" onSubmit={handleSearchClass}>
               <input

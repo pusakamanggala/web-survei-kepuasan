@@ -15,6 +15,8 @@ import {
   faUser,
   faFile,
   faClockRotateLeft,
+  faAngleRight,
+  faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = () => {
@@ -103,20 +105,10 @@ const Sidebar = () => {
         >
           <FontAwesomeIcon icon={faClipboardList} className="w-5 h-5 mr-4" />
           <h1>Survei Kepuasan</h1>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
+          <FontAwesomeIcon
+            icon={subMenu ? faAngleDown : faAngleRight}
             className="w-4 h-4 absolute right-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d={subMenu ? "M19 9l-7 7-7-7" : "M8.25 4.5l7.5 7.5-7.5 7.5"}
-            />
-          </svg>
+          />
         </button>
         {/* survei sub menu */}
 

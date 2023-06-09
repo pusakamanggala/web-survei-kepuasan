@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import useFetchUserById from "../hooks/useFetchUserById";
 import { UserContext } from "../context/UserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKey } from "@fortawesome/free-solid-svg-icons";
 
 const MyProfile = () => {
   const { userId, userRole } = useContext(UserContext);
@@ -66,22 +68,9 @@ const MyProfile = () => {
           <div className="flex justify-end">
             <button
               title="Ganti Password"
-              className="bg-primary-color flex p-2 rounded-md text-white shadow-md"
+              className="bg-primary-color flex p-2 rounded-md text-white shadow-md items-center"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z"
-                />
-              </svg>
+              <FontAwesomeIcon icon={faKey} className="w-5 h-5" />
               <h1 className="hidden md:block ml-2">Ganti Password</h1>
             </button>
           </div>

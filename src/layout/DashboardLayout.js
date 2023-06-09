@@ -5,7 +5,11 @@ import { useLocation, useParams } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import useFetchUserById from "../hooks/useFetchUserById";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRightFromBracket,
+  faBars,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
@@ -113,37 +117,10 @@ const DashboardLayout = ({ children }) => {
         className="lg:hidden border-2 border-white bg-primary-color p-2 rounded-full fixed bottom-4 right-4 z-10 shadow-sm shadow-secondary-color"
         onClick={handleToggleSidebar}
       >
-        {showSidebar ? (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-gray-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="#ffffff"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-gray-600"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="#ffffff"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        )}
+        <FontAwesomeIcon
+          icon={showSidebar ? faXmark : faBars}
+          className="text-white h-6 w-6 flex"
+        />
       </button>
       {/* Render sidebar conditionally */}
       <div

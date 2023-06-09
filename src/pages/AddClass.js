@@ -5,6 +5,8 @@ import useFetchCourseByName from "../hooks/useFetchCourseByName";
 import CourseCard from "../components/CourseCard";
 import { useNavigate } from "react-router-dom";
 import useAddClass from "../hooks/useAddClass";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const AddClass = () => {
   const navigate = useNavigate();
@@ -120,7 +122,7 @@ const AddClass = () => {
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
       {/* input class name */}
-      <div className="mb-4 grid grid-cols-2 gap-3">
+      <div className="mb-2 grid grid-cols-2 gap-3">
         <div>
           <label
             htmlFor="namaKelas"
@@ -133,6 +135,7 @@ const AddClass = () => {
             id="namaKelas"
             name="namaKelas"
             required
+            placeholder="Ex : Kalkulus - A"
             value={namaKelas}
             autoComplete="off"
             onChange={(event) => setNamaKelas(event.target.value)}
@@ -171,27 +174,14 @@ const AddClass = () => {
         </label>
         <div className=" flex h-12 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2  shadow-sm">
           <div className="grid place-items-center h-full w-12 text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="h-5 w-5" />
           </div>
           <form className="w-full" onSubmit={handleSearchDosen}>
             <input
               className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
               type="text"
               id="search"
-              min={1}
+              minLength={3}
               value={dosenSearchValue}
               placeholder="Cari Nama Dosen"
               onChange={(event) => {
@@ -210,20 +200,10 @@ const AddClass = () => {
                 setSelectedNip("");
               }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.8}
-                stroke="#ec161e"
-                className="w-5 h-5 "
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <FontAwesomeIcon
+                icon={faXmark}
+                className="h-5 w-5 text-primary-color"
+              />
             </button>
           )}
         </div>
@@ -273,27 +253,14 @@ const AddClass = () => {
         </label>
         <div className=" flex h-12 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2  shadow-sm">
           <div className="grid place-items-center h-full w-12 text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="h-5 w-5" />
           </div>
           <form className="w-full" onSubmit={handleSearchCourse}>
             <input
               className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
               type="text"
               id="search"
-              min={1}
+              minLength={3}
               value={courseSearchValue}
               placeholder="Cari Nama Mata Kuliah"
               onChange={(event) => {
@@ -311,20 +278,10 @@ const AddClass = () => {
                 setSelectedCourse("");
               }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.8}
-                stroke="#ec161e"
-                className="w-5 h-5 "
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <FontAwesomeIcon
+                icon={faXmark}
+                className="h-5 w-5 text-primary-color"
+              />
             </button>
           )}
         </div>

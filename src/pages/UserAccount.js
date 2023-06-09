@@ -4,6 +4,12 @@ import LecturerTable from "../components/LecturerTable";
 import AlumniTable from "../components/AlumniTable";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMagnifyingGlass,
+  faXmark,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 
 const UserAccount = () => {
   const navigate = useNavigate(); //initializes the navigate function provided by the useNavigate hook from the react-router-dom library
@@ -53,25 +59,12 @@ const UserAccount = () => {
   return (
     <>
       <div className="flex flex-col w-full">
-        <div className="w-full h-12 flex justify-end mb-2">
-          <div className="flex">
+        <div className="flex justify-end mb-2 ">
+          <div className="flex max-w-full">
             {/* Search bar */}
             <div className=" flex h-12 md:w-72 items-center mx-2 rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color shadow-sm">
               <div className="grid place-items-center h-full w-12 text-gray-300">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+                <FontAwesomeIcon icon={faMagnifyingGlass} className="w-5 h-5" />
               </div>
               <form onSubmit={handleSubmit} className="w-full">
                 <input
@@ -95,20 +88,10 @@ const UserAccount = () => {
                     setSearchValue("");
                   }}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.8}
-                    stroke="#ec161e"
-                    className="w-5 h-5 "
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    className="w-5 h-5 text-primary-color"
+                  />
                 </button>
               )}
             </div>
@@ -117,20 +100,10 @@ const UserAccount = () => {
             {role === "mahasiswa" || role === "alumni" ? (
               <div className=" flex h-12 md:w-36 items-center mx-2 rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color shadow-sm">
                 <div className="grid place-items-center h-full w-12 text-gray-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="w-5 h-5"
+                  />
                 </div>
                 <form onSubmit={handleSubmitAngkatan} className="w-full">
                   <input
@@ -154,20 +127,10 @@ const UserAccount = () => {
                       setSearchValueAngkatan("");
                     }}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.8}
-                      stroke="#ec161e"
-                      className="w-5 h-5 "
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
+                    <FontAwesomeIcon
+                      icon={faXmark}
+                      className="w-5 h-5 text-primary-color"
+                    />
                   </button>
                 )}
               </div>
@@ -189,26 +152,14 @@ const UserAccount = () => {
             {/* add button */}
             <button
               title={`Tambah ${role}`}
-              className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+              className="flex justify-evenly ml-2 h-12 px-4 items-center text-white  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
               onClick={() => navigate(`/pengguna/tambah/${role}`)}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="#ffffff"
-                className="w-6 h-6 mr-0 sm:mr-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-                />
-              </svg>
-              <h1 className="text-white hidden sm:block capitalize">
-                Tambah {role}
-              </h1>
+              <FontAwesomeIcon
+                icon={faUserPlus}
+                className="w-5 h-5 mr-0 sm:mr-3 "
+              />
+              <h1 className="hidden sm:block capitalize">Tambah {role}</h1>
             </button>
             {/* end of add button */}
           </div>

@@ -6,6 +6,8 @@ import useAddLecturer from "../hooks/useAddLecturer";
 import useImportStudent from "../hooks/useImportStudent";
 import useImportLecturer from "../hooks/useImportLecturer";
 import useImportAlumni from "../hooks/useImportAlumni";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserPlus, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 const AddUser = () => {
   const navigate = useNavigate();
@@ -136,20 +138,10 @@ const AddUser = () => {
                 className="flex justify-evenly h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
                 onClick={() => setInputType("manual")}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="#ffffff"
-                  className="w-6 h-6 mr-0 sm:mr-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-                  />
-                </svg>
+                <FontAwesomeIcon
+                  icon={faUserPlus}
+                  className="mr-0 sm:mr-4 text-white w-5 h-5"
+                />
                 <h1 className="text-white hidden sm:block">Add Manual</h1>
               </button>
             </div>
@@ -234,23 +226,13 @@ const AddUser = () => {
           <div className="flex justify-end w-full mb-2">
             <button
               title="Impor Excel"
-              className="flex justify-evenly h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+              className="flex justify-evenly h-12 px-4 mb-2 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
               onClick={() => setInputType("bulk")}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="#ffffff"
-                className="w-6 h-6 mr-0 sm:mr-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-                />
-              </svg>
+              <FontAwesomeIcon
+                icon={faFileArrowUp}
+                className="w-5 h-5 mr-0 sm:mr-4 text-white"
+              />
               <h1 className="text-white hidden sm:block">Import Excel</h1>
             </button>
           </div>

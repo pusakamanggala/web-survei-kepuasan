@@ -5,6 +5,11 @@ import useFetchUserByName from "../hooks/useFetchUserByName";
 import { useParams } from "react-router-dom";
 import GraduateStudent from "./GraduateStudent";
 import EditUser from "./EditUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowDownShortWide,
+  faArrowDownWideShort,
+} from "@fortawesome/free-solid-svg-icons";
 
 const StudentTable = ({ keyword, angkatan }) => {
   // Set initial state values for sorting
@@ -144,16 +149,10 @@ const StudentTable = ({ keyword, angkatan }) => {
             >
               NIM
               {shouldShowArrow("nim") && (
-                <svg
-                  className="inline-block h-3 w-3 stroke-white text-white ml-2"
-                  viewBox="0 0 8 8"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="white"
-                    d={isAsc ? "M8 6L4 2 0 6" : "M0 2l4 4 4-4"}
-                  ></path>
-                </svg>
+                <FontAwesomeIcon
+                  icon={isAsc ? faArrowDownShortWide : faArrowDownWideShort}
+                  className="ml-2"
+                />
               )}
             </th>
 
@@ -168,16 +167,10 @@ const StudentTable = ({ keyword, angkatan }) => {
             >
               Nama
               {shouldShowArrow("nama") && (
-                <svg
-                  className="inline-block h-3 w-3 stroke-white text-white ml-2"
-                  viewBox="0 0 8 8"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="white"
-                    d={isAsc ? "M8 6L4 2 0 6" : "M0 2l4 4 4-4"}
-                  ></path>
-                </svg>
+                <FontAwesomeIcon
+                  icon={isAsc ? faArrowDownShortWide : faArrowDownWideShort}
+                  className="ml-2"
+                />
               )}
             </th>
 
@@ -192,16 +185,10 @@ const StudentTable = ({ keyword, angkatan }) => {
             >
               Angkatan
               {shouldShowArrow("angkatan") && (
-                <svg
-                  className="inline-block h-3 w-3 stroke-white text-white ml-2"
-                  viewBox="0 0 8 8"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill="white"
-                    d={isAsc ? "M8 6L4 2 0 6" : "M0 2l4 4 4-4"}
-                  ></path>
-                </svg>
+                <FontAwesomeIcon
+                  icon={isAsc ? faArrowDownShortWide : faArrowDownWideShort}
+                  className="ml-2"
+                />
               )}
             </th>
             <th

@@ -5,6 +5,8 @@ import { useState } from "react";
 import AddStudentToClass from "../components/AddStudentToClass";
 import useDeleteStudentFromClass from "../hooks/useDeleteStudentFromClass";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserPlus, faUserMinus } from "@fortawesome/free-solid-svg-icons";
 
 const ClassDetails = () => {
   const navigate = useNavigate();
@@ -97,20 +99,10 @@ const ClassDetails = () => {
               setShowModal(true);
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="#ffffff"
-              className="w-6 h-6 mr-0 sm:mr-4"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-              />
-            </svg>
+            <FontAwesomeIcon
+              icon={faUserPlus}
+              className="mr-0 sm:mr-4 text-white"
+            />
             <h1 className="text-white hidden sm:block capitalize">
               Tambah Mahasiswa
             </h1>
@@ -144,20 +136,10 @@ const ClassDetails = () => {
                 onClick={() => handleDeleteStudent(nim)}
                 className="w-6 h-6 hover:scale-125"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
+                <FontAwesomeIcon
+                  icon={faUserMinus}
                   className="w-6 h-6 scale-x-[-1]"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-                  />
-                </svg>
+                />
               </button>
               {/* end of delete button */}
             </div>

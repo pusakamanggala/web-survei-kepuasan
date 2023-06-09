@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const SurveyTemplatesDetails = (props) => {
   const { template, isShow } = props; //
@@ -15,20 +17,10 @@ const SurveyTemplatesDetails = (props) => {
             className="absolute top-3 right-3   hover:scale-125"
             onClick={() => isShow(false)}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="#ec161e"
-              className="w-6 h-6 cursor-pointer"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <FontAwesomeIcon
+              icon={faXmark}
+              className="w-6 h-6 text-primary-color"
+            />
           </button>
           <h1 className="font-semibold text-primary-color">{namaTemplate}</h1>
           <h1 className="mb-2">Jenis Survei : {role}</h1>

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const MySurveyCard = ({ surveyData }) => {
   const { userRole, setSurvey } = useContext(UserContext);
@@ -45,20 +47,11 @@ const MySurveyCard = ({ surveyData }) => {
             {convertUnixToDate(surveyData.endDate)}
           </h1>
         </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="#c20000"
-          className="w-8 h-8 mr-7"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-          />
-        </svg>
+
+        <FontAwesomeIcon
+          icon={faPaperPlane}
+          className="text-primary-color w-8 h-8 mr-7 rotate-45"
+        />
       </div>
     </div>
   );
