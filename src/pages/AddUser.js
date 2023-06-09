@@ -8,6 +8,7 @@ import useImportLecturer from "../hooks/useImportLecturer";
 import useImportAlumni from "../hooks/useImportAlumni";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet";
 
 const AddUser = () => {
   const navigate = useNavigate();
@@ -198,6 +199,13 @@ const AddUser = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>
+          {`Tambah ${
+            role.charAt(0).toUpperCase() + role.slice(1)
+          } | Web Survei Kepuasan`}
+        </title>
+      </Helmet>
       {addStudentMutation.isLoading ||
       addAlumniMutation.isLoading ||
       addLecturerMutation.isLoading ? (

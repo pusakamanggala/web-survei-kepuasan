@@ -6,6 +6,7 @@ import ClassCard from "../components/ClassCard";
 import useAddSurvei from "../hooks/useAddSurvei";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet";
 
 const AddSurvey = () => {
   const [surveyTitle, setSurveyTitle] = useState("");
@@ -227,6 +228,9 @@ const AddSurvey = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Tambah Survei | Web Survei Kepuasan</title>
+      </Helmet>
       <div className="mb-4 grid lg:grid-cols-2 gap-3">
         {/* Input survey title */}
         <div>

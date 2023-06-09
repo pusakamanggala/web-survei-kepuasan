@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import useAddClass from "../hooks/useAddClass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet";
 
 const AddClass = () => {
   const navigate = useNavigate();
@@ -121,6 +122,9 @@ const AddClass = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
+      <Helmet>
+        <title>Tambah Kelas | Web Survei Kepuasan</title>
+      </Helmet>
       {/* input class name */}
       <div className="mb-2 grid grid-cols-2 gap-3">
         <div>

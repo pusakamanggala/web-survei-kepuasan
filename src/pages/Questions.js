@@ -3,6 +3,7 @@ import useFetchQuestionByName from "../hooks/useFetchQuestionByName";
 import AddQuestion from "../components/AddQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet";
 
 const Questions = () => {
   // to store search value and keyword
@@ -29,6 +30,9 @@ const Questions = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Pertanyaan Survei | Web Survei Kepuasan</title>
+      </Helmet>
       <div className="flex justify-end mb-4">
         {/* Search bar */}
         <div className=" flex h-12 md:w-72 items-center mx-2 rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color shadow-sm">

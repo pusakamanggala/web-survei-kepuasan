@@ -4,6 +4,7 @@ import useFetchSurveyRecap from "../hooks/useFetchSurveyRecap";
 import UserRatingPieChart from "../components/UserRatingPieChart";
 import LecturerRecapBarChart from "../components/LecturerRecapBarChart";
 import ExportSurveyRecapButton from "../components/ExportSurveyRecapButton";
+import { Helmet } from "react-helmet";
 
 const SurveyRecap = () => {
   const { role, survey } = useParams();
@@ -13,17 +14,47 @@ const SurveyRecap = () => {
     isError: isSurveyRecapError,
     isSuccess: isSurveyRecapSuccess,
   } = useFetchSurveyRecap({ role: role, survey: survey });
+
+  // to set page title
+  const PageTitle = () => {
+    return (
+      <Helmet>
+        <title>
+          Rekap Survei {role.charAt(0).toUpperCase() + role.slice(1)} | Web
+          Survei Kepuasan
+        </title>
+      </Helmet>
+    );
+  };
+
   if (isSurveyRecapLoading) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <PageTitle />
+        <p>Memuat data rekapitulasi survei...</p>
+      </>
+    );
   }
   if (isSurveyRecapError) {
-    return <p>Error...</p>;
+    return (
+      <>
+        <PageTitle />
+        <p className="text-primary-color">
+          Terjadi kesalahan saat memproses permintaan !
+        </p>
+      </>
+    );
   }
   if (
     isSurveyRecapSuccess &&
     surveyRecapData.message === "There is no record with that query"
   ) {
-    return <p>Belum ada respon untuk survei ini</p>;
+    return (
+      <>
+        <PageTitle />
+        <p>Belum ada respon untuk survei ini</p>
+      </>
+    );
   }
 
   const getRatingArray = (rating) => {

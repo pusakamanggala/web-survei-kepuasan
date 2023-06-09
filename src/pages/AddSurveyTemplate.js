@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import AddQuestion from "../components/AddQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet";
 
 const AddSurveyTemplate = () => {
   const navigate = useNavigate();
@@ -102,6 +103,9 @@ const AddSurveyTemplate = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
+      <Helmet>
+        <title>Tambah Template Survei | Web Survei Kepuasan</title>
+      </Helmet>
       {/* input survei template name */}
       <div className="mb-4 grid lg:grid-cols-2 gap-3">
         <div>

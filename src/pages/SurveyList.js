@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useFetchSurveyList from "../hooks/useFetchSurveyList";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const SurveyList = () => {
   const navigate = useNavigate();
@@ -122,6 +123,9 @@ const SurveyList = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Laporan Survei | Web Survei Kepuasan</title>
+      </Helmet>
       <div className="flex justify-end mb-4">
         {/* Search bar */}
         {/* select role dropdown */}

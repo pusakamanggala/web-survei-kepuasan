@@ -3,6 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useFillSurvey from "../hooks/useFillSurvey";
+import { Helmet } from "react-helmet";
 
 const FillSurvey = () => {
   const { userRole, survey, userId } = useContext(UserContext);
@@ -208,6 +209,9 @@ const FillSurvey = () => {
 
   return (
     <div className="w-full   p-6">
+      <Helmet>
+        <title>Isi Survei | Web Survei Kepuasan</title>
+      </Helmet>
       {/* Survey info */}
       <div className="mb-5">
         <h1 className="font-bold text-xl text-secondary-color mb-2">

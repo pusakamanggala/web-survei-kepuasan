@@ -7,6 +7,7 @@ import useDeleteStudentFromClass from "../hooks/useDeleteStudentFromClass";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faUserMinus } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet";
 
 const ClassDetails = () => {
   const navigate = useNavigate();
@@ -81,6 +82,9 @@ const ClassDetails = () => {
 
   return (
     <div className="bg-white rounded shadow-md p-4 text-secondary-color">
+      <Helmet>
+        <title>{namaKelas} | Web Survei Kepuasan</title>
+      </Helmet>
       <div className="flex justify-between">
         <div>
           <h1 className="font-bold text-lg">{namaKelas}</h1>

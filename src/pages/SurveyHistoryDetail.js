@@ -3,6 +3,7 @@ import useFetchSurveyHistoryResult from "../hooks/useFetchSurveyHistoryResult";
 import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 import UserRatingPieChart from "../components/UserRatingPieChart";
+import { Helmet } from "react-helmet";
 
 const SurveyHistoryDetail = () => {
   const { userRole } = useContext(UserContext);
@@ -110,6 +111,9 @@ const SurveyHistoryDetail = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Hasil Survei | Web Survei Kepuasan</title>
+      </Helmet>
       {isSurveyHistoryResultDataSuccess &&
         data.message === "There is no record with that query" && (
           <h1 className="font-bold">Belum ada respon untuk survey ini</h1>

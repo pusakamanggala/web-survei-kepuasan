@@ -1,12 +1,16 @@
 import React from "react";
 import PageNoutFoundImage from "../img/404.jpg";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const PageNotFound = () => {
   const navigate = useNavigate();
 
   return (
     <div className="h-screen bg-white flex flex-col justify-center">
+      <Helmet>
+        <title>Halaman Tidak Ditemukan</title>
+      </Helmet>
       <img
         src={PageNoutFoundImage}
         alt="404 Page Not Found"

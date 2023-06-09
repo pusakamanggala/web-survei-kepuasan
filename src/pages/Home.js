@@ -2,11 +2,15 @@ import React from "react";
 import SurveyMenuImg from "../img/surveyMenu.png";
 import SidebarButtonImg from "../img/mobileSidebarButton.png";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const navigate = useNavigate();
   return (
     <div className="w-full bg-white rounded-md p-6 shadow-md">
+      <Helmet>
+        <title>Beranda | Web Survei Kepuasan</title>
+      </Helmet>
       <div className="text-center text-primary-color text-xl font-semibold mb-10">
         <h1>Selamat Datang di Website Survei Kepuasan</h1>
         <h1>Prodi Matematika UIN Malang</h1>

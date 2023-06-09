@@ -8,6 +8,7 @@ import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
 import useFetchClasses from "../hooks/useFetchClasses";
 import useFetchTotalRecordOfUser from "../hooks/useFetchTotalRecordOfUser";
+import { Helmet } from "react-helmet";
 
 const HomeAdmin = () => {
   const navigate = useNavigate();
@@ -90,6 +91,9 @@ const HomeAdmin = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Beranda | Web Survei Kepuasan</title>
+      </Helmet>
       <div className="grid grid-cols-2 lg:grid-cols-4 md:grid-cols-2  gap-4 mb-4">
         <SummaryCard
           cardTitle="Mahasiswa"

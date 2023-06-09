@@ -3,6 +3,7 @@ import useFetchUserById from "../hooks/useFetchUserById";
 import { UserContext } from "../context/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet";
 
 const MyProfile = () => {
   const { userId, userRole } = useContext(UserContext);
@@ -19,6 +20,9 @@ const MyProfile = () => {
 
   return (
     <div className="w-full bg-white rounded-lg shadow-lg p-6">
+      <Helmet>
+        <title>Profil Saya | Web Survei Kepuasan</title>
+      </Helmet>
       {isUserDataLoading && <h1>Loading...</h1>}
       {isUserDataError && <h1>Error...</h1>}
       {isUserDataSuccess && (

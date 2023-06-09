@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useLogin from "../hooks/useLogin";
+import Helmet from "react-helmet";
 
 function Login() {
   const [userId, setUserId] = useState("");
@@ -46,6 +47,9 @@ function Login() {
 
   return (
     <>
+      <Helmet>
+        <title>Login | Web Survei Kepuasan</title>
+      </Helmet>
       <div className="flex h-screen bg-gray-100">
         {/* left panel */}
         <div className="w-full md:w-1/2 md:block hidden bg-login-background bg-cover ">

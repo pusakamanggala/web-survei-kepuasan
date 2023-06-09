@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import useFetchSurvey from "../hooks/useFetchSurvey";
 import MySurveyCard from "../components/MySurveyCard";
 import { UserContext } from "../context/UserContext";
+import { Helmet } from "react-helmet";
 
 const MySurvey = () => {
   const { userId, userRole } = useContext(UserContext);
@@ -18,6 +19,9 @@ const MySurvey = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Survei Saya | Web Survei Kepuasan</title>
+      </Helmet>
       {isSurveyLoading && <h1>Loading...</h1>}
       {isSurveyError && <h1>Error...</h1>}
       {isSurveySuccess && (

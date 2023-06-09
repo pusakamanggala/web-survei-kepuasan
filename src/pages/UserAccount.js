@@ -11,6 +11,8 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { Helmet } from "react-helmet";
+
 const UserAccount = () => {
   const navigate = useNavigate(); //initializes the navigate function provided by the useNavigate hook from the react-router-dom library
   const { role } = useParams(); //get role parameter from url
@@ -58,6 +60,9 @@ const UserAccount = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Akun Pengguna | Web Survei Kepuasan</title>
+      </Helmet>
       <div className="flex flex-col w-full">
         <div className="flex justify-end mb-2 ">
           <div className="flex max-w-full">
