@@ -36,7 +36,29 @@ const Router = () => {
       const cookie = cookies[i].trim();
 
       if (cookie.startsWith(`${cookieName}=`)) {
-        return true;
+        // Get the value of the Authorization cookie
+        const token = cookie.substring(cookieName.length + 1);
+
+        // Check if the cookie value is a JWT
+        const parts = token.split(".");
+        if (parts.length === 3) {
+          try {
+            // Decode the JWT header
+            const header = JSON.parse(atob(parts[0]));
+
+            // Check if the decoded header has the required properties for a JWT
+            if (
+              header &&
+              typeof header === "object" &&
+              header.alg &&
+              header.typ
+            ) {
+              return true;
+            }
+          } catch (error) {
+            // Ignore decoding error and continue checking other cookies
+          }
+        }
       }
     }
 
@@ -67,7 +89,10 @@ const Router = () => {
           element={
             isAuthenticated ? (
               <DashboardLayout>
-                {userRole === "ADMIN" ? <HomeAdmin /> : <Home />}
+                {userRole === "ADMIN" && <HomeAdmin />}
+                {(userRole === "MAHASISWA" ||
+                  userRole === "DOSEN" ||
+                  userRole === "ALUMNI") && <Home />}
               </DashboardLayout>
             ) : (
               <Navigate to="/" />
