@@ -96,8 +96,6 @@ const ClassDetails = () => {
     );
   }
 
-  console.log(isFetchClassError);
-
   const { namaDosen, StartDate, endDate, namaKelas, mahasiswa } = data.data;
 
   return (
