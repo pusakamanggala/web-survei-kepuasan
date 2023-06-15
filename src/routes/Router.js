@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/Login";
 import DashboardLayout from "../layout/DashboardLayout";
@@ -28,8 +28,6 @@ import SurveyRecap from "../pages/SurveyRecap";
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
   const { userRole, setUser, survey } = useContext(UserContext);
-  const [isLoading, setIsLoading] = useState(true);
-
   const isAuthorized = () => {
     const cookieName = "Authorization";
 
@@ -77,20 +75,6 @@ const Router = () => {
       setUser(decodedToken.role, decodedToken.userId);
     }
   }, [setUser, isAuthenticated]);
-
-  // wait for userRole to be available
-  useEffect(() => {
-    if (userRole !== "") {
-      setIsLoading(false);
-    }
-  }, [userRole]);
-
-  if (isLoading) {
-    // Render a loading state or a placeholder until userRole is available
-    return (
-      <div className="h-screen bg-gray-100 flex items-center justify-center"></div>
-    );
-  }
 
   return (
     <BrowserRouter>
