@@ -17,15 +17,13 @@ const PageNotFound = () => {
         className="h-1/2 mx-auto "
       />
 
-      <button
-        title="Kembali"
+      <h1
         onClick={() => navigate("/beranda")}
-        className="bg-primary-color w-fit mx-auto p-2 rounded-md shadow-md"
+        className="text-center text-xl  cursor-pointer text-gray-400 underline"
       >
-        <h1 className="text-center font-bold text-xl  cursor-pointer text-white">
-          Go Back
-        </h1>
-      </button>
+        Kembali
+      </h1>
+
       <a
         className="text-center text-sm font-light absolute bottom-2 right-2"
         href="https://www.freepik.com/free-vector/error-404-concept-illustration_7741849.htm#query=404&position=1&from_view=search&track=sph"
