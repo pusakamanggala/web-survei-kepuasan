@@ -139,17 +139,19 @@ const SurveyHistoryDetail = () => {
               <h1 className="md:text-2xl text-lg font-bold text-primary-color mb-4">
                 Indeks Kepuasan : {averageIkm}
               </h1>
-              <ExportSurveyResultButton
-                data={surveyData}
-                fileName={
-                  role === "mahasiswa"
-                    ? `Hasil Survei Kelas ${data.data.namaKelas}`
-                    : `Hasil Survei ${
-                        role.charAt(0).toUpperCase() + role.slice(1)
-                      }`
-                }
-                notify={notify}
-              />
+              {userRole === "ADMIN" && (
+                <ExportSurveyResultButton
+                  data={surveyData}
+                  fileName={
+                    role === "mahasiswa"
+                      ? `Hasil Survei Kelas ${data.data.namaKelas}`
+                      : `Hasil Survei ${
+                          role.charAt(0).toUpperCase() + role.slice(1)
+                        }`
+                  }
+                  notify={notify}
+                />
+              )}
             </div>
           </div>
           <div className="bg-white mb-2 md:flex md:justify-evenly p-2 items-center">
