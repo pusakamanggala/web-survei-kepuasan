@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileExport } from "@fortawesome/free-solid-svg-icons";
 import useNotification from "../hooks/useNotification";
 
-function ExportSurveyRecapButton({ tableIds }) {
+function ExportSurveyRecapButton({ tableIds, fileName }) {
   const notify = useNotification();
 
   const handleExportExcel = () => {
@@ -21,7 +21,7 @@ function ExportSurveyRecapButton({ tableIds }) {
       utils.book_append_sheet(workbook, worksheet, tableId);
     });
     notify("Berhasil mengunduh file", "success", false);
-    writeFile(workbook, "tables.xlsx");
+    writeFile(workbook, `${fileName}.xlsx`);
   };
 
   return (

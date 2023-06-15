@@ -91,13 +91,17 @@ const SurveyRecap = () => {
         </h1>
         {role === "mahasiswa" ? (
           <ExportSurveyRecapButton
-            exportData={surveyRecapData.data}
             tableIds={surveyRecapData.data.map((item) => item.namaDosen)}
+            fileName={`Rekap Survei ${
+              role.charAt(0).toUpperCase() + role.slice(1)
+            }`}
           />
         ) : (
           <ExportSurveyRecapButton
-            exportData={surveyRecapData.data}
-            tableIds={["rekap survei dosen"]}
+            tableIds={[`rekap survei ${role}`]}
+            fileName={`Rekap Survei ${
+              role.charAt(0).toUpperCase() + role.slice(1)
+            }`}
           />
         )}
       </div>
@@ -131,7 +135,7 @@ const SurveyRecap = () => {
                 </div>
                 <div>
                   <table
-                    id="rekap survei dosen"
+                    id={`rekap survei ${role}`}
                     className="table-fixed w-full mb-2"
                   >
                     <thead className="bg-primary-color text-white">

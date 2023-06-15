@@ -141,7 +141,13 @@ const SurveyHistoryDetail = () => {
               </h1>
               <ExportSurveyResultButton
                 data={surveyData}
-                fileName="Hasil Survei"
+                fileName={
+                  role === "mahasiswa"
+                    ? `Hasil Survei Kelas ${data.data.namaKelas}`
+                    : `Hasil Survei ${
+                        role.charAt(0).toUpperCase() + role.slice(1)
+                      }`
+                }
                 notify={notify}
               />
             </div>
