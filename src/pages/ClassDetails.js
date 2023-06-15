@@ -7,7 +7,8 @@ import useDeleteStudentFromClass from "../hooks/useDeleteStudentFromClass";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faUserMinus } from "@fortawesome/free-solid-svg-icons";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
+import useNotification from "../hooks/useNotification";
 
 const ClassDetails = () => {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ const ClassDetails = () => {
     error,
   } = useFetchClassDetails({ id });
 
+  const notify = useNotification();
+
   const handleDeleteStudent = (nim) => {
     if (window.confirm("Apakah anda yakin ingin menghapus mahasiswa ini?")) {
       deleteStudentFromClassMutation.mutate(
@@ -34,11 +37,14 @@ const ClassDetails = () => {
         },
         {
           onSuccess: () => {
-            window.location.reload();
-            alert("Berhasil menghapus mahasiswa dari kelas");
+            notify(`Berhasil menghapus mahasiswa ${nim} dari kelas`, "success");
           },
           onError: () => {
-            alert("Gagal menghapus mahasiswa dari kelas");
+            notify(
+              `Gagal menghapus mahasiswa ${nim} dari kelas`,
+              "error",
+              false
+            );
           },
         }
       );
@@ -89,6 +95,8 @@ const ClassDetails = () => {
       </div>
     );
   }
+
+  console.log(isFetchClassError);
 
   const { namaDosen, StartDate, endDate, namaKelas, mahasiswa } = data.data;
 

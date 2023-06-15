@@ -10,8 +10,8 @@ import {
   faXmark,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { Helmet } from "react-helmet-async";
+import useNotification from "../hooks/useNotification";
 
 const UserAccount = () => {
   const navigate = useNavigate(); //initializes the navigate function provided by the useNavigate hook from the react-router-dom library
@@ -21,6 +21,8 @@ const UserAccount = () => {
 
   const [searchValue, setSearchValue] = useState("");
   const [searchValueAngkatan, setSearchValueAngkatan] = useState("");
+
+  const notify = useNotification();
 
   //function to handle change of user type
   const handleChangeData = (event) => {
@@ -38,13 +40,26 @@ const UserAccount = () => {
   // function to submit the search form
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (searchValue.length < 3) {
+      notify("Kata kunci pencarian minimal terdiri dari 3 karakter", "warning");
+      return;
+    }
     setKeyword(searchValue);
+
     // reset the search value state and keyword state for angkatan search
     setKeywordAngkatan("");
     setSearchValueAngkatan("");
   };
   const handleSubmitAngkatan = (event) => {
     event.preventDefault();
+    if (searchValueAngkatan.length < 4) {
+      notify(
+        "Kata kunci angkatan minimal terdiri dari 4 digit angka",
+        "warning"
+      );
+      return;
+    }
     setKeywordAngkatan(searchValueAngkatan);
     // reset the search value state and keyword state for name/nim/nip search
     setKeyword("");
@@ -76,7 +91,6 @@ const UserAccount = () => {
                   className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
                   type="text"
                   id="search"
-                  minLength={3}
                   placeholder={`Cari ${
                     role === "dosen" ? "NIP" : "NIM"
                   } atau Nama`}
@@ -115,7 +129,6 @@ const UserAccount = () => {
                     className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
                     type="number"
                     id="search"
-                    min={2000}
                     placeholder="Angkatan"
                     value={searchValueAngkatan}
                     onChange={(event) =>

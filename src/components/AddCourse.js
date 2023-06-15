@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import useAddCourse from "../hooks/useAddCourse";
+import useNotification from "../hooks/useNotification";
 
 const AddCourse = (props) => {
   const { setIsShow } = props;
   const [courseName, setCourseName] = useState("");
-
   const addCourseMutation = useAddCourse();
+  const notify = useNotification();
 
   const handleSubmitCourse = (event) => {
     event.preventDefault();
 
     if (!courseName) {
-      alert("Nama Mata Kuliah tidak boleh kosong");
+      notify("Nama mata kuliah tidak boleh kosong", "warning");
+      return;
+    }
+
+    if (courseName.trim() === "" || courseName.trim().length < 3) {
+      notify("Nama mata kuliah minimal terdiri dari 3 karakter", "warning");
       return;
     }
 
@@ -22,6 +28,32 @@ const AddCourse = (props) => {
 
     addCourseMutation.mutate(data);
   };
+
+  // to show error or success notification
+  useEffect(() => {
+    if (addCourseMutation.isError) {
+      const errorMessage = addCourseMutation.error.message;
+      if (errorMessage === `Subject ${courseName} already exists`) {
+        notify(`Mata kuliah ${courseName} sudah terdaftar`, "error", false);
+      } else {
+        notify("Terjadi kesalahan dalam memproses permintaan", "error", false);
+        console.log(errorMessage);
+      }
+      // Set addCourseMutation.isError to false after displaying the notification
+      addCourseMutation.reset();
+    } else if (addCourseMutation.isSuccess) {
+      notify("Berhasil menambahkan mata kuliah", "success");
+      setCourseName("");
+      addCourseMutation.reset();
+    }
+  }, [
+    addCourseMutation.isError,
+    addCourseMutation.error,
+    addCourseMutation.isSuccess,
+    notify,
+    addCourseMutation,
+    courseName,
+  ]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full text-primary-color bg-gray-900 bg-opacity-50 z-40">
@@ -53,15 +85,10 @@ const AddCourse = (props) => {
               Tambah
             </button>
           </div>
-
-          {/* to show response message */}
+          {/* to show loading message */}
           <div className="mt-2 text-center">
-            {addCourseMutation.isLoading && <p>Menambahkan Mata Kuliah...</p>}
-            {addCourseMutation.isError && (
-              <p>Terjadi kesalahan dalam memproses permintaan</p>
-            )}
-            {addCourseMutation.isSuccess && (
-              <p className="text-green-500">Mata kuliah berhasil ditambahkan</p>
+            {addCourseMutation.isLoading && (
+              <p className="text-black">Menambahkan Mata Kuliah...</p>
             )}
           </div>
         </div>

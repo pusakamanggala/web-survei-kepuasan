@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useFillSurvey from "../hooks/useFillSurvey";
 import { Helmet } from "react-helmet-async";
+import useNotification from "../hooks/useNotification";
 
 const FillSurvey = () => {
   const { userRole, survey, userId } = useContext(UserContext);
@@ -12,6 +13,8 @@ const FillSurvey = () => {
   const [answer, setAnswer] = useState([]); // State for opstions answer
   const [essayAnswer, setEssayAnswer] = useState([]); // State for essay answer
   const [allAnswer, setAllAnswer] = useState([]); // State for all answer
+
+  const notify = useNotification();
 
   const fillSurveyMutation = useFillSurvey(userRole);
   // destruc survey
@@ -26,6 +29,8 @@ const FillSurvey = () => {
   useEffect(() => {
     setAllAnswer([...answer, ...essayAnswer]);
   }, [answer, essayAnswer]);
+
+  console.log(allAnswer);
 
   const optionsQuestion = (questionId) => {
     const handleOptionChange = (event) => {
@@ -150,44 +155,61 @@ const FillSurvey = () => {
   };
 
   const handleSubmitSurvei = () => {
-    // Check if allAnswer is empty or contains any empty string or whitespace-only string
     const hasEmptyAnswer =
       allAnswer.length === 0 ||
       allAnswer.some((answer) => {
-        // Check if answer is an object with an empty string or whitespace-only string value
         return Object.values(answer).some(
           (value) => typeof value === "string" && value.trim() === ""
         );
       });
 
-    // Check if the length of pertanyaan and allAnswer is the same
     const hasMismatchedLength = pertanyaan.length !== allAnswer.length;
 
     if (hasEmptyAnswer || hasMismatchedLength) {
-      alert("Isi semua pertanyaan yang ada");
+      notify("Harap isi semua pertanyaan yang ada", "warning");
       return;
     }
 
-    let data = {};
+    // Check essay answer length
+    const hasShortEssayAnswer = allAnswer.some((answer) => {
+      return (
+        answer.hasOwnProperty("essay") &&
+        typeof answer.essay === "string" &&
+        answer.essay.trim().length < 5
+      );
+    });
 
-    if (userRole === "MAHASISWA" || userRole === "ALUMNI") {
-      data = {
-        nim: userId,
-        idSurvei: survey.idSurvei,
-        submissionDate: getCurrentUnixTimestamp(),
-        jawaban: allAnswer,
-      };
-    } else if (userRole === "DOSEN") {
-      data = {
-        nip: userId,
-        idSurvei: survey.idSurvei,
-        submissionDate: getCurrentUnixTimestamp(),
-        jawaban: allAnswer,
-      };
+    if (hasShortEssayAnswer) {
+      notify("Jawaban essai harus memiliki setidaknya 5 karakter", "warning");
+      return;
     }
 
-    // post data using hook
-    fillSurveyMutation.mutate(data);
+    // Ask for confirmation before submitting
+    const shouldSubmit = window.confirm(
+      "Apakah anda yakin ingin mengirim survei? Jawaban anda akan direkam dan tidak dapat diubah setelah dikirm."
+    );
+
+    if (shouldSubmit) {
+      let data = {};
+
+      if (userRole === "MAHASISWA" || userRole === "ALUMNI") {
+        data = {
+          nim: userId,
+          idSurvei: survey.idSurvei,
+          submissionDate: getCurrentUnixTimestamp(),
+          jawaban: allAnswer,
+        };
+      } else if (userRole === "DOSEN") {
+        data = {
+          nip: userId,
+          idSurvei: survey.idSurvei,
+          submissionDate: getCurrentUnixTimestamp(),
+          jawaban: allAnswer,
+        };
+      }
+
+      fillSurveyMutation.mutate(data);
+    }
   };
 
   //get date in unix
@@ -197,15 +219,29 @@ const FillSurvey = () => {
     return unixTimestamp;
   }
 
-  // when user successfully submits the survey
-  if (fillSurveyMutation.isSuccess) {
-    localStorage.removeItem("survey"); // Remove the "survey" key from local storage
+  // to show notification when fill survey mutation is success or error
+  useEffect(() => {
+    if (fillSurveyMutation.isSuccess) {
+      notify("Survei berhasil dikirim", "success");
 
-    // Delay the navigation by 2 seconds
-    setTimeout(() => {
-      navigate("/survei-kepuasan/survei-saya"); // Redirect to dashboard
-    }, 2000);
-  }
+      // reset all state
+      setAllAnswer([]);
+      setEssayAnswer([]);
+      setAnswer([]);
+
+      localStorage.removeItem("survey"); // delete local storage survey data
+      fillSurveyMutation.reset(); // reset mutation state
+
+      // navigate to survei-saya page after 2 seconds
+      setTimeout(() => {
+        navigate("/survei-kepuasan/survei-saya");
+      }, 2000);
+    }
+    if (fillSurveyMutation.isError) {
+      notify("Terjadi kesalahan saat mengirim survei", "error", false);
+      fillSurveyMutation.reset();
+    }
+  }, [fillSurveyMutation, notify]);
 
   return (
     <div className="w-full   p-6">
@@ -256,13 +292,8 @@ const FillSurvey = () => {
       </div>
       {/* show fill survey status */}
       {fillSurveyMutation.isLoading && (
-        <h1 className="text-center text-primary-color font-semibold">
-          Menyimpang jawaban anda...
-        </h1>
-      )}
-      {fillSurveyMutation.isError && (
-        <h1 className="text-center text-secondary-color font-semibold">
-          Terjadi kesalahan saat memproses permintaan !
+        <h1 className="text-center text-black font-semibold">
+          Mengirim jawaban anda...
         </h1>
       )}
       {fillSurveyMutation.isSuccess && (

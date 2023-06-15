@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import useAddQuestion from "../hooks/useAddQuestion";
+import useNotification from "../hooks/useNotification";
 
 const AddQuestion = (props) => {
   const { setIsShow } = props; // to set is show modal or not
@@ -9,14 +10,24 @@ const AddQuestion = (props) => {
   const [question, setQuestion] = useState("");
   const [questionType, setQuestionType] = useState(null);
 
+  const notify = useNotification(); // to show notification
+
   const addQuestionMutation = useAddQuestion(); // to add question using useAddQuestion hook
 
   // to handle submit question
   const handleSumbtiQuestion = (event) => {
     event.preventDefault();
-    // question cannot be empty before submit
-    if (!question || !questionType) {
-      alert("Harap isi semua field");
+    // form cannot be empty before submit
+    if (question.trim().length === 0 || !questionType) {
+      notify("Pertanyaan dan jenis pertanyaan tidak boleh kosong", "warning");
+      return;
+    }
+    // question must have length between 10 and 200
+    if (question.trim().length < 10 || question.trim().length > 200) {
+      notify(
+        "Pertanyaan harus memiliki panjang 10 sampai 200 karakter",
+        "warning"
+      );
       return;
     }
     // data to add question
@@ -30,11 +41,20 @@ const AddQuestion = (props) => {
     };
     // sending data using addQuestionMutation
     addQuestionMutation.mutate(data);
-
-    // reset question and question type value
-    setQuestion("");
-    setQuestionType(null);
   };
+
+  useEffect(() => {
+    if (addQuestionMutation.isSuccess) {
+      notify("Berhasil menambahkan pertanyaan", "success", false);
+      setQuestion("");
+      setQuestionType(null);
+      addQuestionMutation.reset();
+    }
+    if (addQuestionMutation.isError) {
+      notify("Terjadi kesalahan dalam memproses permintaan", "error", false);
+      addQuestionMutation.reset();
+    }
+  }, [addQuestionMutation, notify, setIsShow]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full text-primary-color bg-gray-900 bg-opacity-50 z-40">
@@ -82,7 +102,9 @@ const AddQuestion = (props) => {
             <button
               title="Batal"
               className="font-bold py-2 px-4 rounded mr-2 text-white bg-primary-color hover:bg-secondary-color"
-              onClick={() => setIsShow(false)}
+              onClick={() => {
+                setIsShow(false);
+              }}
             >
               Batal
             </button>
@@ -96,12 +118,10 @@ const AddQuestion = (props) => {
           </div>
           {/* to show response message */}
           <div className="mt-4 text-center">
-            {addQuestionMutation.isLoading && <p>Menambahkan Pertanyaan...</p>}
-            {addQuestionMutation.isError && (
-              <p>Terjadi kesalahan dalam memproses permintaan</p>
-            )}
-            {addQuestionMutation.isSuccess && (
-              <p className="text-green-500">Pertanyaan berhasil ditambahkan</p>
+            {addQuestionMutation.isLoading && (
+              <p className="text-black font-semibold">
+                Menambahkan pertanyaan...
+              </p>
             )}
           </div>
         </div>

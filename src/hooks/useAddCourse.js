@@ -9,9 +9,14 @@ function useAddCourse() {
       },
       body: JSON.stringify(course),
       credentials: "include",
-    }).then((res) => {
+    }).then(async (res) => {
       if (!res.ok) {
-        throw new Error("Failed to add course");
+        let errorMessage = "Failed to add course";
+        const responseJson = await res.json();
+        if (responseJson && responseJson.message) {
+          errorMessage = responseJson.message;
+        }
+        throw new Error(errorMessage);
       }
       return res.json();
     })

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useLogin from "../hooks/useLogin";
 import { Helmet } from "react-helmet-async";
+import useNotification from "../hooks/useNotification";
 
 function Login() {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [selectedRole, setSelectedRole] = useState("mahasiswa");
   const loginMutation = useLogin(selectedRole);
+  const notify = useNotification();
 
   // to post the login data
   const handleLogin = (event) => {
@@ -19,7 +21,7 @@ function Login() {
     };
 
     if (!userId || !password || !selectedRole)
-      return alert("NIM/NIP atau Password tidak boleh kosong");
+      return notify("Masukan akun anda", "warning");
 
     // Call the login mutation
     loginMutation.mutate(formData); // Pass the role and form data
@@ -41,9 +43,36 @@ function Login() {
     }; expires=${expirationDate.toUTCString()}; Domain=${
       process.env.REACT_APP_COOKIE_DOMAIN
     }; Path=/; SameSite=None; Secure`;
-
-    window.location.reload();
   }
+
+  useEffect(() => {
+    // If the login is error, show the error message
+    if (loginMutation.isError) {
+      if (loginMutation.error.message === "wrong username or password") {
+        let errorMessage = "NIM/NIP atau Password salah";
+
+        if (selectedRole === "admin") {
+          errorMessage = "Username atau Password salah";
+        } else if (selectedRole === "dosen") {
+          errorMessage = "NIP atau Password salah";
+        } else if (selectedRole === "mahasiswa" || selectedRole === "alumni") {
+          errorMessage = "NIM atau Password salah";
+        }
+
+        notify(errorMessage, "error", false);
+      } else if (loginMutation.error.message === "Failed to fetch") {
+        notify("Terjadi kesalahan saat memproses permintaan", "error", false);
+      }
+      loginMutation.reset();
+    }
+
+    if (loginMutation.isSuccess) {
+      notify("Berhasil login", "success");
+      setPassword("");
+      setUserId("");
+      loginMutation.reset();
+    }
+  }, [loginMutation, notify, selectedRole]);
 
   return (
     <>
@@ -79,7 +108,11 @@ function Login() {
                 id="role"
                 className="border-2  p-2 w-full rounded-md "
                 value={selectedRole}
-                onChange={(event) => setSelectedRole(event.target.value)}
+                onChange={(event) => {
+                  setSelectedRole(event.target.value);
+                  setPassword("");
+                  setUserId("");
+                }}
               >
                 <option value="admin">Admin</option>
                 <option value="mahasiswa">Mahasiswa</option>
@@ -99,7 +132,6 @@ function Login() {
                 type={selectedRole !== "admin" ? "number" : "text"}
                 id="userId"
                 autoComplete="off"
-                required
                 className="border-2  p-2 w-full rounded-md"
                 value={userId}
                 onChange={(event) => setUserId(event.target.value)}
@@ -114,7 +146,6 @@ function Login() {
                 id="password"
                 className="border-2  p-2 w-full rounded-md"
                 value={password}
-                required
                 onChange={(event) => setPassword(event.target.value)}
                 autoComplete="off"
               />
@@ -131,15 +162,8 @@ function Login() {
           </form>
           {/* login status */}
           <div className="text-center font-semibold">
-            {loginMutation.isError && (
-              <h1 className="text-primary-color mt-2">
-                {loginMutation.error.message === "wrong username or password"
-                  ? "NIM/NIP atau Password Salah"
-                  : "Terjadi kesalahan saat memproses permintaan"}
-              </h1>
-            )}
             {loginMutation.isLoading && (
-              <h1 className="text-primary-color mt-2">Mencoba untuk login</h1>
+              <h1 className="text-black mt-2">Mencoba untuk login...</h1>
             )}
           </div>
         </div>

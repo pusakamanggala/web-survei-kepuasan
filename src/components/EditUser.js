@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import useUpdateUser from "../hooks/useUpdateUser";
+import useNotification from "../hooks/useNotification";
 
 const EditUser = (props) => {
   const { setIsShow, userData, role } = props;
+
+  const notify = useNotification();
 
   // to store user data
   const [nama, setNama] = useState("");
@@ -44,8 +47,16 @@ const EditUser = (props) => {
 
     // check if nama is empty
     if (!nama) {
-      alert("Nama tidak boleh kosong");
+      notify("Nama tidak boleh kosong", "warning");
       return;
+    }
+
+    // check if angkatan mahasiswa is empty
+    if (role === "mahasiswa") {
+      if (!angkatan) {
+        notify("Angkatan tidak boleh kosong", "warning");
+        return;
+      }
     }
 
     // set data based on role
@@ -87,12 +98,18 @@ const EditUser = (props) => {
     }
   };
 
-  // Reload page after 2 seconds when the update is successful
-  if (updateUserMutation.isSuccess) {
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
-  }
+  // to show notification when update is success or error
+  useEffect(() => {
+    if (updateUserMutation.isError) {
+      notify(`Gagal memperbarui data ${role}`, "error", false);
+      updateUserMutation.reset();
+    }
+
+    if (updateUserMutation.isSuccess) {
+      notify(`Berhasil memperbarui data ${role}`, "success");
+      updateUserMutation.reset();
+    }
+  }, [updateUserMutation.isError, notify, role, setIsShow, updateUserMutation]);
 
   return (
     <div className="fixed top-0 left-0 w-full h-full  bg-gray-900 bg-opacity-50 z-40">
@@ -259,21 +276,6 @@ const EditUser = (props) => {
               <h1 className="mt-4 text-secondary-color">
                 Memproses Permintaan ....
               </h1>
-            )}
-            {updateUserMutation.isError && (
-              <h1 className="mt-4 text-primary-color">
-                Terjadi kesalahan saat memproses permintaan !
-              </h1>
-            )}
-            {updateUserMutation.isSuccess && (
-              <>
-                <h1 className="text-green-500 mt-4 ">
-                  Berhasil memperbarui pengguna
-                </h1>
-                <h1 className="text-green-500 text-xs">
-                  Memuat ulang halaman dalam 2 detik...
-                </h1>
-              </>
             )}
           </div>
         </div>

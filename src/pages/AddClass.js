@@ -8,6 +8,7 @@ import useAddClass from "../hooks/useAddClass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
+import useNotification from "../hooks/useNotification";
 
 const AddClass = () => {
   const navigate = useNavigate();
@@ -22,6 +23,8 @@ const AddClass = () => {
   const [courseSearchValue, setCourseSearchValue] = useState("");
   const [course, setCourse] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("");
+
+  const notify = useNotification();
 
   const addClassMutation = useAddClass();
 
@@ -52,7 +55,21 @@ const AddClass = () => {
     event.preventDefault();
 
     if (!namaKelas || !endDate || !selectedNip || !selectedCourse) {
-      alert("Semua field harus diisi");
+      notify("Isi semua formulir terlebih dahulu", "warning");
+      return;
+    }
+
+    if (namaKelas.length < 3) {
+      notify("Nama kelas minimal 3 karakter", "warning");
+      return;
+    }
+
+    // display a confirmation dialog
+    const confirmed = window.confirm(
+      "Apakah anda yakin ingin menambahkan kelas ini?. Kelas tidak bisa dihapus atau diperbarui setelah ditambahkan"
+    );
+
+    if (!confirmed) {
       return;
     }
 
@@ -97,28 +114,48 @@ const AddClass = () => {
     }
   }, [namaDosen, refetchDosen]);
 
-  if (addClassMutation.isLoading) {
-    return <p>Loading...</p>;
-  }
+  // if (addClassMutation.isLoading) {
+  //   return <p>Loading...</p>;
+  // }
 
-  if (addClassMutation.isError) {
-    return <p>Error...</p>;
-  }
+  // if (addClassMutation.isError) {
+  //   return <p>Error...</p>;
+  // }
 
-  if (addClassMutation.isSuccess) {
-    setTimeout(() => {
-      window.location.reload(); // reload the page
-    }, 5000); // set timeout to 5 seconds
+  // if (addClassMutation.isSuccess) {
+  //   setTimeout(() => {
+  //     window.location.reload(); // reload the page
+  //   }, 5000); // set timeout to 5 seconds
 
-    return (
-      <div className="text-green-500 font-bold text-xl ml-2 capitalize">
-        <h1>Kelas Berhasil Ditambahkan</h1>
-        <p className="text-black font-normal text-base">
-          Anda akan dialihkan dalam 5 detik
-        </p>
-      </div>
-    );
-  }
+  //   return (
+  //     <div className="text-green-500 font-bold text-xl ml-2 capitalize">
+  //       <h1>Kelas Berhasil Ditambahkan</h1>
+  //       <p className="text-black font-normal text-base">
+  //         Anda akan dialihkan dalam 5 detik
+  //       </p>
+  //     </div>
+  //   );
+  // }
+
+  useEffect(() => {
+    if (addClassMutation.isError) {
+      notify("Gagal menambahkan kelas", "error", false);
+      addClassMutation.reset();
+    }
+    if (addClassMutation.isSuccess) {
+      notify(`Kelas ${namaKelas} berhasil ditambahkan`, "success", false);
+      setNamaDosen("");
+      setSelectedNamaDosen("");
+      setSelectedNip("");
+      setNamaKelas("");
+      setEndDate("");
+      setCourse("");
+      setSelectedCourse("");
+      setDosenSearchValue("");
+      setCourseSearchValue("");
+      addClassMutation.reset();
+    }
+  }, [addClassMutation.isError, notify, addClassMutation, namaKelas]);
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
@@ -139,6 +176,7 @@ const AddClass = () => {
             id="namaKelas"
             name="namaKelas"
             required
+            maxLength={30}
             placeholder="Ex : Kalkulus - A"
             value={namaKelas}
             autoComplete="off"
@@ -212,13 +250,19 @@ const AddClass = () => {
           )}
         </div>
         {/* Show Dosen Name */}
-        {isLoadingDosen && <div>Loading....</div>}
-        {isErrorDosen && <div>Error....</div>}
+        {isLoadingDosen && (
+          <h1 className="font-semibold mt-2">Memuat dosen...</h1>
+        )}
+        {isErrorDosen && (
+          <h1 className="font-semibold mt-2 text-primary-color">
+            Terjadi kesalahan saat memproses permintaan.
+          </h1>
+        )}
         {isSuccessDosen && (
           <div className="mt-2">
             {lecturerData &&
             lecturerData.message === "There is no record with that query" ? (
-              <div className="mt-2 text-primary-color">
+              <div className="mt-2 text-primary-color font-semibold">
                 Dosen tidak ditemukan
               </div>
             ) : (
@@ -290,13 +334,19 @@ const AddClass = () => {
           )}
         </div>
         {/* Show Course Name */}
-        {isLoadingCourse && <div>Loading....</div>}
-        {isErrorCourse && <div>Error....</div>}
+        {isLoadingCourse && (
+          <h1 className="font-semibold mt-2">Memuat mata kuliah...</h1>
+        )}
+        {isErrorCourse && (
+          <h1 className="font-semibold mt-2 text-primary-color">
+            Terjadi kesalahan saat memproses permintaan.
+          </h1>
+        )}
         {isSuccessCourse && (
           <div className="mt-2">
             {courseData &&
             courseData.message === "There is no record with that query" ? (
-              <div className="mt-2 text-primary-color">
+              <div className="mt-2 text-primary-color font-semibold">
                 Mata kuliah tidak ditemukan
               </div>
             ) : (
@@ -345,6 +395,11 @@ const AddClass = () => {
           Submit
         </button>
       </div>
+      {addClassMutation.isLoading && (
+        <h1 className="font-semibold mt-2 text-center">
+          Sedang menambahkan kelas...
+        </h1>
+      )}
     </div>
   );
 };

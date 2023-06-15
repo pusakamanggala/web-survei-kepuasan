@@ -2,8 +2,11 @@ import React from "react";
 import { utils, writeFile } from "xlsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileExport } from "@fortawesome/free-solid-svg-icons";
+import useNotification from "../hooks/useNotification";
 
 function ExportSurveyRecapButton({ tableIds }) {
+  const notify = useNotification();
+
   const handleExportExcel = () => {
     const workbook = utils.book_new();
 
@@ -17,7 +20,7 @@ function ExportSurveyRecapButton({ tableIds }) {
       const worksheet = utils.table_to_sheet(tableElement);
       utils.book_append_sheet(workbook, worksheet, tableId);
     });
-
+    notify("Berhasil mengunduh file", "success", false);
     writeFile(workbook, "tables.xlsx");
   };
 

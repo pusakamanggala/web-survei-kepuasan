@@ -7,6 +7,7 @@ import useAddSurvei from "../hooks/useAddSurvei";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
+import useNotification from "../hooks/useNotification";
 
 const AddSurvey = () => {
   const [surveyTitle, setSurveyTitle] = useState("");
@@ -19,6 +20,8 @@ const AddSurvey = () => {
   const [classKeyword, setClassKeyword] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+
+  const notify = useNotification();
 
   // to add survey using useAddSurvei hook
   const addSurveiMutation = useAddSurvei();
@@ -124,12 +127,17 @@ const AddSurvey = () => {
         !startDate ||
         !endDate
       ) {
-        alert("Mohon isi semua field");
+        notify("Mohon isi semua bidang masukan yang ada", "warning");
+        return;
+      }
+
+      if (surveyTitle.trim().length < 20) {
+        notify("Judul survei minimal 20 karakter", "warning");
         return;
       }
 
       const data = {
-        judulSurvei: surveyTitle,
+        judulSurvei: surveyTitle.trim(),
         detailSurvei: surveyDetail,
         idTemplate: surveyTemplatesId,
         periode: surveyPeriod,
@@ -154,12 +162,17 @@ const AddSurvey = () => {
         !startDate ||
         !endDate
       ) {
-        alert("Mohon isi semua field");
+        notify("Mohon isi semua bidang masukan yang ada", "warning");
+        return;
+      }
+
+      if (surveyTitle.trim().length < 20) {
+        notify("Judul survei minimal 20 karakter", "warning");
         return;
       }
 
       const data = {
-        judulSurvei: surveyTitle,
+        judulSurvei: surveyTitle.trim(),
         detailSurvei: surveyDetail,
         idTemplate: surveyTemplatesId,
         periode: surveyPeriod,
@@ -199,6 +212,11 @@ const AddSurvey = () => {
     setStartDate("");
     setEndDate("");
     setSurveyClass("");
+    setSurveyTitle("");
+    setSurveyDetail("");
+    setClassKeyword("");
+    setSurveyClass("");
+    setClassSearchValue("");
   };
 
   // to refetch class data when classKeyword is changed and not empty
@@ -225,6 +243,31 @@ const AddSurvey = () => {
       setSurveyClass("");
     }
   }, [addSurveiMutation.isSuccess]);
+
+  // to show notification when add survey mutation is error or success
+  useEffect(() => {
+    if (addSurveiMutation.isError) {
+      notify("Terjadi kesalahan saat menambahkan survei", "error", false);
+      addSurveiMutation.reset(); // reset add survey mutation
+    }
+    if (addSurveiMutation.isSuccess) {
+      notify("Survei berhasil ditambahkan", "success", false);
+
+      // reset all data
+      setSurveyTemplatesId("");
+      setSurveyPeriod("");
+      setStartDate("");
+      setEndDate("");
+      setSurveyClass("");
+      setSurveyTitle("");
+      setSurveyDetail("");
+      setClassKeyword("");
+      setSurveyClass("");
+      setClassSearchValue("");
+
+      addSurveiMutation.reset(); // reset add survey mutation
+    }
+  }, [addSurveiMutation, notify]);
 
   return (
     <div>
@@ -330,8 +373,16 @@ const AddSurvey = () => {
           Pilih Template Survei :
         </label>
         {/* show survey template data*/}
-        {isTemplateLoading && <div>Loading...</div>}
-        {isTemplateError && <div>Error...</div>}
+        {isTemplateLoading && (
+          <h1 className="text-black font-semibold">
+            Memuat template survei...
+          </h1>
+        )}
+        {isTemplateError && (
+          <h1 className="text-primary-color font-semibold">
+            Terjadi kesalahan saat memuat template survei
+          </h1>
+        )}
         <div className="grid md:grid-cols-2 md:gap-4 gap-2">
           {surveyTemplateData &&
             surveyTemplateData.data.map((template, index) => (
@@ -383,13 +434,13 @@ const AddSurvey = () => {
           </div>
           {/* show search result */}
           {isClassLoading && (
-            <div className="ml-2 text-primary-color font-semibold">
+            <div className="ml-2 text-black font-semibold">
               Mencari Kelas....
             </div>
           )}
           {isClassError && (
             <div className="ml-2 text-primary-color font-semibold">
-              Terjadi kesalahan saat memproses permintaan
+              Terjadi kesalahan saat memuat kelas
             </div>
           )}
           {isClassSuccess && (
@@ -442,18 +493,8 @@ const AddSurvey = () => {
 
       {/* show add survei process message */}
       {addSurveiMutation.isLoading && (
-        <div className="text-primary-color font-bold mb-3 text-center">
+        <div className="text-black font-bold mb-3 text-center">
           Sedang menyimpan survey...
-        </div>
-      )}
-      {addSurveiMutation.isError && (
-        <div className="text-primary-color font-bold mb-3 text-center">
-          Terjadi kesalahan saat memproses permintaan
-        </div>
-      )}
-      {addSurveiMutation.isSuccess && (
-        <div className="text-green-500 font-bold mb-3 text-center">
-          Survei berhasil ditambahkan
         </div>
       )}
     </div>

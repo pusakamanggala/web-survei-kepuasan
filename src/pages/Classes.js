@@ -8,11 +8,14 @@ import AddCourse from "../components/AddCourse";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
+import useNotification from "../hooks/useNotification";
 
 const Classes = () => {
   const [keyword, setKeyword] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
+
+  const notify = useNotification();
 
   // Pagination state
   const [pageNumber, setPageNumber] = useState(1);
@@ -60,6 +63,10 @@ const Classes = () => {
   // to submit the search form
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (searchValue.length < 3) {
+      notify("Kata kunci pencarian minimal terdiri dari 3 karakter", "warning");
+      return;
+    }
     setKeyword(event.target.search.value);
   };
 
@@ -81,7 +88,6 @@ const Classes = () => {
               className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
               type="text"
               id="search"
-              minLength={3}
               placeholder="Cari Kelas"
               value={searchValue}
               onChange={(event) => setSearchValue(event.target.value)}

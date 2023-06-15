@@ -7,9 +7,12 @@ import AddQuestion from "../components/AddQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
+import useNotification from "../hooks/useNotification";
 
 const AddSurveyTemplate = () => {
   const navigate = useNavigate();
+
+  const notify = useNotification();
 
   // to store survey template data
   const [surveiName, setSurveiName] = useState("");
@@ -55,7 +58,7 @@ const AddSurveyTemplate = () => {
     event.preventDefault();
 
     if (!surveiName || !role || !selectedQuestionsId.length) {
-      alert("Harap isi semua field");
+      notify("Mohon isi semua bidang masukan yang ada", "warning");
       return;
     }
     // confirm before submit
@@ -74,32 +77,68 @@ const AddSurveyTemplate = () => {
   // to search questions
   const handleSearchQuestion = (event) => {
     event.preventDefault();
+    // check if keyword is empty or less than 3 character
+    if (questionSearchValue.trim().length < 3) {
+      notify("Kata kunci pencarian minimal terdiri dari 3 karakter", "warning");
+      return;
+    }
     setQuestionKeyword(questionSearchValue);
   };
 
+  // get questions id from selectedQuestions
+  useEffect(() => {
+    if (selectedQuestions.length) {
+      const questionsId = selectedQuestions.map((question) => question.id);
+      setSelectedQuestionsId(questionsId);
+    }
+  }, [selectedQuestions]);
+
   // to select questions
-  const handleSelectQuestions = (questionId) => {
+  const handleSelectQuestions = (question) => {
     setSelectedQuestions((prevSelected) => {
-      const isSelected = prevSelected.includes(questionId);
+      const isSelected = prevSelected.some(
+        (selectedQuestion) =>
+          selectedQuestion.id === question.id_pertanyaan_survei
+      );
+
       if (isSelected) {
-        return prevSelected.filter((id) => id !== questionId);
+        return prevSelected.filter(
+          (selectedQuestion) =>
+            selectedQuestion.id !== question.id_pertanyaan_survei
+        );
       } else {
-        return [...prevSelected, questionId];
+        return [
+          ...prevSelected,
+          {
+            id: question.id_pertanyaan_survei,
+            pertanyaan: question.pertanyaan,
+          },
+        ];
       }
     });
   };
 
-  // to select questions id
-  const handleSelectQuestionsId = (questionId) => {
-    setSelectedQuestionsId((prevSelected) => {
-      const isSelected = prevSelected.includes(questionId);
-      if (isSelected) {
-        return prevSelected.filter((id) => id !== questionId);
-      } else {
-        return [...prevSelected, questionId];
-      }
-    });
-  };
+  // to show notification when add survey template mutation is success or error
+  useEffect(() => {
+    if (addSurveyTemplateMutation.isSuccess) {
+      notify("Template survei berhasil ditambahkan", "success", false);
+      setQuestionKeyword(null);
+      setQuestionSearchValue("");
+      setSurveiName("");
+      setSelectedQuestionsId([]);
+      setSelectedQuestions([]);
+      setQuestionAutoFetch(false);
+      addSurveyTemplateMutation.reset();
+    }
+    if (addSurveyTemplateMutation.isError) {
+      notify(
+        "Terjadi kesalahan saat menambahkan template survei",
+        "error",
+        false
+      );
+      addSurveyTemplateMutation.reset();
+    }
+  }, [addSurveyTemplateMutation, notify]);
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -120,7 +159,6 @@ const AddSurveyTemplate = () => {
             id="surveiName"
             name="surveiName"
             placeholder="Ex : Template Pertanyaan Survei Kepuasan Dosen 2023"
-            required
             value={surveiName}
             autoComplete="off"
             onChange={(event) => setSurveiName(event.target.value)}
@@ -162,13 +200,11 @@ const AddSurveyTemplate = () => {
               className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
               type="text"
               id="search"
-              minLength={3}
               value={questionSearchValue}
               placeholder="Cari Pertanyaan"
               onChange={(event) => {
                 setQuestionSearchValue(event.target.value);
               }}
-              required
             />
           </form>
           {questionSearchValue && (
@@ -238,43 +274,41 @@ const AddSurveyTemplate = () => {
                       }
                       // click card to add or remove question
                       onClick={() => {
-                        handleSelectQuestionsId(question.id_pertanyaan_survei);
-                        handleSelectQuestions(question.pertanyaan);
+                        // handleSelectQuestionsId(question.id_pertanyaan_survei);
+                        handleSelectQuestions(question);
                       }}
                     />
                   ))}
                 </div>
-                {selectedQuestionsId.length > 0 &&
-                  selectedQuestions.length > 0 && (
-                    <h1 className="text-sm text-slate-500 mt-4">
-                      Pertanyaan Terplih
-                    </h1>
-                  )}
-
-                {/* show selected questions */}
-                <div className="flex justify-between">
-                  <div>
-                    {selectedQuestions.map((question, index) => (
-                      <h1 key={index}>{`${index + 1}. ${question}`}</h1>
-                    ))}
-                  </div>
-                  {/* clear questions button */}
-                  {selectedQuestionsId.length > 0 &&
-                    selectedQuestions.length > 0 && (
-                      <button
-                        title="Hapus semua pertanyaan terpilih"
-                        className="font-bold h-fit py-2 px-4 rounded text-white bg-primary-color hover:bg-secondary-color"
-                        onClick={() => {
-                          setSelectedQuestionsId([]);
-                          setSelectedQuestions([]);
-                        }}
-                      >
-                        Hapus Semua
-                      </button>
-                    )}
-                </div>
               </>
             )}
+            {selectedQuestionsId.length > 0 && selectedQuestions.length > 0 && (
+              <h1 className="text-sm text-slate-500 mt-4">
+                Pertanyaan Terplih
+              </h1>
+            )}
+            {/* show selected questions */}
+            <div className="flex justify-between">
+              <div>
+                {selectedQuestions.map((question, index) => (
+                  <h1 key={index}>{`${index + 1}. ${question.pertanyaan}`}</h1>
+                ))}
+              </div>
+              {/* clear questions button */}
+              {selectedQuestionsId.length > 0 &&
+                selectedQuestions.length > 0 && (
+                  <button
+                    title="Hapus semua pertanyaan terpilih"
+                    className="font-bold h-fit py-2 px-4 rounded text-white bg-primary-color hover:bg-secondary-color"
+                    onClick={() => {
+                      setSelectedQuestionsId([]);
+                      setSelectedQuestions([]);
+                    }}
+                  >
+                    Hapus Semua
+                  </button>
+                )}
+            </div>
           </div>
         )}
       </div>
@@ -302,21 +336,8 @@ const AddSurveyTemplate = () => {
       )}
       {/* submit template proccess */}
       {addSurveyTemplateMutation.isLoading && (
-        <div className="text-center text-primary-color text-lg font-semibold">
-          Menyimpan Template Survei....
-        </div>
-      )}
-      {addSurveyTemplateMutation.isError && (
-        <div className="text-center text-primary-color text-lg font-semibold">
-          Terjadi Kesalahan Saat Memproses Permintaan
-        </div>
-      )}
-      {addSurveyTemplateMutation.isSuccess && (
-        <div>
-          <h1 className="text-lg font-semibold text-green-600">
-            Template Survei Berhasil Disimpan
-          </h1>
-          {setTimeout(() => window.location.reload(), 5000)}
+        <div className="text-center text-black font-semibold">
+          Menyimpan template survei....
         </div>
       )}
     </div>

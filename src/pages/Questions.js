@@ -4,11 +4,14 @@ import AddQuestion from "../components/AddQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
+import useNotification from "../hooks/useNotification";
 
 const Questions = () => {
   // to store search value and keyword
   const [questionKeyword, setQuestionKeyword] = useState("");
   const [searchValue, setSearchValue] = useState("");
+
+  const notify = useNotification();
 
   // to store add question modal state
   const [showAddQuestionModal, setShowAddQuestionModal] = useState(false);
@@ -18,6 +21,7 @@ const Questions = () => {
     data: questionData,
     isLoading: isQuestionLoading,
     isError: isQuestionError,
+    isSuccess: isQuestionSuccess,
   } = useFetchQuestionByName({
     keyword: questionKeyword,
   });
@@ -25,6 +29,13 @@ const Questions = () => {
   // to handle search question
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    // if search value is less than 3 characters, show warning notification
+    if (searchValue.length < 3) {
+      notify("Kata kunci pencarian minimal terdiri dari 3 karakter", "warning");
+      return;
+    }
+
     setQuestionKeyword(searchValue);
   };
 
@@ -44,7 +55,6 @@ const Questions = () => {
               className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
               type="text"
               id="search"
-              minLength={3}
               placeholder="Cari Pertanyaan"
               value={searchValue}
               onChange={(event) => setSearchValue(event.target.value)}
@@ -76,16 +86,22 @@ const Questions = () => {
             + Tambah Pertanyaan
           </h1>
         </button>
-
         {/* show add question modal */}
         {showAddQuestionModal && (
           <AddQuestion setIsShow={setShowAddQuestionModal} />
         )}
       </div>
-      {isQuestionLoading && <h1>Loading...</h1>}
-      {isQuestionError && <h1>Error...</h1>}
+      {isQuestionLoading && (
+        <h1 className="font-semibold">Memuat pertanyaan...</h1>
+      )}
+      {isQuestionError && (
+        <h1 className="text-primary-color font-semibold">
+          Terjadi kesalahan saat memproses permintaan.
+        </h1>
+      )}
       <div className="grid gap-2 md:grid-cols-2 md:gap-3 ">
-        {questionData && questionData.data ? (
+        {isQuestionSuccess &&
+          questionData.data &&
           questionData.data.map(({ pertanyaan, tipe }, index) => (
             <div
               key={index}
@@ -96,10 +112,13 @@ const Questions = () => {
                 Tipe: <span className="lowercase">{tipe}</span>
               </h1>
             </div>
-          ))
-        ) : (
-          <h1>Data tidak ada</h1>
-        )}
+          ))}
+        {isQuestionSuccess &&
+          questionData.message === "There is no record with that query" && (
+            <h1 className="text-primary-color font-semibold">
+              Pertanyaan tidak ditemukan.
+            </h1>
+          )}
       </div>
     </div>
   );
