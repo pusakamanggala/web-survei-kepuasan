@@ -45,9 +45,7 @@ const Sidebar = () => {
       <div className="h-full overflow-y-auto pb-12">
         <NavLink
           to="/beranda"
-          className={({ isActive }) =>
-            isActive ? "active" : "inActive hover:bg-red-500"
-          }
+          className={({ isActive }) => (isActive ? "active" : "inActive")}
         >
           <FontAwesomeIcon icon={faHouse} className="w-5 h-5 mr-4" />
           <h1>Beranda</h1>
@@ -57,9 +55,7 @@ const Sidebar = () => {
           userRole === "DOSEN") && (
           <NavLink
             to="/profil"
-            className={({ isActive }) =>
-              isActive ? "active" : "inActive hover:bg-red-500"
-            }
+            className={({ isActive }) => (isActive ? "active" : "inActive")}
           >
             <FontAwesomeIcon icon={faUser} className="w-5 h-5 mr-4" />
             <h1>Profil Saya</h1>
@@ -77,7 +73,7 @@ const Sidebar = () => {
                 location.pathname === "/pengguna/tambah/alumni" ||
                 location.pathname === "/pengguna/tambah/dosen"
                   ? "active"
-                  : "inActive hover:bg-red-500"
+                  : "inActive"
               }
             >
               <FontAwesomeIcon icon={faUsers} className="w-5 h-5 mr-4" />
@@ -85,9 +81,7 @@ const Sidebar = () => {
             </NavLink>
             <NavLink
               to="/kelas"
-              className={({ isActive }) =>
-                isActive ? "active" : "inActive hover:bg-red-500"
-              }
+              className={({ isActive }) => (isActive ? "active" : "inActive")}
             >
               <FontAwesomeIcon
                 icon={faChalkboardTeacher}
@@ -100,7 +94,7 @@ const Sidebar = () => {
         <button
           title="Survei Kepuasan"
           type="button"
-          className="p-5 flex w-full items-center relative hover:bg-red-500"
+          className="p-5 flex w-full items-center relative hover:bg-red-500 hover:rounded-lg"
           onClick={() => setSubMenu(!subMenu)}
         >
           <FontAwesomeIcon icon={faClipboardList} className="w-5 h-5 mr-4" />
@@ -117,27 +111,21 @@ const Sidebar = () => {
           <div className={`px-3 ${subMenu ? "" : "hidden"}`}>
             <NavLink
               to="/survei-kepuasan/pertanyaan"
-              className={({ isActive }) =>
-                isActive ? "active" : "inActive hover:bg-red-500"
-              }
+              className={({ isActive }) => (isActive ? "active" : "inActive")}
             >
               <FontAwesomeIcon icon={faComment} className="w-5 h-5 mr-4" />
               <h1>Pertanyaan Survei</h1>
             </NavLink>
             <NavLink
               to="/survei-kepuasan/template-survei"
-              className={({ isActive }) =>
-                isActive ? "active" : "inActive hover:bg-red-500"
-              }
+              className={({ isActive }) => (isActive ? "active" : "inActive")}
             >
               <FontAwesomeIcon icon={faComments} className="w-5 h-5 mr-4" />
               <h1>Template Survei</h1>
             </NavLink>
             <NavLink
               to="/survei-kepuasan/tambah-survei"
-              className={({ isActive }) =>
-                isActive ? "active" : "inActive hover:bg-red-500"
-              }
+              className={({ isActive }) => (isActive ? "active" : "inActive")}
             >
               <FontAwesomeIcon
                 icon={faFileCirclePlus}
@@ -147,9 +135,7 @@ const Sidebar = () => {
             </NavLink>
             <NavLink
               to="/survei-kepuasan/laporan-survei"
-              className={({ isActive }) =>
-                isActive ? "active" : "inActive hover:bg-red-500"
-              }
+              className={({ isActive }) => (isActive ? "active" : "inActive")}
             >
               <FontAwesomeIcon
                 icon={faFileCircleCheck}
@@ -166,18 +152,14 @@ const Sidebar = () => {
           <div className={`px-3 ${subMenu ? "" : "hidden"}`}>
             <NavLink
               to="/survei-kepuasan/survei-saya"
-              className={({ isActive }) =>
-                isActive ? "active" : "inActive hover:bg-red-500"
-              }
+              className={({ isActive }) => (isActive ? "active" : "inActive")}
             >
               <FontAwesomeIcon icon={faFile} className="w-5 h-5 mr-4" />
               <h1>Survei Saya</h1>
             </NavLink>
             <NavLink
               to="/survei-kepuasan/riwayat-survei"
-              className={({ isActive }) =>
-                isActive ? "active" : "inActive hover:bg-red-500"
-              }
+              className={({ isActive }) => (isActive ? "active" : "inActive")}
             >
               <FontAwesomeIcon
                 icon={faClockRotateLeft}
@@ -192,7 +174,7 @@ const Sidebar = () => {
         <button
           title="Keluar"
           type="button"
-          className="p-5 flex w-full items-center hover:bg-red-500"
+          className="p-5 flex w-full items-center"
           onClick={handleSignOut}
         >
           <FontAwesomeIcon
