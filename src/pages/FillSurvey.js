@@ -241,7 +241,7 @@ const FillSurvey = () => {
       notify("Terjadi kesalahan saat mengirim survei", "error", false);
       fillSurveyMutation.reset();
     }
-  }, [fillSurveyMutation, notify]);
+  }, [fillSurveyMutation, notify, navigate]);
 
   return (
     <div className="w-full   p-6">
