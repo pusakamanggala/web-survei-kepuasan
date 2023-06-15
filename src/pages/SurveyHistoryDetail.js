@@ -4,6 +4,8 @@ import { UserContext } from "../context/UserContext";
 import { useParams } from "react-router-dom";
 import UserRatingPieChart from "../components/UserRatingPieChart";
 import { Helmet } from "react-helmet-async";
+import ExportSurveyResultButton from "../components/ExportSurveyResultButton";
+import useNotification from "../hooks/useNotification";
 
 const SurveyHistoryDetail = () => {
   const { userRole } = useContext(UserContext);
@@ -11,6 +13,8 @@ const SurveyHistoryDetail = () => {
   const [surveyData, setSurveyData] = useState(null); // state for survey data
   const [averageIkm, setAverageIkm] = useState(null); // state for average ikm
   const [totalRatings, setTotalRatings] = useState(null); // state for total ratings
+
+  const notify = useNotification();
 
   // to fetch survey result data
   const {
@@ -103,12 +107,6 @@ const SurveyHistoryDetail = () => {
     );
   }
 
-  if (isSurveyHistoryResultDataSuccess) {
-    <h1 className="text-primary-color font-bold">
-      Terjadi kesalahan saat memproses permintaan
-    </h1>;
-  }
-
   return (
     <div>
       <Helmet>
@@ -122,7 +120,7 @@ const SurveyHistoryDetail = () => {
         <>
           <div className="flex justify-between mb-4">
             <div>
-              {userRole === "MAHASISWA" && (
+              {(userRole === "MAHASISWA" || role === "mahasiswa") && (
                 <>
                   <h1 className="text-lg font-bold text-primary-color ">
                     {data.data.namaKelas}
@@ -137,9 +135,16 @@ const SurveyHistoryDetail = () => {
               )}
             </div>
             {/* show average indeks kepuasan */}
-            <h1 className="md:text-2xl text-lg font-bold text-primary-color mb-4">
-              Indeks Kepuasan : {averageIkm}
-            </h1>
+            <div className="flex flex-col items-end">
+              <h1 className="md:text-2xl text-lg font-bold text-primary-color mb-4">
+                Indeks Kepuasan : {averageIkm}
+              </h1>
+              <ExportSurveyResultButton
+                data={surveyData}
+                fileName="Hasil Survei"
+                notify={notify}
+              />
+            </div>
           </div>
           <div className="bg-white mb-2 md:flex md:justify-evenly p-2 items-center">
             <div>
