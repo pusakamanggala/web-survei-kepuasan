@@ -60,14 +60,14 @@ function Login() {
         }
 
         notify(errorMessage, "error", false);
-      } else if (loginMutation.error.message === "Failed to fetch") {
+      } else {
         notify("Terjadi kesalahan saat memproses permintaan", "error", false);
       }
       loginMutation.reset();
     }
 
     if (loginMutation.isSuccess) {
-      notify("Berhasil login", "success");
+      notify("Berhasil login", "success", 1000);
       setPassword("");
       setUserId("");
       loginMutation.reset();
