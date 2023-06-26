@@ -9,6 +9,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowDownShortWide,
   faArrowDownWideShort,
+  faAngleRight,
+  faAngleLeft,
+  faAnglesRight,
+  faAnglesLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 const StudentTable = ({ keyword, angkatan }) => {
@@ -24,6 +28,8 @@ const StudentTable = ({ keyword, angkatan }) => {
   const [pageSize, setPageSize] = useState(5); // Set initial page size to 5
 
   const [selectedStudent, setSelectedStudent] = useState(null); // state to store selected student data
+
+  const isMobile = window.innerWidth <= 768; // Check if screen width is less than or equal to 768px
 
   // get role from url
   const { role } = useParams();
@@ -356,7 +362,7 @@ const StudentTable = ({ keyword, angkatan }) => {
                     : "bg-red-600 hover:bg-red-700 "
                 } `}
               >
-                First
+                {isMobile ? <FontAwesomeIcon icon={faAnglesLeft} /> : "First"}
               </button>
             ) : null}
 
@@ -369,7 +375,7 @@ const StudentTable = ({ keyword, angkatan }) => {
                   : "bg-red-600 hover:bg-red-700 "
               } `}
             >
-              Prev
+              {isMobile ? <FontAwesomeIcon icon={faAngleLeft} /> : "Prev"}
             </button>
             <button
               title="Selanjutnya"
@@ -381,7 +387,7 @@ const StudentTable = ({ keyword, angkatan }) => {
                   : "bg-red-600 hover:bg-red-700 "
               } `}
             >
-              Next
+              {isMobile ? <FontAwesomeIcon icon={faAngleRight} /> : "Next"}
             </button>
             <button
               onClick={() => handleLastPage(studentData.totalPage)}
@@ -392,7 +398,7 @@ const StudentTable = ({ keyword, angkatan }) => {
                   : "bg-red-600 hover:bg-red-700 "
               } `}
             >
-              Last
+              {isMobile ? <FontAwesomeIcon icon={faAnglesRight} /> : "Last"}
             </button>
           </div>
         ) : null}

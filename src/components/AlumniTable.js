@@ -8,6 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowDownWideShort,
   faArrowDownShortWide,
+  faAngleRight,
+  faAngleLeft,
+  faAnglesRight,
+  faAnglesLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 const AlumniTable = ({ keyword, angkatan }) => {
@@ -19,6 +23,8 @@ const AlumniTable = ({ keyword, angkatan }) => {
 
   const [showEditModal, setShowEditModal] = useState(false); // State to show/hide edit modal
   const [selectedAlumni, setSelectedAlumni] = useState(null); // State to store selected alumni data
+
+  const isMobile = window.innerWidth <= 768; // Check if screen width is less than or equal to 768px
 
   // get role from url
   const { role } = useParams();
@@ -325,7 +331,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
                     : "bg-red-600 hover:bg-red-700 "
                 } `}
               >
-                First
+                {isMobile ? <FontAwesomeIcon icon={faAnglesLeft} /> : "First"}
               </button>
             ) : null}
 
@@ -339,7 +345,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
                   : "bg-red-600 hover:bg-red-700 "
               } `}
             >
-              Prev
+              {isMobile ? <FontAwesomeIcon icon={faAngleLeft} /> : "Prev"}
             </button>
             <button
               title="Selanjutnya"
@@ -351,7 +357,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
                   : "bg-red-600 hover:bg-red-700 "
               } `}
             >
-              Next
+              {isMobile ? <FontAwesomeIcon icon={faAngleRight} /> : "Next"}
             </button>
             <button
               title="Terakhir"
@@ -363,7 +369,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
                   : "bg-red-600 hover:bg-red-700 "
               } `}
             >
-              Last
+              {isMobile ? <FontAwesomeIcon icon={faAnglesRight} /> : "Last"}
             </button>
           </div>
         ) : null}

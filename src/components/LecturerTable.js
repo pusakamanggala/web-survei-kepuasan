@@ -4,6 +4,13 @@ import useFetchUserById from "../hooks/useFetchUserById";
 import useFetchUserByName from "../hooks/useFetchUserByName";
 import { useParams } from "react-router-dom";
 import EditUser from "./EditUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleRight,
+  faAngleLeft,
+  faAnglesRight,
+  faAnglesLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 const LecturerTable = ({ keyword }) => {
   // get role from url
@@ -15,6 +22,8 @@ const LecturerTable = ({ keyword }) => {
 
   const [pageNumber, setPageNumber] = useState(1); // Set initial page number to 1
   const [pageSize, setPageSize] = useState(5); // Set initial page size to 5
+
+  const isMobile = window.innerWidth <= 768; // Check if screen width is less than or equal to 768px
 
   // Define functions to handle pagination
   const handleNextPage = () => {
@@ -238,7 +247,7 @@ const LecturerTable = ({ keyword }) => {
                     : "bg-red-600 hover:bg-red-700 "
                 } `}
               >
-                First
+                {isMobile ? <FontAwesomeIcon icon={faAnglesLeft} /> : "First"}
               </button>
             ) : null}
 
@@ -252,7 +261,7 @@ const LecturerTable = ({ keyword }) => {
                   : "bg-red-600 hover:bg-red-700 "
               } `}
             >
-              Prev
+              {isMobile ? <FontAwesomeIcon icon={faAngleLeft} /> : "Prev"}
             </button>
             <button
               title="Selanjutnya"
@@ -264,7 +273,7 @@ const LecturerTable = ({ keyword }) => {
                   : "bg-red-600 hover:bg-red-700 "
               } `}
             >
-              Next
+              {isMobile ? <FontAwesomeIcon icon={faAngleRight} /> : "Next"}
             </button>
             <button
               title="Terakhir"
@@ -276,7 +285,7 @@ const LecturerTable = ({ keyword }) => {
                   : "bg-red-600 hover:bg-red-700 "
               } `}
             >
-              Last
+              {isMobile ? <FontAwesomeIcon icon={faAnglesRight} /> : "Last"}
             </button>
           </div>
         ) : null}
