@@ -99,7 +99,7 @@ const LecturerTable = ({ keyword }) => {
     );
 
   return (
-    <div>
+    <div className="mb-5 lg:mb-0">
       {/* To show total users when keyword is empty */}
       {keyword === "" ? (
         <div className="flex justify-between text-secondary-color font-medium mx-1">

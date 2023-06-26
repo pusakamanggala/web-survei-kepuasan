@@ -25,6 +25,7 @@ input[type="number"] {
 /* Hide the scrollbar */
 ::-webkit-scrollbar {
   width: 0.25rem;
+  height: 0.5rem;
   background-color: transparent;
 }
 
