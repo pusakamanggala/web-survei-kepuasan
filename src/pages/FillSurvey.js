@@ -30,8 +30,6 @@ const FillSurvey = () => {
     setAllAnswer([...answer, ...essayAnswer]);
   }, [answer, essayAnswer]);
 
-  console.log(allAnswer);
-
   const optionsQuestion = (questionId) => {
     const handleOptionChange = (event) => {
       const selectedOption = event.target.value;

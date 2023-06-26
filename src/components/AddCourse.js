@@ -37,7 +37,6 @@ const AddCourse = (props) => {
         notify(`Mata kuliah ${courseName} sudah terdaftar`, "error", false);
       } else {
         notify("Terjadi kesalahan dalam memproses permintaan", "error", false);
-        console.log(errorMessage);
       }
       // Set addCourseMutation.isError to false after displaying the notification
       addCourseMutation.reset();
