@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import useFetchUserById from "../hooks/useFetchUserById";
+import ChangePassword from "../components/ChangePassword";
 import { UserContext } from "../context/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const { userId, userRole } = useContext(UserContext);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
   const {
     data: userData,
@@ -73,11 +75,21 @@ const MyProfile = () => {
             <button
               title="Ganti Password"
               className="bg-primary-color flex p-2 rounded-md text-white shadow-md items-center"
+              onClick={() => setShowChangePasswordModal(true)}
             >
               <FontAwesomeIcon icon={faKey} className="w-5 h-5" />
               <h1 className="hidden md:block ml-2">Ganti Password</h1>
             </button>
           </div>
+          {/* Change password modal */}
+          {showChangePasswordModal && (
+            <ChangePassword
+              showModal={setShowChangePasswordModal}
+              userId={
+                userRole === "Dosen" ? userData.data.nip : userData.data.nim
+              }
+            />
+          )}
         </div>
       )}
     </div>
