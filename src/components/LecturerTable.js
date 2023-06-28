@@ -10,11 +10,17 @@ import {
   faAngleLeft,
   faAnglesRight,
   faAnglesLeft,
+  faArrowDownShortWide,
+  faArrowDownWideShort,
 } from "@fortawesome/free-solid-svg-icons";
 
 const LecturerTable = ({ keyword }) => {
   // get role from url
   const { role } = useParams();
+
+  // Set initial state values for sorting
+  const [isAsc, setIsAsc] = useState(true);
+  const [orderBy, setOrderBy] = useState("nip");
 
   const [selectedLecturer, setSelectedLecturer] = useState({}); // State to hold lecturer data
 
@@ -24,6 +30,18 @@ const LecturerTable = ({ keyword }) => {
   const [pageSize, setPageSize] = useState(5); // Set initial page size to 5
 
   const isMobile = window.innerWidth <= 768; // Check if screen width is less than or equal to 768px
+
+  // Function to determine whether to show sort arrow
+  const shouldShowArrow = (param) => {
+    return (
+      // Check if sorting by specified parameter and if data is an array
+      orderBy === param &&
+      Array.isArray(lecturerData.data) &&
+      // Check if data array length is greater than 1
+      lecturerData.data.length !== 1 &&
+      keyword === ""
+    );
+  };
 
   // Define functions to handle pagination
   const handleNextPage = () => {
@@ -63,6 +81,8 @@ const LecturerTable = ({ keyword }) => {
     // Use default fetch function and arguments if no keyword is provided
     fetchFunction = useFetchLecturers;
     fetchArgs = {
+      sortBy: isAsc ? "asc" : "desc", // Set the sorting order
+      orderBy: orderBy, // Set the field to sort by
       limit: pageSize, // Set the number of items per page
       page: pageNumber, // Set the initial page number
     };
@@ -98,6 +118,8 @@ const LecturerTable = ({ keyword }) => {
       </div>
     );
 
+  console.log(orderBy, isAsc);
+
   return (
     <div className="mb-5 lg:mb-0">
       {/* To show total users when keyword is empty */}
@@ -115,15 +137,35 @@ const LecturerTable = ({ keyword }) => {
           <tr>
             <th
               scope="col"
-              className="text-sm font-medium bg-secondary-color text-white px-6 py-4 text-left"
+              className="text-sm font-medium bg-secondary-color text-white px-6 py-4 text-left cursor-pointer"
+              onClick={() => {
+                setIsAsc(!isAsc);
+                setOrderBy("nip");
+              }}
             >
               NIP
+              {shouldShowArrow("nip") && (
+                <FontAwesomeIcon
+                  icon={isAsc ? faArrowDownShortWide : faArrowDownWideShort}
+                  className="ml-2"
+                />
+              )}
             </th>
             <th
               scope="col"
-              className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-left"
+              className="text-sm font-medium text-white bg-secondary-color px-6 py-4 text-left cursor-pointer"
+              onClick={() => {
+                setIsAsc(!isAsc);
+                setOrderBy("nama");
+              }}
             >
               Nama
+              {shouldShowArrow("nama") && (
+                <FontAwesomeIcon
+                  icon={isAsc ? faArrowDownShortWide : faArrowDownWideShort}
+                  className="ml-2"
+                />
+              )}
             </th>
             <th
               scope="col"
