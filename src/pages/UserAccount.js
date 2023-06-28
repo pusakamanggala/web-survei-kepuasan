@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import StudentTable from "../components/StudentTable";
 import LecturerTable from "../components/LecturerTable";
 import AlumniTable from "../components/AlumniTable";
+import EksportUsers from "../components/EksportUsers";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +10,7 @@ import {
   faMagnifyingGlass,
   faXmark,
   faUserPlus,
+  faFileDownload,
 } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
 import useNotification from "../hooks/useNotification";
@@ -18,6 +20,7 @@ const UserAccount = () => {
   const { role } = useParams(); //get role parameter from url
   const [keyword, setKeyword] = useState(""); //state to store the keyword of the student to be searched
   const [keywordAngkatan, setKeywordAngkatan] = useState(""); //state to store the keyword of the student to be searched
+  const [showEksportModal, setShowEksportModal] = useState(false); //state to store the visibility of the export modal
 
   const [searchValue, setSearchValue] = useState("");
   const [searchValueAngkatan, setSearchValueAngkatan] = useState("");
@@ -170,7 +173,7 @@ const UserAccount = () => {
             {/* add button */}
             <button
               title={`Tambah ${role}`}
-              className="flex justify-evenly ml-2 h-12 px-4 items-center text-white  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+              className="flex justify-evenly h-12 px-4 items-center text-white  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color mx-2"
               onClick={() => navigate(`/pengguna/tambah/${role}`)}
             >
               <FontAwesomeIcon
@@ -180,6 +183,23 @@ const UserAccount = () => {
               <h1 className="hidden sm:block capitalize">Tambah {role}</h1>
             </button>
             {/* end of add button */}
+            {/* Eksport Button */}
+            <button
+              title={`Tambah ${role}`}
+              className="flex justify-evenly ml-2 h-12 px-4 items-center text-white  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+              onClick={() => setShowEksportModal(true)}
+            >
+              <FontAwesomeIcon
+                icon={faFileDownload}
+                className="w-5 h-5 mr-0 sm:mr-3 "
+              />
+              <h1 className="hidden sm:block capitalize">Ekspor {role}</h1>
+            </button>
+            {/* End of Export Button */}
+            {/* Export Modal */}
+            {showEksportModal && (
+              <EksportUsers role={role} isShow={setShowEksportModal} />
+            )}
           </div>
         </div>
         <div className="sm:mx-0.5 lg:mx-0.5 p-3 bg-white rounded-md shadow-md">
