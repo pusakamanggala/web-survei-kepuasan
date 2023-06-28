@@ -1,9 +1,16 @@
 import { useQuery } from "react-query";
 
-const useFetchAlumni = ({ sortBy, orderBy, limit, page, angkatan }) => {
+const useFetchAlumni = ({
+  sortBy,
+  orderBy,
+  limit,
+  page,
+  angkatan,
+  fetchAll = "false",
+}) => {
   // Define async function to fetch alumni data
   const fetchAlumni = async () => {
-    let url = `${process.env.REACT_APP_API_ENDPOINT}/alumni?sortBy=${sortBy}&orderBy=${orderBy}&limit=${limit}&page=${page}`;
+    let url = `${process.env.REACT_APP_API_ENDPOINT}/alumni?sortBy=${sortBy}&orderBy=${orderBy}&limit=${limit}&page=${page}&all=${fetchAll}`;
 
     if (angkatan !== "") {
       url += `&angkatan=${angkatan}`;
@@ -20,7 +27,7 @@ const useFetchAlumni = ({ sortBy, orderBy, limit, page, angkatan }) => {
 
   // Use useQuery hook to fetch and cache alumni data
   return useQuery(
-    ["alumni", sortBy, orderBy, limit, page, angkatan],
+    ["alumni", sortBy, orderBy, limit, page, angkatan, fetchAll],
     fetchAlumni,
     {
       refetchOnWindowFocus: false,

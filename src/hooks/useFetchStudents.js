@@ -1,8 +1,15 @@
 import { useQuery } from "react-query";
 
-const useFetchStudents = ({ sortBy, orderBy, limit, page, angkatan }) => {
+const useFetchStudents = ({
+  sortBy,
+  orderBy,
+  limit,
+  page,
+  angkatan,
+  fetchAll = "false",
+}) => {
   const fetchStudents = async () => {
-    let url = `${process.env.REACT_APP_API_ENDPOINT}/mahasiswa?sortBy=${sortBy}&orderBy=${orderBy}&limit=${limit}&page=${page}`;
+    let url = `${process.env.REACT_APP_API_ENDPOINT}/mahasiswa?sortBy=${sortBy}&orderBy=${orderBy}&limit=${limit}&page=${page}&all=${fetchAll}`;
 
     if (angkatan !== "") {
       url += `&angkatan=${angkatan}`;
@@ -19,7 +26,7 @@ const useFetchStudents = ({ sortBy, orderBy, limit, page, angkatan }) => {
   };
   // Use useQuery hook to fetch and cache students data
   return useQuery(
-    ["students", sortBy, orderBy, limit, page, angkatan],
+    ["students", sortBy, orderBy, limit, page, angkatan, fetchAll],
     fetchStudents,
     {
       refetchOnWindowFocus: false,
