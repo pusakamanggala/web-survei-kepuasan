@@ -132,11 +132,29 @@ const AddUser = () => {
     }
 
     if (isError) {
-      notify(
-        `${role.charAt(0).toUpperCase() + role.slice(1)} gagal ditambahkan`,
-        "error",
-        false
-      );
+      if (
+        hooks.some(
+          (hook) =>
+            hook.isError &&
+            hook.error &&
+            hook.error.message === "Failed to fetch"
+        )
+      ) {
+        notify("Terjadi kesalahan saat memproses permintaan", "error", false);
+        hooks.forEach((hook) => hook.reset()); // reset the hooks
+        return;
+      }
+
+      if (role === "mahasiswa") {
+        notify(`${addStudentMutation.error.message}`, "error", false);
+      }
+      if (role === "dosen") {
+        notify(`${addLecturerMutation.error.message}`, "error", false);
+      }
+      if (role === "alumni") {
+        notify(`${addAlumniMutation.error.message}`, "error", false);
+      }
+
       hooks.forEach((hook) => hook.reset()); // reset the hooks
     }
   }, [
