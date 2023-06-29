@@ -6,7 +6,7 @@ const useFetchLectures = ({
   orderBy,
   sortBy,
   fetchAll = "false",
-  stat = "none",
+  stat = "aktif",
 }) => {
   // Define async function to fetch lectures data
   const fetchLectures = async () => {
