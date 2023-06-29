@@ -6,15 +6,21 @@ import AddStudentToClass from "../components/AddStudentToClass";
 import useDeleteStudentFromClass from "../hooks/useDeleteStudentFromClass";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faUserMinus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUserPlus,
+  faUserMinus,
+  faFileUpload,
+} from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
 import useNotification from "../hooks/useNotification";
+import ImportStudentToClass from "../components/ImportStudentToClass";
 
 const ClassDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams(); // get class id from url
   const [seLectedClass, setSelectedClass] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showImportModal, setShowImportModal] = useState(false);
 
   // delete student from class
   const deleteStudentFromClassMutation = useDeleteStudentFromClass();
@@ -112,7 +118,7 @@ const ClassDetails = () => {
             Periode : {convertUnixTime(StartDate)} - {convertUnixTime(endDate)}
           </h1>
         </div>
-        <div>
+        <div className="flex">
           {/* add button */}
           <button
             title="Tambah Mahasiswa"
@@ -131,11 +137,31 @@ const ClassDetails = () => {
             </h1>
           </button>
           {/* end of add button */}
+          {/* import button */}
+          <button
+            title="Impor Mahasiswa"
+            className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+            onClick={() => {
+              setShowImportModal(true);
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faFileUpload}
+              className="mr-0 sm:mr-4 text-white"
+            />
+            <h1 className="text-white hidden sm:block capitalize">
+              Impor Mahasiswa
+            </h1>
+          </button>
+          {/* end of import button */}
           {showModal && (
             <AddStudentToClass
               kelas={seLectedClass.idKelas}
               setIsShow={setShowModal}
             />
+          )}
+          {showImportModal && (
+            <ImportStudentToClass showModal={setShowImportModal} />
           )}
         </div>
       </div>
