@@ -11,7 +11,9 @@ function useAddLecturer() {
       credentials: "include",
     }).then((res) => {
       if (!res.ok) {
-        throw new Error("Failed to add lecturer");
+        return res.json().then((errorData) => {
+          throw new Error(errorData.message); // Throw an Error with the error message
+        });
       }
       return res.json();
     })

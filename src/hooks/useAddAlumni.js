@@ -1,25 +1,23 @@
 import { useMutation } from "react-query";
 
 const useAddAlumni = () => {
-  const addAlumniMutation = useMutation(async (formData) => {
-    const response = await fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/alumni`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-        credentials: "include",
+  const addAlumniMutation = useMutation((formData) =>
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/alumni`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+      credentials: "include",
+    }).then((res) => {
+      if (!res.ok) {
+        return res.json().then((errorData) => {
+          throw new Error(errorData.message); // Throw an Error with the error message
+        });
       }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to add alumni");
-    }
-
-    return response.json();
-  });
+      return res.json();
+    })
+  );
 
   return addAlumniMutation;
 };
