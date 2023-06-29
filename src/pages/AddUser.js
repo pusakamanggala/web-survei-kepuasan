@@ -294,7 +294,7 @@ const AddUser = () => {
         </button>
       </div>
       {role === "mahasiswa" ? (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg">
+        <div className="bg-white p-6 rounded-lg">
           <div className="mb-4">
             <label
               htmlFor="nama"
@@ -395,13 +395,14 @@ const AddUser = () => {
               title="Submit"
               type="submit"
               className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={handleSubmit}
             >
               Submit
             </button>
           </div>
-        </form>
+        </div>
       ) : role === "dosen" ? (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg">
+        <div className="bg-white p-6 rounded-lg">
           <div className="mb-4">
             <label
               htmlFor="nama"
@@ -483,13 +484,14 @@ const AddUser = () => {
               title="Submit"
               type="submit"
               className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={handleSubmit}
             >
               Submit
             </button>
           </div>
-        </form>
+        </div>
       ) : role === "alumni" ? (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg">
+        <div className="bg-white p-6 rounded-lg">
           <div className="mb-4"></div>
           <div className="mb-4">
             <label htmlFor="nim" className="block text-gray-700 font-bold mb-2">
@@ -539,11 +541,12 @@ const AddUser = () => {
               title="Submit"
               type="submit"
               className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              onClick={handleSubmit}
             >
               Submit
             </button>
           </div>
-        </form>
+        </div>
       ) : null}
       {(addStudentMutation.isLoading ||
         addAlumniMutation.isLoading ||
