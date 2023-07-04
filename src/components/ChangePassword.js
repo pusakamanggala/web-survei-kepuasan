@@ -106,10 +106,11 @@ const ChangePassword = ({ userId, showModal }) => {
               className="w-full border-2 border-primary-color rounded-md text-sm text-gray-700 p-2 mt-2"
               onChange={(e) => setConfirmNewPassword(e.target.value)}
             />
-            {newPassword !== confirmNewPassword &&
+            {confirmNewPassword &&
+              newPassword !== confirmNewPassword &&
               isPasswordValid(newPassword) && (
                 <h1 className="text-sm ml-1 text-primary-color">
-                  Password baru tidak sesuai !
+                  Ulangi password dengan benar !
                 </h1>
               )}
           </form>
