@@ -35,7 +35,7 @@ const EksportUsers = ({ role, isShow }) => {
               Terjadi kesalahan saat memproses permintaan
             </h1>
           )}
-          {isSuccess && (
+          {isSuccess && data.data ? (
             <div className="flex flex-col justify-center items-center">
               <h1 className="mb-4"> Jumlah Data : {data.data.length}</h1>
               <div className="flex">
@@ -49,6 +49,21 @@ const EksportUsers = ({ role, isShow }) => {
                 <EksportUsersButton data={data.data} role={role} />
               </div>
             </div>
+          ) : (
+            isSuccess && (
+              <div className="flex flex-col items-end">
+                <h1 className="text-primary-color mb-4">
+                  Belum ada {role} yang terdaftar
+                </h1>
+                <button
+                  title="Batal"
+                  className="flex justify-evenly w-fit ml-2 h-12 px-4 items-center text-white  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+                  onClick={() => isShow(false)}
+                >
+                  <h1 className="capitalize">Batal</h1>
+                </button>
+              </div>
+            )
           )}
         </div>
       </div>
