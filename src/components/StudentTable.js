@@ -107,6 +107,14 @@ const StudentTable = ({ keyword, angkatan }) => {
       </div>
     );
 
+  // show message if there is no record in database
+  if (studentData.message === "There is no record" && angkatan === "")
+    return (
+      <div className="text-primary-color">
+        Belum ada mahasiswa yang terdaftar
+      </div>
+    );
+
   // Show message if no record is found with the given Name or NIM
 
   if (studentData.message === "There is no record with that id")
@@ -116,7 +124,7 @@ const StudentTable = ({ keyword, angkatan }) => {
         ditemukan
       </div>
     );
-  if (studentData.message === "There is no record")
+  if (studentData.message === "There is no record" && angkatan !== "")
     return (
       <div className="text-primary-color">
         Angkatan <span className="font-bold">{angkatan}</span> tidak ditemukan

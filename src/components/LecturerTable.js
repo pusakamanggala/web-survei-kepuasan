@@ -103,6 +103,11 @@ const LecturerTable = ({ keyword }) => {
       </div>
     );
 
+  if (lecturerData.message === "There is no record")
+    return (
+      <div className="text-primary-color">Belum ada dosen yang terdaftar</div>
+    );
+
   // Show message if no record is found with the given Name or NIP
   if (lecturerData.message === "There is no record with that id")
     return (
@@ -117,8 +122,6 @@ const LecturerTable = ({ keyword }) => {
         Dosen <span className="font-bold">{keyword}</span> tidak ditemukan
       </div>
     );
-
-  console.log(orderBy, isAsc);
 
   return (
     <div className="mb-5 lg:mb-0">

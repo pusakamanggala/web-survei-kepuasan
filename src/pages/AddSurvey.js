@@ -384,7 +384,7 @@ const AddSurvey = () => {
           </h1>
         )}
         <div className="grid md:grid-cols-2 md:gap-4 gap-2">
-          {surveyTemplateData &&
+          {surveyTemplateData && surveyTemplateData.data ? (
             surveyTemplateData.data.map((template, index) => (
               <SurveyTemplateCard
                 key={index}
@@ -401,7 +401,12 @@ const AddSurvey = () => {
                 }
                 onClick={() => setSurveyTemplatesId(template.idTemplate)}
               />
-            ))}
+            ))
+          ) : (
+            <h1 className="text-primary-color font-semibold">
+              Tidak ada template survei yang tersedia.
+            </h1>
+          )}
         </div>
       </div>
       {/* search class */}

@@ -14,9 +14,7 @@ const useNotification = () => {
         autoClose: autoClose,
         onClose: () => {
           if (autoClose !== false) {
-            setTimeout(() => {
-              window.location.reload();
-            }, autoClose);
+            window.location.reload();
           }
         },
       });
@@ -28,9 +26,7 @@ const useNotification = () => {
         autoClose: autoClose,
         onClose: () => {
           if (autoClose !== false) {
-            setTimeout(() => {
-              window.location.reload();
-            }, autoClose);
+            window.location.reload();
           }
         },
       });

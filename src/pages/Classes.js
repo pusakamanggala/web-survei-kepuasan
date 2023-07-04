@@ -132,25 +132,33 @@ const Classes = () => {
         {showAddCourseModal && <AddCourse setIsShow={setShowAddCourseModal} />}
       </div>
       {/* To show total classes when keyword is empty */}
-      {keyword === "" && data ? (
+      {isSuccess && keyword === "" && data.totalRecords && (
         <div className="flex justify-between text-secondary-color font-medium mx-1 mb-2">
-          <h1>Total Kelas : {data.totalRecords}</h1>
+          <h1>Total Kelas: {data.totalRecords}</h1>
           <h1>
-            Halaman : {pageNumber} / {data.totalPage}
+            Halaman: {pageNumber} / {data.totalPage}
           </h1>
         </div>
-      ) : null}
+      )}
+
       {/* end of add button */}
       {isLoading && (
-        <div className="text-primary-color">Memuat data kelas...</div>
+        <div className="text-primary-color font-semibold">
+          Memuat data kelas...
+        </div>
       )}
       {isError && (
-        <div className="text-primary-color">
+        <div className="text-primary-color font-semibold">
           Terjadi kesalahan saat memproses permintaan. Mohon muat ulang website,
           atau tunggu beberapa saat
         </div>
       )}
       {/* If data is not empty, map the data to ClassCard component, and check if kelas is not empty */}
+      {isSuccess && !data.totalRecords && keyword === "" && (
+        <h1 className="text-primary-color font-semibold">
+          Belum ada kelas yang terdaftar
+        </h1>
+      )}
       {isSuccess && (
         <div>
           {data && data.data && data.data.length > 0 ? (
@@ -164,9 +172,12 @@ const Classes = () => {
               ))}
             </div>
           ) : (
-            <h1 className="text-primary-color">
-              Kelas <span className="font-bold">{keyword}</span> tidak ditemukan
-            </h1>
+            keyword !== "" && (
+              <h1 className="text-primary-color">
+                Kelas <span className="font-bold">{keyword}</span> tidak
+                ditemukan
+              </h1>
+            )
           )}
         </div>
       )}
@@ -192,7 +203,7 @@ const Classes = () => {
           ) : null}
         </div>
         {/* pagination buttons */}
-        {data && data.totalPage !== 1 && keyword === "" ? (
+        {data && data.totalPage && data.totalPage !== 1 && keyword === "" ? (
           <div>
             {pageNumber !== 1 ? (
               <button

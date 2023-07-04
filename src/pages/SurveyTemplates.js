@@ -14,6 +14,7 @@ const SurveyTemplates = () => {
   // to fetch survey templates using useFetchSurveyTemplate hook
   const {
     data: surveyTemplatesData,
+    isSuccess: isTemplatesSuccess,
     isLoading: isTemplatesLoading,
     isError: isTemplatesError,
   } = useFetchSurveyTemplate({
@@ -63,17 +64,25 @@ const SurveyTemplates = () => {
       </div>
       {/* show survey templates */}
       {isTemplatesLoading && (
-        <h1 className="text-primary-color text-lg font-semibold">
+        <h1 className="text-primary-color font-semibold">
           Memuat template survei...
         </h1>
       )}
       {isTemplatesError && (
-        <h1 className="text-primary-color text-lg font-semibold">
-          Terjadi kesalahan saat memproses permintaan...
+        <h1 className="text-primary-color font-semibold">
+          Terjadi kesalahan saat memproses permintaan
         </h1>
       )}
+      {isTemplatesSuccess &&
+        surveyTemplatesData.message ===
+          "There is no record with that query" && (
+          <h1 className="text-primary-color font-semibold">
+            Belum ada template survei yang terdaftar
+          </h1>
+        )}
       <div className="grid md:grid-cols-2 nd:gap-4 grid-cols-1 gap-2">
         {surveyTemplatesData &&
+          surveyTemplatesData.data &&
           surveyTemplatesData.data.map((template, index) => (
             <SurveyTemplateCard
               key={index}

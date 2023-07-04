@@ -165,8 +165,14 @@ const SurveyList = () => {
           />
         </form>
       </div>
-      {isSurveyListLoading && <div>Loading...</div>}
-      {isSurveyListError && <div>Error...</div>}
+      {isSurveyListLoading && (
+        <div className="font-semibold">Memuat survei...</div>
+      )}
+      {isSurveyListError && (
+        <div className="text-primary-color font-semibold">
+          Terjadi kesalahan saat memproses permintaan
+        </div>
+      )}
       {isSurveyListSuccess &&
         surveyListData.data &&
         surveyListData.data.length > 0 && (
@@ -234,7 +240,7 @@ const SurveyList = () => {
       {isSurveyListSuccess &&
         surveyListData.message &&
         surveyListData.message === "There is no record with that query" && (
-          <div>
+          <div className="text-primary-color font-semibold">
             Tidak ada survei pada periode {startDate} - {endDate}
           </div>
         )}

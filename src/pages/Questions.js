@@ -114,11 +114,18 @@ const Questions = () => {
             </div>
           ))}
         {isQuestionSuccess &&
-          questionData.message === "There is no record with that query" && (
+        questionData.message === "There is no record with that query" &&
+        questionKeyword !== "" ? (
+          <h1 className="text-primary-color font-semibold">
+            Pertanyaan tidak ditemukan
+          </h1>
+        ) : (
+          isQuestionSuccess && (
             <h1 className="text-primary-color font-semibold">
-              Pertanyaan tidak ditemukan.
+              Belum ada pertanyaan yang terdaftar
             </h1>
-          )}
+          )
+        )}
       </div>
     </div>
   );

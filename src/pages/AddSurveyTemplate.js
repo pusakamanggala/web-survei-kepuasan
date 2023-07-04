@@ -252,7 +252,6 @@ const AddSurveyTemplate = () => {
                 <h1 className="text-sm text-slate-500 mb-4">
                   Pilih Pertanyaan
                 </h1>
-                {/*  */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
                   {questionData.data.map((question, index) => (
                     <QuestionsCard

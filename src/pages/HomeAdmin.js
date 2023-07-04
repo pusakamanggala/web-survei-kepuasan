@@ -86,7 +86,13 @@ const HomeAdmin = () => {
   useEffect(() => {
     if (isClassError) setTotalClass("Error");
     if (isClassLoading) setTotalClass("...");
-    if (isClassSuccess) setTotalClass(classData.totalRecords);
+    if (isClassSuccess) {
+      if (classData.totalRecords) {
+        setTotalClass(classData.totalRecords);
+      } else {
+        setTotalClass(0);
+      }
+    }
   }, [isClassSuccess, classData, isClassLoading, isClassError]);
 
   return (
