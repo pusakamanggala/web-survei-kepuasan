@@ -91,6 +91,14 @@ const AddUser = () => {
       // Call addStudent mutation to submit the data
       addStudentMutation.mutate(studentData);
     } else if (role === "alumni") {
+      // Validate the tahunKelulusan
+      const tahunRegex = /^\d{4}$/; // Regex pattern for 4-digit number
+      if (!tahunRegex.test(tahunLulus)) {
+        // Handle validation error (e.g., display an error message)
+        notify("Tahun kelulusan harus berupa 4 digit angka", "warning");
+        return;
+      }
+
       // Create alumni data object
       const alumniData = { nim, tahunKelulusan: tahunLulus };
 
@@ -250,7 +258,7 @@ const AddUser = () => {
                 <input
                   id="file-input"
                   type="file"
-                  accept=".xlsx, .xls"
+                  accept=".xlsx"
                   onChange={handleFileInputChange}
                   className="appearance-none border border-gray-400 rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-gray focus:border-gray-500"
                 />
