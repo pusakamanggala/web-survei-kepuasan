@@ -104,6 +104,14 @@ const ClassDetails = () => {
 
   const { namaDosen, StartDate, endDate, namaKelas, mahasiswa } = data.data;
 
+  // get current date
+  const currentDate = new Date();
+  const currentUnixTime = Math.round(currentDate.getTime() / 1000);
+  // get class remaining time
+  const remainingTime = endDate - currentUnixTime;
+  // convert remaining time to days
+  const remainingDays = Math.floor(remainingTime / 86400);
+
   return (
     <div className="bg-white rounded shadow-md p-4 text-secondary-color">
       <Helmet>
@@ -114,8 +122,11 @@ const ClassDetails = () => {
         <div>
           <h1 className="font-bold text-lg">{namaKelas}</h1>
           <h1 className="mb-5 font-semibold">Dosen Pengampu : {namaDosen}</h1>
+          <h1 className="font font-semibold">
+            Ditambahkan : {convertUnixTime(StartDate)}
+          </h1>
           <h1 className="mb-5 font font-semibold">
-            Periode : {convertUnixTime(StartDate)} - {convertUnixTime(endDate)}
+            Kadaluarsa : {convertUnixTime(endDate)} ({remainingDays} hari lagi)
           </h1>
         </div>
         <div className="flex">
