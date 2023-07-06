@@ -21,7 +21,7 @@ function Login() {
     };
 
     if (!userId || !password || !selectedRole)
-      return notify("Masukan akun anda", "warning");
+      return notify("Masukkan akun anda", "warning");
 
     // Call the login mutation
     loginMutation.mutate(formData); // Pass the role and form data
@@ -67,7 +67,7 @@ function Login() {
     }
 
     if (loginMutation.isSuccess) {
-      notify("Berhasil login", "success", 1000);
+      notify("Login Berhasil", "success", 1000);
       setPassword("");
       setUserId("");
       loginMutation.reset();
