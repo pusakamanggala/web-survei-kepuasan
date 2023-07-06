@@ -92,12 +92,17 @@ const LecturerTable = ({ keyword }) => {
   const { data: lecturerData, isLoading, isError } = fetchFunction(fetchArgs);
 
   // Show loading text while data is being fetched
-  if (isLoading) return <div className="text-primary-color">Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="text-primary-color font-semibold">
+        Memuat data dosen...
+      </div>
+    );
 
   // Show error message if an error occurred while fetching data
   if (isError)
     return (
-      <div className="text-primary-color">
+      <div className="text-primary-color font-semibold">
         Terjadi kesalahan saat memproses permintaan. Mohon muat ulang website,
         atau tunggu beberapa saat
       </div>

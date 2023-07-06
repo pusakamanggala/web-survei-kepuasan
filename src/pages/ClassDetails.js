@@ -72,7 +72,9 @@ const ClassDetails = () => {
         <Helmet>
           <title>Detail Kelas | Web Survei Kepuasan</title>
         </Helmet>
-        <h1>Loading...</h1>
+        <h1 className="text-primary-color font-semibold">
+          Memuat data kelas...
+        </h1>
       </>
     );
   }
@@ -117,7 +119,7 @@ const ClassDetails = () => {
       <Helmet>
         <title>Detail Kelas | Web Survei Kepuasan</title>
       </Helmet>
-      {isFetchClassLoading && <h1>Loading...</h1>}
+
       <div className="flex justify-between">
         <div>
           <h1 className="font-bold text-lg">{namaKelas}</h1>
