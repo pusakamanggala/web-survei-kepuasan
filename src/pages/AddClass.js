@@ -64,7 +64,16 @@ const AddClass = () => {
       return;
     }
 
-    // display a confirmation dialog
+    // Validate the end date
+    const currentDate = new Date();
+    const selectedEndDate = new Date(endDate);
+
+    if (selectedEndDate < currentDate) {
+      notify("Tanggal kadaluarsa tidak boleh kurang dari hari ini", "warning");
+      return;
+    }
+
+    // Display a confirmation dialog
     const confirmed = window.confirm(
       "Apakah anda yakin ingin menambahkan kelas ini?. Kelas tidak bisa dihapus atau diperbarui setelah ditambahkan"
     );
@@ -113,29 +122,6 @@ const AddClass = () => {
       refetchDosen();
     }
   }, [namaDosen, refetchDosen]);
-
-  // if (addClassMutation.isLoading) {
-  //   return <p>Loading...</p>;
-  // }
-
-  // if (addClassMutation.isError) {
-  //   return <p>Error...</p>;
-  // }
-
-  // if (addClassMutation.isSuccess) {
-  //   setTimeout(() => {
-  //     window.location.reload(); // reload the page
-  //   }, 5000); // set timeout to 5 seconds
-
-  //   return (
-  //     <div className="text-green-500 font-bold text-xl ml-2 capitalize">
-  //       <h1>Kelas Berhasil Ditambahkan</h1>
-  //       <p className="text-black font-normal text-base">
-  //         Anda akan dialihkan dalam 5 detik
-  //       </p>
-  //     </div>
-  //   );
-  // }
 
   useEffect(() => {
     if (addClassMutation.isError) {
