@@ -10,6 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faFileArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
 import useNotification from "../hooks/useNotification";
+import student_file_template from "../sample_file/import_student_template.xlsx";
+import lecturer_file_template from "../sample_file/import_lecturer_template.xlsx";
+import alumni_file_template from "../sample_file/import_alumni_template.xlsx";
 
 const AddUser = () => {
   const navigate = useNavigate();
@@ -26,6 +29,7 @@ const AddUser = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [tahunLulus, setTahunLulus] = useState("");
   const [nip, setNip] = useState("");
+  const [fileTemplate, setFileTemplate] = useState(null);
 
   // useMutation to add user data manually
   const addStudentMutation = useAddStudent(); // call addStudent mutation
@@ -36,6 +40,20 @@ const AddUser = () => {
   const importStudentMutation = useImportStudent(); // call importStudent mutation
   const importLecturerMutation = useImportLecturer(); // call importLecturer mutation
   const importAlumniMutation = useImportAlumni(); // call importAlumni mutation
+
+  console.log(role);
+
+  useEffect(() => {
+    if (role === "mahasiswa") {
+      setFileTemplate(student_file_template);
+    }
+    if (role === "dosen") {
+      setFileTemplate(lecturer_file_template);
+    }
+    if (role === "alumni") {
+      setFileTemplate(alumni_file_template);
+    }
+  }, [role]);
 
   // To capitalize the first letter of each word in name
   const capitalizeName = (name) => {
@@ -199,6 +217,7 @@ const AddUser = () => {
     role,
   ]);
 
+  // import user
   if (inputType === "bulk") {
     return (
       <div>
@@ -236,7 +255,21 @@ const AddUser = () => {
                   className="appearance-none border border-gray-400 rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline-gray focus:border-gray-500"
                 />
               </div>
-              <div className="flex justify-end">
+              <div>
+                <h1 className="text-primary-color font-semibold">
+                  * Pastikan tabel excel sudah sesuai dengan template yang
+                  disediakan, dan tidak ada duplikasi data pada file excel
+                  maupun database.
+                </h1>
+                <a
+                  className="underline"
+                  href={fileTemplate}
+                  download={`template_file_import_${role}`}
+                >
+                  Download Template
+                </a>
+              </div>
+              <div className="flex justify-end mt-4">
                 <button
                   title="Batal"
                   className="bg-primary-color mr-2 hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -269,6 +302,7 @@ const AddUser = () => {
     );
   }
 
+  // add user manually
   return (
     <div>
       <Helmet>
