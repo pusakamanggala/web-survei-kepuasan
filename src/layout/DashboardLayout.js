@@ -10,6 +10,7 @@ import {
   faBars,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import LoadingPage from "../pages/LoadingPage";
 
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -158,10 +159,12 @@ const DashboardLayout = ({ children }) => {
             </div>
           </div>
         </header>
-        <main className="flex-1 overflow-y-auto bg-gray-100 lg:rounded-tl-3xl">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <Suspense fallback={<h1>Loading...</h1>}> {children}</Suspense>
-          </div>
+        <main className="flex-1 overflow-y-auto bg-gray-100 lg:rounded-tl-3xl h-full ">
+          <Suspense fallback={<LoadingPage />}>
+            <div className="container mx-auto sm:p-6 p-8 min-h-full">
+              {children}
+            </div>
+          </Suspense>
         </main>
       </div>
     </div>
