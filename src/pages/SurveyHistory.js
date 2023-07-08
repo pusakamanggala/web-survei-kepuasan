@@ -50,15 +50,19 @@ const SurveyHistory = () => {
       <Helmet>
         <title>Riwayat Survei | Web Survei Kepuasaan</title>
       </Helmet>
-      {isSurveyHistoryLoading && <h1>Memuat riwayat survei...</h1>}
+      {isSurveyHistoryLoading && (
+        <h1 className="text-primary-color font-semibold">
+          Memuat riwayat survei...
+        </h1>
+      )}
       {isSurveyHistoryError && (
-        <h1 className="text-primary-color font-bold">
+        <h1 className="text-primary-color font-semibold">
           Terjadi kesalahan saat memproses permintaan
         </h1>
       )}
       {isSurveyHistorySuccess &&
         surveyHistory.message === "There is no record with that query" && (
-          <h1 className="font-bold">Belum ada survei yang diisi</h1>
+          <h1 className="font-semibold">Belum ada survei yang diisi</h1>
         )}
       {isSurveyHistorySuccess &&
         surveyHistory.data &&

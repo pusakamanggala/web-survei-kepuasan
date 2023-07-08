@@ -22,12 +22,18 @@ const MySurvey = () => {
       <Helmet>
         <title>Survei Saya | Web Survei Kepuasan</title>
       </Helmet>
-      {isSurveyLoading && <h1>Loading...</h1>}
-      {isSurveyError && <h1>Error...</h1>}
+      {isSurveyLoading && (
+        <h1 className="text-primary-color font-semibold">Memuat survei...</h1>
+      )}
+      {isSurveyError && (
+        <h1 className="text-primary-color font-semibold">
+          Terjadi kesalahan saat memproses permintaan.
+        </h1>
+      )}
       {isSurveySuccess && (
         <>
           {surveyData.message === "There is no record" ? (
-            <h1>Tidak ada survei yang tersedia</h1>
+            <h1 className="font-semibold">Belum ada survei yang tersedia</h1>
           ) : (
             <>
               {surveyData.data.survei.map((survey) => (

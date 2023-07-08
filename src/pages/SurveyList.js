@@ -166,7 +166,7 @@ const SurveyList = () => {
         </form>
       </div>
       {isSurveyListLoading && (
-        <div className="font-semibold">Memuat survei...</div>
+        <div className="font-semibold text-primary-color">Memuat survei...</div>
       )}
       {isSurveyListError && (
         <div className="text-primary-color font-semibold">
