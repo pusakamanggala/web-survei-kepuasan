@@ -7,38 +7,24 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import jwtDecode from "jwt-decode";
 
-// set lazy load with timeout
-const lazyLoadWithTimeout = (importPromise, timeout = 1000) => {
-  return lazy(() =>
-    Promise.all([
-      importPromise,
-      new Promise((resolve) => setTimeout(resolve, timeout)),
-    ]).then(([module]) => module)
-  );
-};
-
-const UserAccount = lazyLoadWithTimeout(import("../pages/UserAccount"));
-const HomeAdmin = lazyLoadWithTimeout(import("../pages/HomeAdmin"));
-const Questions = lazyLoadWithTimeout(import("../pages/Questions"));
-const AddSurveyTemplate = lazyLoadWithTimeout(
-  import("../pages/AddSurveyTemplate")
-);
-const SurveyTemplates = lazyLoadWithTimeout(import("../pages/SurveyTemplates"));
-const AddSurvey = lazyLoadWithTimeout(import("../pages/AddSurvey"));
-const Home = lazyLoadWithTimeout(import("../pages/Home"));
-const SurveyList = lazyLoadWithTimeout(import("../pages/SurveyList"));
-const SurveyRecap = lazyLoadWithTimeout(import("../pages/SurveyRecap"));
-const AddUser = lazyLoadWithTimeout(import("../pages/AddUser"));
-const Classes = lazyLoadWithTimeout(import("../pages/Classes"));
-const ClassDetails = lazyLoadWithTimeout(import("../pages/ClassDetails"));
-const AddClass = lazyLoadWithTimeout(import("../pages/AddClass"));
-const MyProfile = lazyLoadWithTimeout(import("../pages/MyProfile"));
-const MySurvey = lazyLoadWithTimeout(import("../pages/MySurvey"));
-const FillSurvey = lazyLoadWithTimeout(import("../pages/FillSurvey"));
-const SurveyHistory = lazyLoadWithTimeout(import("../pages/SurveyHistory"));
-const SurveyHistoryDetail = lazyLoadWithTimeout(
-  import("../pages/SurveyHistoryDetail")
-);
+const UserAccount = lazy(() => import("../pages/UserAccount"));
+const HomeAdmin = lazy(() => import("../pages/HomeAdmin"));
+const Questions = lazy(() => import("../pages/Questions"));
+const AddSurveyTemplate = lazy(() => import("../pages/AddSurveyTemplate"));
+const SurveyTemplates = lazy(() => import("../pages/SurveyTemplates"));
+const AddSurvey = lazy(() => import("../pages/AddSurvey"));
+const Home = lazy(() => import("../pages/Home"));
+const SurveyList = lazy(() => import("../pages/SurveyList"));
+const SurveyRecap = lazy(() => import("../pages/SurveyRecap"));
+const AddUser = lazy(() => import("../pages/AddUser"));
+const Classes = lazy(() => import("../pages/Classes"));
+const ClassDetails = lazy(() => import("../pages/ClassDetails"));
+const AddClass = lazy(() => import("../pages/AddClass"));
+const MyProfile = lazy(() => import("../pages/MyProfile"));
+const MySurvey = lazy(() => import("../pages/MySurvey"));
+const FillSurvey = lazy(() => import("../pages/FillSurvey"));
+const SurveyHistory = lazy(() => import("../pages/SurveyHistory"));
+const SurveyHistoryDetail = lazy(() => import("../pages/SurveyHistoryDetail"));
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
