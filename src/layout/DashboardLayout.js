@@ -68,7 +68,7 @@ const DashboardLayout = ({ children }) => {
       <button
         title="Buka Menu"
         type="button"
-        className="lg:hidden border-2 border-white bg-primary-color p-2 rounded-full fixed bottom-4 right-4 z-10 shadow-sm shadow-secondary-color"
+        className="xl:hidden border-2 border-white bg-primary-color/70 p-2 rounded-full fixed bottom-4 right-4 z-10 shadow-sm shadow-secondary-color"
         onClick={handleToggleSidebar}
       >
         <FontAwesomeIcon
@@ -80,12 +80,12 @@ const DashboardLayout = ({ children }) => {
       <div
         className={`${
           showSidebar ? "translate-x-0" : "-translate-x-full"
-        } fixed inset-y-0 left-0 transform lg:relative lg:translate-x-0 transition duration-200 ease-in-out bg-primary-color z-50`}
+        } fixed inset-y-0 left-0 transform xl:relative xl:translate-x-0 transition duration-200 ease-in-out bg-primary-color z-50`}
       >
         <Sidebar />
       </div>
       <div className="flex flex-col flex-1 w-full bg-secondary-color">
-        <header className="bg-secondary-color py-4">
+        <header className="py-4">
           <div className="mx-auto px-4 sm:px-6 lg:px-8 flex justify-between">
             <h1 className="text-white text-xl font-bold capitalize">
               {dashboardTitle}
