@@ -41,8 +41,6 @@ const AddUser = () => {
   const importLecturerMutation = useImportLecturer(); // call importLecturer mutation
   const importAlumniMutation = useImportAlumni(); // call importAlumni mutation
 
-  console.log(role);
-
   useEffect(() => {
     if (role === "mahasiswa") {
       setFileTemplate(student_file_template);

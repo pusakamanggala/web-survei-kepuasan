@@ -113,7 +113,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
     return (
       <div className="text-primary-color">Belum ada alumni yang terdaftar</div>
     );
-  console.log(angkatan);
+
   // Show message if no record is found with the given Name or NIM
   if (alumniData.message === "There is no record with that id")
     return (
