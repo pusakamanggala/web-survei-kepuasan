@@ -11,6 +11,7 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import LoadingPage from "../pages/LoadingPage";
+import useDashboardTitle from "../hooks/useDashboardTitles";
 
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -27,67 +28,16 @@ const DashboardLayout = ({ children }) => {
     autoFetch: autoFetch,
   });
 
-  // set page title based on current path
-  let pageTitle;
-  switch (location.pathname) {
-    case "/beranda":
-      pageTitle = "Beranda";
-      break;
-    case `/pengguna/${role}`:
-      pageTitle = `${role}`;
-      break;
-    case `/pengguna/tambah/${role}`:
-      pageTitle = `Tambah ${role}`;
-      break;
-    case `/kelas`:
-      pageTitle = `Kelas`;
-      break;
-    case `/kelas/${id}`:
-      pageTitle = `Detail Kelas`;
-      break;
-    case "/kelas/tambah":
-      pageTitle = "Tambah Kelas";
-      break;
-    case "/profil":
-      pageTitle = "Profil Saya";
-      break;
-    case "/survei-kepuasan/survei-saya":
-      pageTitle = "Survei Saya";
-      break;
-    case `/survei-kepuasan/survei-saya/${idSurvey}`:
-      pageTitle = "Isi Survei";
-      break;
-    case `/survei-kepuasan/riwayat-survei`:
-      pageTitle = "Riwayat Survei";
-      break;
-    case `/survei-kepuasan/riwayat-survei/hasil-survei/${idSurvey}`:
-      pageTitle = "Hasil Survei";
-      break;
-    case `/survei-kepuasan/pertanyaan`:
-      pageTitle = "Pertanyaan Survei";
-      break;
-    case `/survei-kepuasan/template-survei`:
-      pageTitle = "Template Survei";
-      break;
-    case `/survei-kepuasan/template-survei/tambah`:
-      pageTitle = "Tambah Template Survei";
-      break;
-    case `/survei-kepuasan/tambah-survei`:
-      pageTitle = "Tambah Survei";
-      break;
-    case `/survei-kepuasan/laporan-survei`:
-      pageTitle = "Laporan Survei";
-      break;
-    case `/survei-kepuasan/laporan-survei/${role}/${idSurvey}`:
-      pageTitle = "Laporan Survei";
-      break;
-    case `/survei-kepuasan/laporan-survei/rekap-survei/${role}/${survey}`:
-      pageTitle = "Rekapitulasi Survei";
-      break;
+  // set dashboard title based on current path
 
-    default:
-      pageTitle = "Halaman Tidak Ditemukan";
-  }
+  const dashboardTitle = useDashboardTitle(
+    location.pathname,
+    role,
+    id,
+    idSurvey,
+    survey
+  );
+
   // only fetch user data when role is not ADMIN
   useEffect(() => {
     if (userRole) {
@@ -138,7 +88,7 @@ const DashboardLayout = ({ children }) => {
         <header className="bg-secondary-color py-4">
           <div className="mx-auto px-4 sm:px-6 lg:px-8 flex justify-between">
             <h1 className="text-white text-xl font-bold capitalize">
-              {pageTitle}
+              {dashboardTitle}
             </h1>
             <div className="flex justify-center items-center">
               {/* show user name when fetch is success */}
@@ -159,7 +109,7 @@ const DashboardLayout = ({ children }) => {
             </div>
           </div>
         </header>
-        <main className="flex-1 overflow-y-auto bg-gray-100 lg:rounded-tl-3xl h-full ">
+        <main className="flex-1 overflow-y-auto bg-gray-100 lg:rounded-tl-3xl h-full">
           <Suspense fallback={<LoadingPage />}>
             <div className="container mx-auto sm:p-6 p-8 min-h-full">
               {children}
