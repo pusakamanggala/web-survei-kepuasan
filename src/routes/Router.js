@@ -1,29 +1,31 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/Login";
 import DashboardLayout from "../layout/DashboardLayout";
-import UserAccount from "../pages/UserAccount";
-import HomeAdmin from "../pages/HomeAdmin";
 import PageNotFound from "../pages/PageNotFound";
-import AddUser from "../pages/AddUser";
-import Classes from "../pages/Classes";
-import ClassDetails from "../pages/ClassDetails";
-import AddClass from "../pages/AddClass";
-import Questions from "../pages/Questions";
-import AddSurveyTemplate from "../pages/AddSurveyTemplate";
-import SurveyTemplates from "../pages/SurveyTemplates";
-import AddSurvey from "../pages/AddSurvey";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import jwtDecode from "jwt-decode";
-import MyProfile from "../pages/MyProfile";
-import MySurvey from "../pages/MySurvey";
-import FillSurvey from "../pages/FillSurvey";
-import SurveyHistory from "../pages/SurveyHistory";
-import SurveyHistoryDetail from "../pages/SurveyHistoryDetail";
-import Home from "../pages/Home";
-import SurveyList from "../pages/SurveyList";
-import SurveyRecap from "../pages/SurveyRecap";
+
+// Lazy load pages to reduce initial load time
+const UserAccount = lazy(() => import("../pages/UserAccount"));
+const HomeAdmin = lazy(() => import("../pages/HomeAdmin"));
+const Questions = lazy(() => import("../pages/Questions"));
+const AddSurveyTemplate = lazy(() => import("../pages/AddSurveyTemplate"));
+const SurveyTemplates = lazy(() => import("../pages/SurveyTemplates"));
+const AddSurvey = lazy(() => import("../pages/AddSurvey"));
+const Home = lazy(() => import("../pages/Home"));
+const SurveyList = lazy(() => import("../pages/SurveyList"));
+const SurveyRecap = lazy(() => import("../pages/SurveyRecap"));
+const AddUser = lazy(() => import("../pages/AddUser"));
+const Classes = lazy(() => import("../pages/Classes"));
+const ClassDetails = lazy(() => import("../pages/ClassDetails"));
+const AddClass = lazy(() => import("../pages/AddClass"));
+const MyProfile = lazy(() => import("../pages/MyProfile"));
+const MySurvey = lazy(() => import("../pages/MySurvey"));
+const FillSurvey = lazy(() => import("../pages/FillSurvey"));
+const SurveyHistory = lazy(() => import("../pages/SurveyHistory"));
+const SurveyHistoryDetail = lazy(() => import("../pages/SurveyHistoryDetail"));
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
