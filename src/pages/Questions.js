@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import useFetchQuestionByName from "../hooks/useFetchQuestionByName";
 import AddQuestion from "../components/AddQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faXmark,
+  faCommentMedical,
+} from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
 import useNotification from "../hooks/useNotification";
 
@@ -79,12 +83,11 @@ const Questions = () => {
         {/* add button */}
         <button
           title="Tambah Mata Kuliah"
-          className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+          className="grid grid-flow-col-dense gap-2 ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color text-white"
           onClick={() => setShowAddQuestionModal(true)}
         >
-          <h1 className="text-white hidden sm:block capitalize">
-            + Tambah Pertanyaan
-          </h1>
+          <FontAwesomeIcon className="w-5 h-5" icon={faCommentMedical} />
+          <h1 className=" hidden sm:block capitalize">Tambah Pertanyaan</h1>
         </button>
         {/* show add question modal */}
         {showAddQuestionModal && (

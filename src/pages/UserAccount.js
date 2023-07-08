@@ -83,9 +83,9 @@ const UserAccount = () => {
       </Helmet>
       <div className="flex flex-col w-full">
         <div className="flex justify-end mb-2 ">
-          <div className="flex max-w-full">
+          <div className="md:grid-flow-col-dense md:grid md:w-auto w-full flex flex-col gap-3 mb-4">
             {/* Search bar */}
-            <div className=" flex h-12 md:w-72 items-center mx-2 rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color shadow-sm">
+            <div className=" flex h-12 md:w-72 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color shadow-sm">
               <div className="grid place-items-center h-full w-12 text-gray-300">
                 <FontAwesomeIcon icon={faMagnifyingGlass} className="w-5 h-5" />
               </div>
@@ -120,7 +120,7 @@ const UserAccount = () => {
             {/* end of Search bar */}
             {/* Search bar Angkatan */}
             {role === "mahasiswa" || role === "alumni" ? (
-              <div className=" flex h-12 md:w-36 items-center mx-2 rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color shadow-sm">
+              <div className=" flex h-12 md:w-36 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color shadow-sm">
                 <div className="grid place-items-center h-full w-12 text-gray-300">
                   <FontAwesomeIcon
                     icon={faMagnifyingGlass}
@@ -156,12 +156,11 @@ const UserAccount = () => {
                 )}
               </div>
             ) : null}
-
             {/* end of Search bar Angkatan*/}
             {/* select dropdown */}
             <select
               title="Jenis Pengguna"
-              className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
+              className="flex h-12 md:w-40 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
               onChange={handleChangeData}
               value={role}
             >
@@ -170,32 +169,35 @@ const UserAccount = () => {
               <option value="alumni">Alumni</option>
             </select>
             {/* end of select dropdown */}
-            {/* add button */}
-            <button
-              title={`Tambah ${role}`}
-              className="flex justify-evenly h-12 px-4 items-center text-white  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color mx-2"
-              onClick={() => navigate(`/pengguna/tambah/${role}`)}
-            >
-              <FontAwesomeIcon
-                icon={faUserPlus}
-                className="w-5 h-5 mr-0 sm:mr-3 "
-              />
-              <h1 className="hidden sm:block capitalize">Tambah {role}</h1>
-            </button>
-            {/* end of add button */}
-            {/* Eksport Button */}
-            <button
-              title={`Tambah ${role}`}
-              className="flex justify-evenly ml-2 h-12 px-4 items-center text-white  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
-              onClick={() => setShowEksportModal(true)}
-            >
-              <FontAwesomeIcon
-                icon={faFileDownload}
-                className="w-5 h-5 mr-0 sm:mr-3 "
-              />
-              <h1 className="hidden sm:block capitalize">Ekspor {role}</h1>
-            </button>
-            {/* End of Export Button */}
+            <div className="md:grid md:grid-cols-2 gap-3 flex">
+              {/* add button */}
+              <button
+                title={`Tambah ${role}`}
+                className="flex justify-evenly h-12 px-4 md:w-auto w-full items-center text-white  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+                onClick={() => navigate(`/pengguna/tambah/${role}`)}
+              >
+                <FontAwesomeIcon
+                  icon={faUserPlus}
+                  className="w-5 h-5 mr-0 lg:mr-3 "
+                />
+                <h1 className="hidden lg:block capitalize">Tambah {role}</h1>
+              </button>
+              {/* end of add button */}
+              {/* Eksport Button */}
+              <button
+                title={`Tambah ${role}`}
+                className="flex justify-evenly h-12 px-4 md:w-auto w-full items-center text-white  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+                onClick={() => setShowEksportModal(true)}
+              >
+                <FontAwesomeIcon
+                  icon={faFileDownload}
+                  className="w-5 h-5 mr-0 lg:mr-3 "
+                />
+                <h1 className="hidden lg:block capitalize">Ekspor {role}</h1>
+              </button>
+              {/* End of Export Button */}
+            </div>
+
             {/* Export Modal */}
             {showEksportModal && (
               <EksportUsers role={role} isShow={setShowEksportModal} />

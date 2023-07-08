@@ -4,6 +4,8 @@ import useFetchSurveyTemplate from "../hooks/useFetchSurveyTemplates";
 import SurveyTemplateCard from "../components/SurveyTemplateCard";
 import SurveyTemplatesDetails from "../components/SurveyTemplateDetails";
 import { Helmet } from "react-helmet-async";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComments } from "@fortawesome/free-solid-svg-icons";
 
 const SurveyTemplates = () => {
   const [role, setRole] = useState("mahasiswa"); // to store survey role template
@@ -42,7 +44,7 @@ const SurveyTemplates = () => {
         {/* select dropdown */}
         <select
           title="Sasaran Survei"
-          className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
+          className="flex h-12 w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
           onChange={handleChangeRole}
           value={role}
         >
@@ -54,12 +56,11 @@ const SurveyTemplates = () => {
         {/* add button */}
         <button
           title="Tambah Mata Kuliah"
-          className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+          className="grid grid-flow-col-dense gap-3 justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color text-white"
           onClick={() => navigate("/survei-kepuasan/template-survei/tambah")}
         >
-          <h1 className="text-white hidden sm:block capitalize">
-            + Tambah Template Survei
-          </h1>
+          <FontAwesomeIcon className="w-5 h-5" icon={faComments} />
+          <h1 className="hidden sm:block capitalize">Tambah Template Survei</h1>
         </button>
       </div>
       {/* show survey templates */}

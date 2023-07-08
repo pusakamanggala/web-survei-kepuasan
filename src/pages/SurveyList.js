@@ -126,45 +126,48 @@ const SurveyList = () => {
       <Helmet>
         <title>Laporan Survei | Web Survei Kepuasan</title>
       </Helmet>
-      <div className="flex justify-end mb-4">
-        {/* Search bar */}
-        {/* select role dropdown */}
-        <select
-          title="Sasaran Survei"
-          className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
-          value={role}
-          onChange={handleChangeRole}
-        >
-          <option value="mahasiswa">Mahasiswa</option>
-          <option value="dosen">Dosen</option>
-          <option value="alumni">Alumni</option>
-        </select>
-        {/* select period dropdown */}
-        <select
-          title="Periode Survei"
-          className="flex h-12 md:w-56 mx-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
-          value={period}
-          onChange={handleChangePeriod}
-        >
-          <option value="1">Periode 1</option>
-          {role === "mahasiswa" && <option value="2">Periode 2</option>}
-        </select>
-        {/* input year */}
-        <form
-          className="h-12 w-32 ml-2 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
-          onSubmit={handleYearSubmit}
-        >
-          <input
-            className="peer h-full w-full outline-none pr-2"
-            type="number"
-            id="search"
-            min={2023}
-            placeholder="Tahun"
-            value={year}
-            onChange={(e) => setYear(e.target.value)}
-          />
-        </form>
+      <div className="flex justify-end mb-2 ">
+        <div className="md:grid-flow-col-dense md:grid md:w-auto flex flex-col gap-4 mb-4 w-full">
+          {/* Search bar */}
+          {/* select role dropdown */}
+          <select
+            title="Sasaran Survei"
+            className="flex h-12 w-full md:w-56 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
+            value={role}
+            onChange={handleChangeRole}
+          >
+            <option value="mahasiswa">Mahasiswa</option>
+            <option value="dosen">Dosen</option>
+            <option value="alumni">Alumni</option>
+          </select>
+          {/* select period dropdown */}
+          <select
+            title="Periode Survei"
+            className="flex h-12 w-full md:w-56 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
+            value={period}
+            onChange={handleChangePeriod}
+          >
+            <option value="1">Periode 1</option>
+            {role === "mahasiswa" && <option value="2">Periode 2</option>}
+          </select>
+          {/* input year */}
+          <form
+            className="h-12 w-full md:w-32 items-center rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color px-4 shadow-sm"
+            onSubmit={handleYearSubmit}
+          >
+            <input
+              className="peer h-full w-full outline-none pr-2"
+              type="number"
+              id="search"
+              min={2023}
+              placeholder="Tahun"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+            />
+          </form>
+        </div>
       </div>
+
       {isSurveyListLoading && (
         <div className="font-semibold text-primary-color">Memuat survei...</div>
       )}

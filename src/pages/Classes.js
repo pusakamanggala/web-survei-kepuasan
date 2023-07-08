@@ -6,7 +6,12 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddCourse from "../components/AddCourse";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faXmark,
+  faBook,
+  faChalkboardTeacher,
+} from "@fortawesome/free-solid-svg-icons";
 import { Helmet } from "react-helmet-async";
 import useNotification from "../hooks/useNotification";
 
@@ -77,7 +82,7 @@ const Classes = () => {
       <Helmet>
         <title>Daftar Kelas | Web Survei Kepuasan</title>
       </Helmet>
-      <div className="flex justify-end mb-4">
+      <div className="grid grid-flow-col-dense justify-end mb-4">
         {/* Search bar */}
         <div className=" flex h-12 md:w-72 items-center mx-2 rounded-lg focus-within:shadow-lg bg-white overflow-hidden border-2 border-primary-color shadow-sm">
           <div className="grid place-items-center h-full w-12 text-gray-300">
@@ -113,21 +118,19 @@ const Classes = () => {
         {/* add button */}
         <button
           title="Tambah Mata Kuliah"
-          className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+          className="grid grid-flow-col-dense gap-3 ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color text-white"
           onClick={() => setShowAddCourseModal(true)}
         >
-          <h1 className="text-white hidden sm:block capitalize">
-            + Tambah Mata Kuliah
-          </h1>
+          <FontAwesomeIcon className="w-5 h-5" icon={faBook} />
+          <h1 className=" hidden md:block capitalize">Tambah Mata Kuliah</h1>
         </button>
         <button
           title="Tambah Kelas"
-          className="flex justify-evenly ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color"
+          className="grid grid-flow-col-dense gap-3 ml-2 h-12 px-4 items-center  rounded-lg focus-within:shadow-lg overflow-hidden bg-primary-color hover:bg-secondary-color shadow-sm shadow-secondary-color text-white"
           onClick={() => navigate("/kelas/tambah")}
         >
-          <h1 className="text-white hidden sm:block capitalize">
-            + Tambah Kelas
-          </h1>
+          <FontAwesomeIcon className="w-5 h-5" icon={faChalkboardTeacher} />
+          <h1 className="hidden md:block capitalize">Tambah Kelas</h1>
         </button>
         {showAddCourseModal && <AddCourse setIsShow={setShowAddCourseModal} />}
       </div>
