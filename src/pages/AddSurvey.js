@@ -454,7 +454,7 @@ const AddSurvey = () => {
               classData.message === "There is no record with that query" ? (
                 <div className="mt-2 ml-2 flex ">
                   <h1 className="text-primary-color font-semibold mr-1">
-                    Pertanyaan tidak ditemukan.
+                    Kelas tidak ditemukan.
                   </h1>
                 </div>
               ) : (
