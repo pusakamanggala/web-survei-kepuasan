@@ -56,57 +56,67 @@ const FillSurvey = () => {
     };
 
     return (
-      <div className="md:w-2/4 w-full flex justify-evenly">
-        <h1>Kurang</h1>
-        <input
-          type="radio"
-          title="1"
-          value={"dm0KtbQPdK0Pfazv8opf"}
-          className="h-5 w-5"
-          name={`question-${questionId}`}
-          checked={
-            answer.find((item) => item.idPertanyaan === questionId)?.idOpsi ===
-            "dm0KtbQPdK0Pfazv8opf"
-          }
-          onChange={handleOptionChange}
-        />
-        <input
-          type="radio"
-          title="2"
-          value={"21craH0rvALjqlnwcOI6"}
-          className="h-5 w-5"
-          name={`question-${questionId}`}
-          checked={
-            answer.find((item) => item.idPertanyaan === questionId)?.idOpsi ===
-            "21craH0rvALjqlnwcOI6"
-          }
-          onChange={handleOptionChange}
-        />
-        <input
-          type="radio"
-          title="3"
-          value={"6ULGZb5Vxwy9wdNNhYdc"}
-          className="h-5 w-5"
-          name={`question-${questionId}`}
-          checked={
-            answer.find((item) => item.idPertanyaan === questionId)?.idOpsi ===
-            "6ULGZb5Vxwy9wdNNhYdc"
-          }
-          onChange={handleOptionChange}
-        />
-        <input
-          type="radio"
-          title="4"
-          value={"z5OHO3jjoYXq4GHXacIR"}
-          className="h-5 w-5"
-          name={`question-${questionId}`}
-          checked={
-            answer.find((item) => item.idPertanyaan === questionId)?.idOpsi ===
-            "z5OHO3jjoYXq4GHXacIR"
-          }
-          onChange={handleOptionChange}
-        />
-        <h1>Sangat Baik</h1>
+      <div className="md:w-2/4 w-full flex justify-evenly items-center">
+        <div className="flex flex-col items-center">
+          <p>1</p>
+          <input
+            type="radio"
+            title="1"
+            value={"dm0KtbQPdK0Pfazv8opf"}
+            className="h-5 w-5"
+            name={`question-${questionId}`}
+            checked={
+              answer.find((item) => item.idPertanyaan === questionId)
+                ?.idOpsi === "dm0KtbQPdK0Pfazv8opf"
+            }
+            onChange={handleOptionChange}
+          />
+        </div>
+        <div className="flex flex-col items-center">
+          <p>2</p>
+          <input
+            type="radio"
+            title="2"
+            value={"21craH0rvALjqlnwcOI6"}
+            className="h-5 w-5"
+            name={`question-${questionId}`}
+            checked={
+              answer.find((item) => item.idPertanyaan === questionId)
+                ?.idOpsi === "21craH0rvALjqlnwcOI6"
+            }
+            onChange={handleOptionChange}
+          />
+        </div>
+        <div className="flex flex-col items-center">
+          <p>3</p>
+          <input
+            type="radio"
+            title="3"
+            value={"6ULGZb5Vxwy9wdNNhYdc"}
+            className="h-5 w-5"
+            name={`question-${questionId}`}
+            checked={
+              answer.find((item) => item.idPertanyaan === questionId)
+                ?.idOpsi === "6ULGZb5Vxwy9wdNNhYdc"
+            }
+            onChange={handleOptionChange}
+          />
+        </div>
+        <div className="flex flex-col items-center">
+          <p>4</p>
+          <input
+            type="radio"
+            title="4"
+            value={"z5OHO3jjoYXq4GHXacIR"}
+            className="h-5 w-5"
+            name={`question-${questionId}`}
+            checked={
+              answer.find((item) => item.idPertanyaan === questionId)
+                ?.idOpsi === "z5OHO3jjoYXq4GHXacIR"
+            }
+            onChange={handleOptionChange}
+          />
+        </div>
       </div>
     );
   };
@@ -220,7 +230,7 @@ const FillSurvey = () => {
   // to show notification when fill survey mutation is success or error
   useEffect(() => {
     if (fillSurveyMutation.isSuccess) {
-      notify("Survei berhasil dikirim", "success");
+      notify("Survei berhasil dikirim", "success", false);
 
       // reset all state
       setAllAnswer([]);
@@ -233,7 +243,7 @@ const FillSurvey = () => {
       // navigate to survei-saya page after 2 seconds
       setTimeout(() => {
         navigate("/survei-kepuasan/survei-saya");
-      }, 2000);
+      }, 1500);
     }
     if (fillSurveyMutation.isError) {
       notify("Terjadi kesalahan saat mengirim survei", "error", false);
@@ -247,7 +257,7 @@ const FillSurvey = () => {
         <title>Isi Survei | Web Survei Kepuasan</title>
       </Helmet>
       {/* Survey info */}
-      <div className="mb-5">
+      <div>
         <h1 className="font-bold text-xl text-secondary-color mb-2">
           {survey.judulSurvei}
         </h1>
@@ -259,6 +269,13 @@ const FillSurvey = () => {
         )}
         <h1 className="mb-2 ">{survey.detailSurvei}</h1>
       </div>
+      <div className="my-2 font-semibold">
+        <h1>1 = Kurang</h1>
+        <h1>2 = Cukup</h1>
+        <h1>3 = Baik</h1>
+        <h1>4 = Sangat Baik</h1>
+      </div>
+
       {/* Survey Questions */}
       <div>
         {pertanyaan.map((question, index) => (
