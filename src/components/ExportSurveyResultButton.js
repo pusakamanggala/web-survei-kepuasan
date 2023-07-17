@@ -45,7 +45,7 @@ const ExportButton = ({ data, fileName, notify }) => {
       className="flex items-center bg-primary-color shadow-md w-fit hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
     >
       <h1 className="flex">
-        Export <span className="hidden md:block ml-1">Hasil Survey</span>
+        Expor <span className="hidden md:block ml-1">Hasil Survei</span>
       </h1>
       <FontAwesomeIcon icon={faFileExport} className="ml-2" />
     </button>
