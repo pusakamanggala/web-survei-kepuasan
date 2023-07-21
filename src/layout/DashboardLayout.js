@@ -9,9 +9,12 @@ import {
   faArrowRightFromBracket,
   faBars,
   faXmark,
+  faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 import LoadingPage from "../pages/LoadingPage";
 import useDashboardTitle from "../hooks/useDashboardTitles";
+import adminUserGuide from "../user_guide/ADMIN_USER_GUIDE.pdf";
+import regularUserGuide from "../user_guide/USER_GUIDE.pdf";
 
 const DashboardLayout = ({ children }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -62,20 +65,45 @@ const DashboardLayout = ({ children }) => {
     setShowSidebar(!showSidebar);
   };
 
+  const handleShowUserGuide = () => {
+    // Determine the user guide path based on the user's role
+    const userGuide = userRole === "Admin" ? adminUserGuide : regularUserGuide;
+
+    // Open the user guide in a new window
+    window.open(userGuide, "_blank");
+  };
+
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Show toggle button on mobile */}
-      <button
-        title="Buka Menu"
-        type="button"
-        className="xl:hidden border-2 border-white bg-primary-color/70 p-2 rounded-full fixed bottom-4 right-4 z-10 shadow-sm shadow-secondary-color"
-        onClick={handleToggleSidebar}
-      >
-        <FontAwesomeIcon
-          icon={showSidebar ? faXmark : faBars}
-          className="text-white h-6 w-6 flex"
-        />
-      </button>
+      <div className="fixed bottom-4 right-4 z-10 grid gap-1">
+        {location.pathname === "/beranda" && (
+          //   Help Button
+          <button
+            title="User Guide"
+            type="button"
+            className=" border-2 border-white bg-primary-color/70 p-2 rounded-full shadow-sm shadow-secondary-color"
+            onClick={handleShowUserGuide}
+          >
+            <FontAwesomeIcon
+              icon={faQuestion}
+              className="text-white h-6 w-6 flex"
+            />
+          </button>
+        )}
+
+        {/* Show toggle button on mobile */}
+        <button
+          title="Buka Menu"
+          type="button"
+          className="xl:hidden border-2 border-white bg-primary-color/70 p-2 rounded-full shadow-sm shadow-secondary-color"
+          onClick={handleToggleSidebar}
+        >
+          <FontAwesomeIcon
+            icon={showSidebar ? faXmark : faBars}
+            className="text-white h-6 w-6 flex"
+          />
+        </button>
+      </div>
       {/* Render sidebar conditionally */}
       <div
         className={`${
