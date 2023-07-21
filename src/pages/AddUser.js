@@ -75,6 +75,10 @@ const AddUser = () => {
         notify("Harap isi semua bidang masukan yang wajib diisi", "warning");
         return;
       }
+      if (tahunLulus.length !== 4) {
+        notify("Tahun kelulusan harus berupa 4 digit angka", "warning");
+        return;
+      }
     } else if (role === "dosen") {
       if (!nama || !nip || !password) {
         notify("Harap isi semua bidang masukan yang wajib diisi", "warning");
