@@ -54,13 +54,12 @@ const UserAccount = () => {
     setKeywordAngkatan("");
     setSearchValueAngkatan("");
   };
+
+  // to submit the angkatan search form
   const handleSubmitAngkatan = (event) => {
     event.preventDefault();
-    if (searchValueAngkatan.length < 4) {
-      notify(
-        "Kata kunci angkatan minimal terdiri dari 4 digit angka",
-        "warning"
-      );
+    if (searchValueAngkatan.length !== 4) {
+      notify("Kata kunci angkatan harus terdiri dari 4 karakter", "warning");
       return;
     }
     setKeywordAngkatan(searchValueAngkatan);

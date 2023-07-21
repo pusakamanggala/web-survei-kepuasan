@@ -41,7 +41,7 @@ const AddCourse = (props) => {
       // Set addCourseMutation.isError to false after displaying the notification
       addCourseMutation.reset();
     } else if (addCourseMutation.isSuccess) {
-      notify("Berhasil menambahkan mata kuliah", "success");
+      notify("Berhasil menambahkan mata kuliah", "success", false);
       setCourseName("");
       addCourseMutation.reset();
     }
