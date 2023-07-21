@@ -171,7 +171,7 @@ const AddSurveyTemplate = () => {
             htmlFor="surveiName"
             className="block text-gray-700 font-bold mb-2"
           >
-            Role :
+            Tujuan Survei :
           </label>
           <select
             title="Sasaran Survei"
