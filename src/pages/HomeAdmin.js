@@ -9,6 +9,7 @@ import { faChalkboardTeacher } from "@fortawesome/free-solid-svg-icons";
 import useFetchClasses from "../hooks/useFetchClasses";
 import useFetchTotalRecordOfUser from "../hooks/useFetchTotalRecordOfUser";
 import { Helmet } from "react-helmet-async";
+import useFetchNumberOfUserByEntryYear from "../hooks/useFetchNumberOfUserByEntryYear";
 
 const HomeAdmin = () => {
   const navigate = useNavigate();
@@ -16,6 +17,11 @@ const HomeAdmin = () => {
   const [totalStudent, setTotalStudent] = useState(null);
   const [totalLecturer, setTotalLecturer] = useState(null);
   const [totalAlumni, setTotalAlumni] = useState(null);
+
+  const {
+    data: numberOfUserByEntryYear,
+    isSuccess: isNumberOfUserByEntryYearSuccess,
+  } = useFetchNumberOfUserByEntryYear();
 
   // to get the total class
   const {
@@ -127,26 +133,33 @@ const HomeAdmin = () => {
         />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4">
-        <button
-          title="Klik untuk melihat detail"
-          onClick={() => navigate("/pengguna/mahasiswa")}
-          className="h-60 bg-white items-center  p-2 rounded-md text-center flex flex-col justify-evenly shadow-md hover:scale-102 hover:shadow-lg transform transition duration-500 ease-in-out"
-        >
-          <h1 className="font-semibold text-primary-color">
-            Mahasiswa / Angkatan
-          </h1>
-          <BarChart />
-        </button>
-        <button
-          title="Klik untuk melihat detail"
-          onClick={() => navigate("/pengguna/alumni")}
-          className="h-60 bg-white items-center  p-2 rounded-md text-center flex flex-col justify-evenly shadow-md hover:scale-102 hover:shadow-lg transform transition duration-500 ease-in-out"
-        >
-          <h1 className="font-semibold text-primary-color">
-            Alumni / Angkatan
-          </h1>
-          <BarChart />
-        </button>
+        {isNumberOfUserByEntryYearSuccess &&
+          numberOfUserByEntryYear.data.Mahasiswa && (
+            <div
+              title="Klik untuk melihat detail"
+              onClick={() => navigate("/pengguna/mahasiswa")}
+              className="h-60 bg-white items-center  p-2 rounded-md text-center flex flex-col justify-evenly shadow-md hover:scale-102 hover:shadow-lg transform transition duration-500 ease-in-out cursor-pointer"
+            >
+              <h1 className="font-semibold text-primary-color">
+                Mahasiswa / Angkatan
+              </h1>
+              <BarChart datas={numberOfUserByEntryYear.data.Mahasiswa} />
+            </div>
+          )}
+        {isNumberOfUserByEntryYearSuccess &&
+          numberOfUserByEntryYear.data.Alumni && (
+            <div
+              title="Klik untuk melihat detail"
+              onClick={() => navigate("/pengguna/alumni")}
+              className="h-60 bg-white items-center  p-2 rounded-md text-center flex flex-col justify-evenly shadow-md hover:scale-102 hover:shadow-lg transform transition duration-500 ease-in-out cursor-pointer"
+            >
+              <h1 className="font-semibold text-primary-color">
+                Alumni / Angkatan
+              </h1>
+
+              <BarChart datas={numberOfUserByEntryYear.data.Alumni} />
+            </div>
+          )}
       </div>
     </div>
   );
