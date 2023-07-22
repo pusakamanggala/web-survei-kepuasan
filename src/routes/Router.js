@@ -25,6 +25,7 @@ const MySurvey = lazy(() => import("../pages/MySurvey"));
 const FillSurvey = lazy(() => import("../pages/FillSurvey"));
 const SurveyHistory = lazy(() => import("../pages/SurveyHistory"));
 const SurveyHistoryDetail = lazy(() => import("../pages/SurveyHistoryDetail"));
+const ResetUserPassword = lazy(() => import("../pages/ResetUserPassword"));
 
 const Router = () => {
   const cookies = document.cookie.split(";"); // Get cookies
@@ -202,6 +203,14 @@ const Router = () => {
               element={
                 <DashboardLayout>
                   <SurveyRecap />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/atur-ulang-password-pengguna"
+              element={
+                <DashboardLayout>
+                  <ResetUserPassword />
                 </DashboardLayout>
               }
             />

@@ -17,6 +17,7 @@ import {
   faClockRotateLeft,
   faAngleRight,
   faAngleDown,
+  faUnlock,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar = () => {
@@ -108,42 +109,52 @@ const Sidebar = () => {
 
         {/* admin menu */}
         {userRole === "ADMIN" && (
-          <div className={`px-3 ${subMenu ? "" : "hidden"}`}>
+          <>
+            {" "}
+            <div className={`px-3 ${subMenu ? "" : "hidden"}`}>
+              <NavLink
+                to="/survei-kepuasan/pertanyaan"
+                className={({ isActive }) => (isActive ? "active" : "inActive")}
+              >
+                <FontAwesomeIcon icon={faComment} className="w-5 h-5 mr-4" />
+                <h1>Pertanyaan Survei</h1>
+              </NavLink>
+              <NavLink
+                to="/survei-kepuasan/template-survei"
+                className={({ isActive }) => (isActive ? "active" : "inActive")}
+              >
+                <FontAwesomeIcon icon={faComments} className="w-5 h-5 mr-4" />
+                <h1>Template Survei</h1>
+              </NavLink>
+              <NavLink
+                to="/survei-kepuasan/tambah-survei"
+                className={({ isActive }) => (isActive ? "active" : "inActive")}
+              >
+                <FontAwesomeIcon
+                  icon={faFileCirclePlus}
+                  className="w-5 h-5 mr-4"
+                />
+                <h1>Tambah Survei</h1>
+              </NavLink>
+              <NavLink
+                to="/survei-kepuasan/laporan-survei"
+                className={({ isActive }) => (isActive ? "active" : "inActive")}
+              >
+                <FontAwesomeIcon
+                  icon={faFileCircleCheck}
+                  className="w-5 h-5 mr-4"
+                />
+                <h1>Laporan Survei</h1>
+              </NavLink>
+            </div>
             <NavLink
-              to="/survei-kepuasan/pertanyaan"
+              to="/atur-ulang-password-pengguna"
               className={({ isActive }) => (isActive ? "active" : "inActive")}
             >
-              <FontAwesomeIcon icon={faComment} className="w-5 h-5 mr-4" />
-              <h1>Pertanyaan Survei</h1>
+              <FontAwesomeIcon icon={faUnlock} className="w-5 h-5 mr-4" />
+              <h1>Atur Ulang Password Pengguna</h1>
             </NavLink>
-            <NavLink
-              to="/survei-kepuasan/template-survei"
-              className={({ isActive }) => (isActive ? "active" : "inActive")}
-            >
-              <FontAwesomeIcon icon={faComments} className="w-5 h-5 mr-4" />
-              <h1>Template Survei</h1>
-            </NavLink>
-            <NavLink
-              to="/survei-kepuasan/tambah-survei"
-              className={({ isActive }) => (isActive ? "active" : "inActive")}
-            >
-              <FontAwesomeIcon
-                icon={faFileCirclePlus}
-                className="w-5 h-5 mr-4"
-              />
-              <h1>Tambah Survei</h1>
-            </NavLink>
-            <NavLink
-              to="/survei-kepuasan/laporan-survei"
-              className={({ isActive }) => (isActive ? "active" : "inActive")}
-            >
-              <FontAwesomeIcon
-                icon={faFileCircleCheck}
-                className="w-5 h-5 mr-4"
-              />
-              <h1>Laporan Survei</h1>
-            </NavLink>
-          </div>
+          </>
         )}
         {/* student, lecturer, and alumni menu */}
         {(userRole === "MAHASISWA" ||
