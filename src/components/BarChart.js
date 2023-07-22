@@ -3,13 +3,22 @@ import { Bar } from "react-chartjs-2";
 //eslint-disable-next-line
 import { Chart as ChartJS } from "chart.js/auto";
 
-const BarChart = () => {
+const BarChart = ({ datas }) => {
+  const angkatan = [];
+  const total = [];
+
+  // Loop through the data object and extract the values into the arrays
+  for (const key in datas) {
+    angkatan.push(datas[key].angkatan);
+    total.push(datas[key].total);
+  }
+
   const data = {
-    labels: ["2017", "2018", "2019", "2020", "2021", "2022", "2023"],
+    labels: angkatan,
     datasets: [
       {
         label: "Jumlah",
-        data: [12, 19, 3, 5, 2, 3, 7],
+        data: total,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         borderColor: "rgb(194,0,0)",
         borderWidth: 1,
