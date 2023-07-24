@@ -53,13 +53,6 @@ const AddUser = () => {
     }
   }, [role]);
 
-  // To capitalize the first letter of each word in name
-  const capitalizeName = (name) => {
-    return name
-      .toLowerCase()
-      .replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
-  };
-
   // handle submit button
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -352,7 +345,7 @@ const AddUser = () => {
               name="nama"
               value={nama}
               autoComplete="off"
-              onChange={(event) => setNama(capitalizeName(event.target.value))}
+              onChange={(event) => setNama(event.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
@@ -459,7 +452,7 @@ const AddUser = () => {
               id="nama"
               name="nama"
               value={nama}
-              onChange={(event) => setNama(capitalizeName(event.target.value))}
+              onChange={(event) => setNama(event.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
