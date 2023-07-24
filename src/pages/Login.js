@@ -20,6 +20,7 @@ function Login() {
       password: password,
     };
 
+    // Check if the form fields are empty
     if (!userId || !password || !selectedRole)
       return notify("Masukkan akun anda", "warning");
 
@@ -45,12 +46,26 @@ function Login() {
     }; Path=/; SameSite=None; Secure`;
   }
 
+  const handleUserIdChange = (event) => {
+    const value = event.target.value;
+    // If the selected role is "dosen", validate the input to allow only numbers and hyphens
+    if (selectedRole === "dosen") {
+      const sanitizedValue = value.replace(/[^0-9-]/g, "");
+      setUserId(sanitizedValue);
+    } else {
+      setUserId(value);
+    }
+  };
+
+  // login status notification
   useEffect(() => {
     // If the login is error, show the error message
     if (loginMutation.isError) {
+      // if the error message is "wrong username or password"
       if (loginMutation.error.message === "wrong username or password") {
         let errorMessage = "NIM/NIP atau Password salah";
 
+        // Check the selected role and set the error message based on the selected role
         if (selectedRole === "admin") {
           errorMessage = "Username atau Password salah";
         } else if (selectedRole === "dosen") {
@@ -58,18 +73,23 @@ function Login() {
         } else if (selectedRole === "mahasiswa" || selectedRole === "alumni") {
           errorMessage = "NIM atau Password salah";
         }
-
+        // Show the error message
         notify(errorMessage, "error", false);
       } else {
         notify("Terjadi kesalahan saat memproses permintaan", "error", false);
       }
+      // Reset the login mutation
       loginMutation.reset();
     }
 
+    // if the login is success, show the success message
     if (loginMutation.isSuccess) {
       notify("Login Berhasil", "success", 1000);
+      // Reset the form fields
       setPassword("");
       setUserId("");
+
+      // Reset the login mutation
       loginMutation.reset();
     }
   }, [loginMutation, notify, selectedRole]);
@@ -129,12 +149,16 @@ function Login() {
                 )}
               </label>
               <input
-                type={selectedRole !== "admin" ? "number" : "text"}
+                type={
+                  selectedRole === "admin" || selectedRole === "dosen"
+                    ? "text"
+                    : "number"
+                }
                 id="userId"
                 autoComplete="off"
                 className="border-2  p-2 w-full rounded-md"
                 value={userId}
-                onChange={(event) => setUserId(event.target.value)}
+                onChange={handleUserIdChange}
               />
             </div>
             <div className="mb-5 text-secondary-color">
