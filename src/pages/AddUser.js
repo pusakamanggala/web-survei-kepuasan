@@ -468,15 +468,18 @@ const AddUser = () => {
               NIP :
             </label>
             <input
-              type="number"
+              type="text"
               id="nip"
               name="nip"
               value={nip}
               onChange={(event) => {
                 const value = event.target.value;
-                setNip(value);
-                setPassword(value);
+                // Here, we use a regular expression to remove any characters that are not numbers or hyphens
+                const sanitizedValue = value.replace(/[^0-9-]/g, "");
+                setNip(sanitizedValue);
+                setPassword(sanitizedValue); // It's not clear why you're setting password to the same value, but I've kept it as per your original code.
               }}
+              pattern="[0-9-]*" // Specify the allowed pattern using a regular expression
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>

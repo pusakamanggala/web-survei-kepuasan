@@ -69,8 +69,8 @@ const LecturerTable = ({ keyword }) => {
   let fetchArgs;
 
   if (keyword) {
-    // Check if keyword contains only numbers
-    if (/^\d+$/.test(keyword)) {
+    // Check if keyword contains only numbers and hyphen
+    if (/^[\d-]+$/.test(keyword)) {
       fetchFunction = useFetchUserById; // Use fetch function to search by NIM
       fetchArgs = { role: role, id: keyword }; // Set the NIM argument
     } else {
