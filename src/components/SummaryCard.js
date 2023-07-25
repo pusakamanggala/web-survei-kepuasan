@@ -48,7 +48,7 @@ const SummaryCard = (props) => {
       <div className="h-24 lg:col-span-2 justify-center flex items-center md:p-6 p-4">
         <FontAwesomeIcon icon={props.icon} className="h-full" />
       </div>
-      <div className="pb-4 md:p-4 lg:col-span-3  text-center md:text-start text-3xl font-bold">
+      <div className="pb-4 md:p-4 lg:col-span-3  text-center lg:text-start text-3xl font-bold">
         {props.cardValue === "..."
           ? "..."
           : props.cardValue === "Error"
