@@ -23,6 +23,12 @@ const ResetUserPassword = () => {
     }
   };
 
+  function handleOnChangeUserId(event) {
+    const input = event.target.value;
+    const sanitizedInput = input.replace(/[^0-9-]/g, ""); // Remove characters that are not numbers or hyphens
+    setUserId(sanitizedInput); // Update the state with the sanitized input
+  }
+
   useEffect(() => {
     if (resetUserPasswordMutation.isSuccess) {
       notify("Password berhasil diatur ulang", "success", false);
@@ -57,7 +63,7 @@ const ResetUserPassword = () => {
             {userRole === "mahasiswa" || userRole === "alumni" ? "NIM" : "NIP"}
           </label>
           <input
-            type="number"
+            type="text"
             id="user id"
             name="user id"
             placeholder={
@@ -68,7 +74,7 @@ const ResetUserPassword = () => {
             value={userId}
             autoComplete="off"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus-within:shadow-md"
-            onChange={(e) => setUserId(e.target.value)}
+            onChange={handleOnChangeUserId}
           />
         </div>
         <div>
