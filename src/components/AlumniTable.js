@@ -314,7 +314,7 @@ const AlumniTable = ({ keyword, angkatan }) => {
         <div className="flex text-primary-color font-semibold ml-2">
           {alumniData && alumniData.totalRecords > 5 ? (
             <>
-              <h1>Tampilkan</h1>
+              <h1 className="hidden md:block">Tampilkan</h1>
               <select
                 title="Jumlah Data"
                 name="dataLength"
