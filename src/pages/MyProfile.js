@@ -86,7 +86,7 @@ const MyProfile = () => {
             <ChangePassword
               showModal={setShowChangePasswordModal}
               userId={
-                userRole === "Dosen" ? userData.data.nip : userData.data.nim
+                userRole === "DOSEN" ? userData.data.nip : userData.data.nim
               }
             />
           )}
