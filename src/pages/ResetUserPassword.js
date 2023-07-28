@@ -118,6 +118,11 @@ const ResetUserPassword = () => {
           Submit
         </button>
       </div>
+      {resetUserPasswordMutation.isLoading && (
+        <h1 className="font-semibold text-center text-secondary-color">
+          Sedang mengatur ulang password pengguna...
+        </h1>
+      )}
     </div>
   );
 };
