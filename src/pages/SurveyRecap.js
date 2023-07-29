@@ -217,18 +217,6 @@ const SurveyRecap = () => {
                   </table>
                 </div>
               </div>
-
-              <h1>Respon soal terbuka</h1>
-              {surveyRecapData.data &&
-                surveyRecapData.data.hasilRekap[
-                  "rnDvcWSJ3ASo3NLe1mg7"
-                ].essay.map((essay, index) => (
-                  <div key={index}>
-                    <p>
-                      {index + 1}. {essay}
-                    </p>
-                  </div>
-                ))}
             </>
           )}
         </>
@@ -318,16 +306,6 @@ const SurveyRecap = () => {
                       </table>
                     </div>
                   </div>
-                  <h1>Respon soal terbuka</h1>
-                  {item.hasilRekap["rnDvcWSJ3ASo3NLe1mg7"].essay.map(
-                    (essay, index) => (
-                      <div key={index}>
-                        <p>
-                          {index + 1}. {essay}
-                        </p>
-                      </div>
-                    )
-                  )}
                 </div>
               ))}
             </>
