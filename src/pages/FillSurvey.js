@@ -243,7 +243,8 @@ const FillSurvey = () => {
       // navigate to survei-saya page after 2 seconds
       setTimeout(() => {
         navigate("/survei-kepuasan/survei-saya");
-      }, 1500);
+        window.location.reload();
+      }, 1000);
     }
     if (fillSurveyMutation.isError) {
       notify("Terjadi kesalahan saat mengirim survei", "error", false);
@@ -297,6 +298,13 @@ const FillSurvey = () => {
         ))}
       </div>
       <div className="flex w-full justify-end">
+        <button
+          title="Submit Survei"
+          className="font-bold py-2 px-4 rounded text-white bg-primary-color hover:bg-secondary-color shadow-lg mr-2"
+          onClick={() => navigate("/survei-kepuasan/survei-saya")}
+        >
+          Batal
+        </button>
         <button
           title="Submit Survei"
           className="font-bold py-2 px-4 rounded text-white bg-primary-color hover:bg-secondary-color shadow-lg"
