@@ -67,7 +67,7 @@ const DashboardLayout = ({ children }) => {
 
   const handleShowUserGuide = () => {
     // Determine the user guide path based on the user's role
-    const userGuide = userRole === "Admin" ? adminUserGuide : regularUserGuide;
+    const userGuide = userRole === "ADMIN" ? adminUserGuide : regularUserGuide;
 
     // Open the user guide in a new window
     window.open(userGuide, "_blank");
