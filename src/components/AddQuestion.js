@@ -45,11 +45,18 @@ const AddQuestion = (props) => {
 
   useEffect(() => {
     if (addQuestionMutation.isSuccess) {
-      notify("Berhasil menambahkan pertanyaan", "success", false);
-      setQuestion("");
-      setQuestionType(null);
+      if (
+        addQuestionMutation.data.message === "questions already exist in db"
+      ) {
+        notify("Pertanyaan sudah terdaftar", "error", false);
+      } else {
+        notify("Berhasil menambahkan pertanyaan", "success", false);
+        setQuestion("");
+        setQuestionType(null);
+      }
       addQuestionMutation.reset();
     }
+
     if (addQuestionMutation.isError) {
       notify("Terjadi kesalahan dalam memproses permintaan", "error", false);
       addQuestionMutation.reset();
